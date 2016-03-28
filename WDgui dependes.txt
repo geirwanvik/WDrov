@@ -1,0 +1,88 @@
+Legg openCV folderen under C:
+
+så må du add denne i system path enviroment: 
+
+Den finner du under Control panel->System->advance system settings-->enviromental variabels. 
+Gå til listen som gjelder hele pcen.
+Path --> edit, legg til den: C:\OpenCV-3.1.0\mybuild\Debug
+
+De sier det er anbefalt å starte pcen på nytt, men funket for meg å la vær. Du kan sjekke om den er registrert ved å starte cmd og kjøre denne kommandoen: path
+Da bør du finne den i lista.
+
+Qt må ha 32bit MSVC2013 debug. Her anbefaler de og laste ned fra nettet og ikke bruke maintaincen tool. Har prøvd begge, og begge funket fint for meg. 
+
+Da skal det kompile. Skulle det ikke, er et tips å prøve å build-->clean all også kjøre build-->qmake
+
+Så var det PI2:
+
+Du må ha jessi på pi.
+
+Så må du installere UV4L:
+
+Begynn med denne i terminalen:
+
+ curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | sudo apt-key add -
+
+så åpner du denne filen med nano feks:
+
+/etc/apt/sources.list
+
+legg til denne linken i filen:
+
+deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ wheezy main
+
+så kan du kjøre: 
+
+sudo apt-get update
+
+sudo apt-get install uv4l uv4l-raspicam
+
+også:
+
+sudo apt-get install uv4l-raspicam-extras
+
+så denne:
+
+sudo apt-get install uv4l-server
+
+så denne:
+
+ sudo apt-get install uv4l-uvc
+
+så denne: 
+
+sudo apt-get install uv4l-xscreen
+
+så denne: 
+
+sudo apt-get install uv4l-mjpegstream
+
+også denne:
+
+sudo apt-get install uv4l-webrtc
+
+Da skal du være klar for å kjøre igang serveren:
+
+ uv4l --auto-video_nr --driver raspicam --encoding mjpeg --server-option '--port=9000' --server-option '--admin-password=myp4ssw0rd' --width=1024 --height=60 --framerate=30
+
+Denne vil du kunne finne igjen som en stream i feks google chrome ved å taste inn dette:
+
+http://192.168.10.115:9000/stream/video.mjpeg
+
+Det samme må du endre i WDgui skal det funke også trykke play.
+
+Andre ting som kan være hendig:
+
+Stop serveren som kjører stream'en på PI: pkill uv4l
+
+WDgui vil prøve å finne WDcore under start, men vil ikke gi noe feilmelding om den ikke får koblet seg til, sjekk server options for riktig IP og port.
+
+Lykke til
+
+
+
+
+
+
+
+

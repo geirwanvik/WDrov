@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>903</width>
+    <height>546</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WD Rov GUI</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="page">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QScrollArea" name="scrollAreaVideoStream">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>865</width>
+             <height>455</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Compass">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QScrollArea" name="scrollAreaCompass">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_2">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>63</width>
+             <height>16</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Attitude">
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QScrollArea" name="scrollAreaAttitude">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_3">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>63</width>
+             <height>16</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>903</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuConfigure">
+    <property name="title">
+     <string>Configure </string>
+    </property>
+    <widget class="QMenu" name="menuServer_Options">
+     <property name="title">
+      <string>Server Options</string>
+     </property>
+     <addaction name="actionConnection"/>
+     <addaction name="actionSensor_Setup"/>
+     <addaction name="actionConnect_To_Server"/>
+    </widget>
+    <addaction name="menuServer_Options"/>
+   </widget>
+   <widget class="QMenu" name="menuVideo">
+    <property name="title">
+     <string>Video</string>
+    </property>
+    <widget class="QMenu" name="menuOverlay">
+     <property name="title">
+      <string>Overlay</string>
+     </property>
+     <addaction name="actionFont_Color"/>
+     <addaction name="actionFont_Size"/>
+    </widget>
+    <addaction name="menuOverlay"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionVideo_Stream"/>
+    <addaction name="actionAttitude_Indicator"/>
+    <addaction name="actionCompass"/>
+   </widget>
+   <addaction name="menuConfigure"/>
+   <addaction name="menuVideo"/>
+   <addaction name="menuView"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionConnection">
+   <property name="text">
+    <string>Connection</string>
+   </property>
+  </action>
+  <action name="actionSensor_Setup">
+   <property name="text">
+    <string>Sensor Setup</string>
+   </property>
+  </action>
+  <action name="actionFont_Color">
+   <property name="text">
+    <string>Font Color</string>
+   </property>
+  </action>
+  <action name="actionConnect_To_Server">
+   <property name="text">
+    <string>Connect To Server</string>
+   </property>
+  </action>
+  <action name="actionVideo_Stream">
+   <property name="text">
+    <string>Video Stream</string>
+   </property>
+  </action>
+  <action name="actionAttitude_Indicator">
+   <property name="text">
+    <string>Attitude Indicator</string>
+   </property>
+  </action>
+  <action name="actionCompass">
+   <property name="text">
+    <string>Compass </string>
+   </property>
+  </action>
+  <action name="actionFont_Size">
+   <property name="text">
+    <string>Font Size</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
