@@ -12,6 +12,7 @@
 
 #include "Sensors/sensorsetupdialog.h"
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -56,6 +57,8 @@ private:
     AtttudeIndicatorForm *mAttitudeIndicator;
 
     CompassForm *mCompassForm;
+
+
 };
 
 #endif // MAINWINDOW_H

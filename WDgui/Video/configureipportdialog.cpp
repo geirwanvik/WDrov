@@ -11,7 +11,6 @@ ConfigureIpPortDialog::ConfigureIpPortDialog(QWidget *parent) :
 
     readSettings();
 
-    qDebug() << getPort() << getIpAdress();
 
     ui->lineEditIpAdress->setText(getIpAdress());
     ui->lineEditPort->setText(QString::number(getPort()));
@@ -40,7 +39,7 @@ void ConfigureIpPortDialog::on_pushButtonSaveAndClose_clicked()
    writeSettings();
    this->hide();
 
-   qDebug() << ipAdress << port;
+   qDebug() << "Changed Stream Config: " << ipAdress << port;
 }
 
 void ConfigureIpPortDialog::on_pushButtonCancel_clicked()

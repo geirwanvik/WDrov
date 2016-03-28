@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
+
     mVideoStream = new VideoForm(this);
     ui->scrollAreaVideoStream->setWidget(mVideoStream);
 
@@ -30,6 +32,8 @@ MainWindow::MainWindow(QWidget *parent) :
     mCompassForm = new CompassForm(this);
     ui->scrollAreaCompass->setWidget(mCompassForm);
     connect(mWDlink, SIGNAL(GetMessageItem(QString,QString)), mCompassForm, SLOT(sensorData(QString,QString)));
+
+
 
 
 }

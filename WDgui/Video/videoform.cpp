@@ -46,7 +46,7 @@ void VideoForm::processFrameAndUpdateGUI()
     bool blnFrameReadSuccessfully = capWebcam.read(imgOriginal);
 
 
-    //This will terminate the program, maybe do something else?
+    //
     if (!blnFrameReadSuccessfully || imgOriginal.empty()) {                            // if we did not get a frame
         QMessageBox::information(this, "", "Unable to read from webcam \n\n This is probably not a video Stream!\n");        // show error via message box
         exitProgram();                                                              // and exit program
@@ -59,7 +59,7 @@ void VideoForm::processFrameAndUpdateGUI()
     QString pitch = tr("Pitch: %1").arg(Pitch);
     QString heading = tr("Heading: %1").arg(Heading);
 
-    cv::putText(imgOriginal, "WD Gui", cv::Point(imgOriginal.cols/2,40), cv::FONT_HERSHEY_SIMPLEX, font_Size, cv::Scalar(blue,green,red), font_Bold);
+    cv::putText(imgOriginal, "WD Gui", cv::Point(10,40), cv::FONT_HERSHEY_SIMPLEX, font_Size, cv::Scalar(blue,green,red), font_Bold);
     cv::putText(imgOriginal, dataShow.toLocal8Bit().constData(), cv::Point(10,80), cv::FONT_HERSHEY_SIMPLEX, font_Size, cv::Scalar(blue,green,red), font_Bold);
     cv::putText(imgOriginal, roll.toLocal8Bit().constData(), cv::Point(10,120),cv::FONT_HERSHEY_SIMPLEX, font_Size, cv::Scalar(blue,green,red), font_Bold);
     cv::putText(imgOriginal, pitch.toLocal8Bit().constData(), cv::Point(10,160),cv::FONT_HERSHEY_SIMPLEX, font_Size, cv::Scalar(blue,green,red), font_Bold);
@@ -120,7 +120,7 @@ void VideoForm::on_pushButtonPlay_clicked()
     {
         CameraStreamUrl = mCmdIpandPort->getHttpAdress();
         capWebcam.open(CameraStreamUrl.toLocal8Bit().constData());
-        qtimer->start(25);
+        qtimer->start(25); //update rate for stream
     }
     else if(streamType == "IP Stream")
     {
@@ -143,6 +143,8 @@ void VideoForm::on_pushButtonPlay_clicked()
         mCmdIpandPort->show();
     }
 
+
+   qDebug() << "Stream setup: " << streamType << mCmdIpandPort->getHttpAdress() << mCmdIpandPort->getIpAdress() << mCmdIpandPort->getPort();
 
 }
 
@@ -188,7 +190,7 @@ void VideoForm::sensorData(QString cmd, QString value)
         return;
     }
 
- //   qDebug() << "Roll" << Roll << "Pitch: " << Pitch << "Heading: " << Heading;
+    //qDebug() << "Roll" << Roll << "Pitch: " << Pitch << "Heading: " << Heading;
 }
 
 void VideoForm::on_pushButtonRecord_clicked()

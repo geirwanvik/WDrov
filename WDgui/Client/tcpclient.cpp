@@ -43,7 +43,7 @@ void tcpClient::connectToHost()
     hostAdress = mClientSetupDialog->getIpAdress();
     hostPort = mClientSetupDialog->getPort();
 
-    qDebug() << "Host Connection: " << hostAdress << hostPort;
+    qDebug() << "Connected To Server: " << hostAdress << hostPort;
 
     mSocket->connectToHost(hostAdress, hostPort, QIODevice::ReadWrite);
     mSocket->waitForConnected(5000);

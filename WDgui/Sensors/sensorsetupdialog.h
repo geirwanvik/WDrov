@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QTimer>
 #include <QDebug>
+#include <QSettings>
 
 
 namespace Ui {
@@ -18,9 +19,17 @@ public:
     explicit SensorSetupDialog(QWidget *parent = 0);
     ~SensorSetupDialog();
 
+    quint32 getUpdateRateMs() const;
+    void setUpdateRateMs(const quint32 &value);
+
 private:
     Ui::SensorSetupDialog *ui;
     QTimer *mRealTimer;
+
+    void writeSettings();
+    void readSettings();
+
+    quint32 updateRateMs;
 
 public slots:
     void connectedToHost(bool status);
@@ -28,6 +37,10 @@ public slots:
 
 private slots:
     void timerRequest();
+
+    void on_pushButtonSaveAndClose_clicked();
+
+    void on_pushButtonCancel_clicked();
 
 signals:
     void requestSensorData(QString String);
