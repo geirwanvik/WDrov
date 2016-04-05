@@ -65,11 +65,11 @@ void VideoForm::processFrameAndUpdateGUI()
     cv::putText(imgOriginal, pitch.toLocal8Bit().constData(), cv::Point(10,160),cv::FONT_HERSHEY_SIMPLEX, font_Size, cv::Scalar(blue,green,red), font_Bold);
     cv::putText(imgOriginal, heading.toLocal8Bit().constData(), cv::Point(10,200),cv::FONT_HERSHEY_SIMPLEX, font_Size, cv::Scalar(blue,green,red), font_Bold);
 
-    auto angleRad = (Heading*CV_PI)/180;
+  //  auto angleRad = (Heading*CV_PI)/180;
 
 
-    auto length = 50;
-    auto direction =  cv::Point(length * cos(angleRad), length *sin(angleRad));
+  //  auto length = 50;
+  //  auto direction =  cv::Point(length * cos(angleRad), length *sin(angleRad));
 
   //  qDebug() << imgOriginal.rows << imgOriginal.cols;
 
@@ -144,7 +144,7 @@ void VideoForm::on_pushButtonPlay_clicked()
     }
 
 
-   qDebug() << "Stream setup: " << streamType << mCmdIpandPort->getHttpAdress() << mCmdIpandPort->getIpAdress() << mCmdIpandPort->getPort();
+  // qDebug() << "Stream setup: " << streamType << mCmdIpandPort->getHttpAdress() << mCmdIpandPort->getIpAdress() << mCmdIpandPort->getPort();
 
 }
 
