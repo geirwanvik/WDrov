@@ -78,7 +78,7 @@ bool WDlink::CheckCRC(const QString &string)
     cCalculated = CalculateCRC(string);
     int index = string.lastIndexOf('*');
     cReceived = string.mid(index +1);
-    if (cReceived == cCalculated)
+    if (QString::compare(cReceived,cCalculated,Qt::CaseInsensitive) == 0)
         return true;
 
     return false;

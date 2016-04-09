@@ -59,7 +59,7 @@ void WDlink::sendWdLink(QString String)
 
 QString WDlink::EncodeOutgoing(QString string)
 {
-    string.prepend("pi2");
+    string.prepend("pc");
     string.append("*");
     string += CalculateCRC(string);
     string.prepend("$");

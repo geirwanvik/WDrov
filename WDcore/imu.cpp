@@ -1,6 +1,6 @@
 #include "imu.h"
 #include "imuhelperfunctions.h"
-#include <wiringPi.h>
+#include "wiringPi.h"
 #include <unistd.h>
 #include <QDebug>
 
