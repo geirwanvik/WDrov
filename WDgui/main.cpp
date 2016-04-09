@@ -5,6 +5,7 @@
 #include <QCoreApplication>
 #include <QFile>
 
+/*
 #define MY_ASSERT(c) if (c == false) ;
 #define MY_ASSERT_X(c, where, what) if (c == false) ;
 
@@ -24,7 +25,7 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
    // case QtWarningMsg:  out << "WRN" ; break;
     case QtCriticalMsg: out << "CRT"; break;
     case QtFatalMsg:    out << "FTL"; break;
-    }*/
+    }
 
     switch (type) {
     case 0:
@@ -52,7 +53,7 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 
 }
 
-
+*/
 
 int main(int argc, char *argv[])
 {

@@ -20,6 +20,8 @@ VideoForm::VideoForm(QWidget *parent) :
     font_Size = mFontDialog->getFontSize();
     font_Bold = mFontDialog->getFontBold();
 
+
+
 }
 
 VideoForm::~VideoForm()
@@ -79,6 +81,7 @@ void VideoForm::processFrameAndUpdateGUI()
 
     ui->labelVideo->setPixmap(QPixmap::fromImage(qimgOriginal));
 
+
 }
 
 QImage VideoForm::convertOpenCVMatToQtQImage(cv::Mat mat)
@@ -120,6 +123,7 @@ void VideoForm::on_pushButtonPlay_clicked()
     {
         CameraStreamUrl = mCmdIpandPort->getHttpAdress();
         capWebcam.open(CameraStreamUrl.toLocal8Bit().constData());
+
         qtimer->start(25); //update rate for stream
     }
     else if(streamType == "IP Stream")
@@ -144,7 +148,7 @@ void VideoForm::on_pushButtonPlay_clicked()
     }
 
 
-  // qDebug() << "Stream setup: " << streamType << mCmdIpandPort->getHttpAdress() << mCmdIpandPort->getIpAdress() << mCmdIpandPort->getPort();
+   qDebug() << "Stream setup: " << streamType << mCmdIpandPort->getHttpAdress() << mCmdIpandPort->getIpAdress() << mCmdIpandPort->getPort();
 
 }
 
@@ -202,4 +206,26 @@ void VideoForm::fontSizeChanged(float fontSize, float fontBold)
 {
     font_Size = fontSize;
     font_Bold = fontBold;
+}
+
+
+
+void VideoForm::on_pushButtonTakePicture_clicked()
+{
+    cv::Mat imgOriginal;
+
+    bool blnFrameReadSuccessfully = capWebcam.read(imgOriginal);
+
+    if(blnFrameReadSuccessfully == true)
+    {
+        QImage qimgOriginal = convertOpenCVMatToQtQImage(imgOriginal);
+        bool success = qimgOriginal.save("C:\Users\EmirD\Pictures\ROV\Rov1.png", "PNG", -1);
+
+        qDebug() << success;
+
+    }
+    else
+    {
+        qDebug() << "We fucked up!";
+    }
 }

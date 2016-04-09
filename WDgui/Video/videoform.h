@@ -13,6 +13,7 @@
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
+
 #include <QTimer>
 
 #include "Video/configureipportdialog.h"
@@ -40,6 +41,9 @@ private slots:
     void colorSelected(const QColor &color);
     void on_pushButtonRecord_clicked();
     void fontSizeChanged(float fontSize, float fontBold);
+
+
+    void on_pushButtonTakePicture_clicked();
 
 public slots:
     void sensorData(QString cmd, QString value);
