@@ -110,6 +110,11 @@ QString VideoForm::GetTime()
     return timeString;
 }
 
+void VideoForm::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    qDebug() << "Double Click!!";
+}
+
 void VideoForm::on_pushButtonPlay_clicked()
 {
 
@@ -124,7 +129,7 @@ void VideoForm::on_pushButtonPlay_clicked()
         CameraStreamUrl = mCmdIpandPort->getHttpAdress();
         capWebcam.open(CameraStreamUrl.toLocal8Bit().constData());
 
-        qtimer->start(25); //update rate for stream
+        qtimer->start(20); //update rate for stream
     }
     else if(streamType == "IP Stream")
     {
@@ -219,7 +224,7 @@ void VideoForm::on_pushButtonTakePicture_clicked()
     if(blnFrameReadSuccessfully == true)
     {
         QImage qimgOriginal = convertOpenCVMatToQtQImage(imgOriginal);
-        bool success = qimgOriginal.save("C:\Users\EmirD\Pictures\ROV\Rov1.png", "PNG", -1);
+        bool success = qimgOriginal.save("C:\Users\EmirD\Pictures\ROV\Rov.png", "PNG", -1);
 
         qDebug() << success;
 

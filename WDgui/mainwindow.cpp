@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->scrollAreaCompass->setWidget(mCompassForm);
     connect(mWDlink, SIGNAL(GetMessageItem(QString,QString)), mCompassForm, SLOT(sensorData(QString,QString)));
 
-
+    QApplication::setStyle(new styleOne);
 
 
 }

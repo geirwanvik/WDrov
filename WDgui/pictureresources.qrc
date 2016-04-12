@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/palette">
+        <file>Resources/Palette/star.jpg</file>
+    </qresource>
+</RCC>

@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QColorDialog>
+#include <QTime>
+#include <QDateTime>
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -71,6 +73,9 @@ private:
     float font_Size;
     float font_Bold;
     FontSizeDialog *mFontDialog;
+
+protected:
+     void mouseDoubleClickEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 };
 

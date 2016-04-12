@@ -11,6 +11,7 @@
 #include "RovWidgets/compassform.h"
 
 #include "Sensors/sensorsetupdialog.h"
+#include "palette/styleone.h"
 
 
 namespace Ui {
@@ -27,20 +28,12 @@ public:
 
 private slots:
     void on_actionConnection_triggered();
-
-
     void on_actionSensor_Setup_triggered();
-
     void on_actionFont_Color_triggered();
-
     void on_actionConnect_To_Server_triggered();
-
     void on_actionAttitude_Indicator_triggered();
-
     void on_actionCompass_triggered();
-
     void on_actionVideo_Stream_triggered();
-
     void on_actionFont_Size_triggered();
 
 private:
