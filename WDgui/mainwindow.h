@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QDebug>
+#include <QStyleFactory>
 
 #include "Video/videoform.h"
 #include "Client/tcpclient.h"
@@ -12,6 +13,8 @@
 
 #include "Sensors/sensorsetupdialog.h"
 #include "palette/styleone.h"
+
+#include "Plot/plotdialog.h"
 
 
 namespace Ui {
@@ -36,6 +39,12 @@ private slots:
     void on_actionVideo_Stream_triggered();
     void on_actionFont_Size_triggered();
 
+    void on_actionDay_Mode_triggered();
+
+    void on_actionNight_Mode_triggered();
+
+    void on_actionPlot_triggered();
+
 private:
     Ui::MainWindow *ui;
 
@@ -50,6 +59,8 @@ private:
     AtttudeIndicatorForm *mAttitudeIndicator;
 
     CompassForm *mCompassForm;
+
+    plotDialog *mPlot;
 
 
 };

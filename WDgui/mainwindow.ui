@@ -139,9 +139,16 @@
     <addaction name="actionCompass"/>
     <addaction name="menuMode"/>
    </widget>
+   <widget class="QMenu" name="menuUtility">
+    <property name="title">
+     <string>Utility</string>
+    </property>
+    <addaction name="actionPlot"/>
+   </widget>
    <addaction name="menuConfigure"/>
    <addaction name="menuVideo"/>
    <addaction name="menuView"/>
+   <addaction name="menuUtility"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -200,6 +207,11 @@
   <action name="actionNight_Mode">
    <property name="text">
     <string>Night Mode</string>
+   </property>
+  </action>
+  <action name="actionPlot">
+   <property name="text">
+    <string>Sensor Plot</string>
    </property>
   </action>
  </widget>

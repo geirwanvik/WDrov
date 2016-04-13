@@ -20,8 +20,8 @@ void styleOne::polish(QPalette &palette)
     QColor beige(225, 225, 225); //Not beige
     QColor slightlyOpaqueBlack(0, 0, 0, 67);
 
-    QPixmap backgroundImage(":/palette/Resources/Palette/star.jpg");
-    QPixmap buttonImage(":/palette/Resources/Palette/star.jpg ");
+    QPixmap backgroundImage(":/palette/Resources/Palette/black.jpg");
+    QPixmap buttonImage(":/palette/Resources/Palette/black brick.jpg");
 
     QPixmap midImage = buttonImage;
 

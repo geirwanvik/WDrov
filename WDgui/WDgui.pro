@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network
+QT       += core gui network printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,7 +25,9 @@ SOURCES += main.cpp\
     RovWidgets/source/qcgaugewidget.cpp \
     Video/fontsizedialog.cpp \
     Video/overlaysettingsdialog.cpp \
-    palette/styleone.cpp
+    palette/styleone.cpp \
+    Plot/Lib/qcustomplot.cpp \
+    Plot/plotdialog.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -40,7 +42,9 @@ HEADERS  += mainwindow.h \
     RovWidgets/source/qcgaugewidget.h \
     Video/fontsizedialog.h \
     Video/overlaysettingsdialog.h \
-    palette/styleone.h
+    palette/styleone.h \
+    Plot/Lib/qcustomplot.h \
+    Plot/plotdialog.h
 
 
 FORMS    += mainwindow.ui \
@@ -51,7 +55,8 @@ FORMS    += mainwindow.ui \
     RovWidgets/atttudeindicatorform.ui \
     RovWidgets/compassform.ui \
     Video/fontsizedialog.ui \
-    Video/overlaysettingsdialog.ui
+    Video/overlaysettingsdialog.ui \
+    Plot/plotdialog.ui
 
 
 win32{
