@@ -2,6 +2,8 @@
 #define PLOTDIALOG_H
 
 #include <QDialog>
+#include <QTime>
+#include <QDate>
 
 #include "Plot/Lib/qcustomplot.h"
 

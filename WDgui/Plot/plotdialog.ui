@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Plot Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout" rowstretch="9,1" columnstretch="2,8">
    <item row="0" column="0">
