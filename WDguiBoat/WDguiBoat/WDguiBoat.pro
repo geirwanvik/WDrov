@@ -13,12 +13,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    Palette/styleone.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    Palette/styleone.h
 
 FORMS    += mainwindow.ui
 
 CONFIG += mobility
 MOBILITY = 
+
+RESOURCES += \
+    pictureresources.qrc
 

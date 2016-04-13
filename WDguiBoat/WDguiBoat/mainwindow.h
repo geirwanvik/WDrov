@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+
+#include "Palette/styleone.h"
+
 namespace Ui {
 class MainWindow;
 }
