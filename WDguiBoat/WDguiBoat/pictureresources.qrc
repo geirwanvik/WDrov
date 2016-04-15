@@ -2,4 +2,15 @@
     <qresource prefix="/background">
         <file>pictures/compassBackground.jpg</file>
     </qresource>
+    <qresource prefix="/icons">
+        <file>pictures/Boat icon/small-boat.jpg</file>
+        <file>pictures/Boat icon/compass.png</file>
+        <file>pictures/Boat icon/motor-boat-512.png</file>
+    </qresource>
+    <qresource prefix="/instrumentIcons">
+        <file>pictures/Instrument/bilge pump.png</file>
+        <file>pictures/Instrument/lantern.png</file>
+        <file>pictures/Instrument/led light.png</file>
+        <file>pictures/Instrument/windshield wiper.png</file>
+    </qresource>
 </RCC>

@@ -2,9 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QToolBar>
+#include <QAction>
 
 #include "Palette/styleone.h"
+#include "hmi/instrumentform.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +22,12 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void createToolbar();
+
+    QAction *mBoatPanel;
+    QAction *mBoatSensors;
+
+    InstrumentForm *mInstrumentForm;
 };
 
 #endif // MAINWINDOW_H
