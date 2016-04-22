@@ -16,11 +16,11 @@ void styleOne::polish(QPalette &palette)
 
 
     RGB = QColor(0,0,255,100);
-    QColor blue(0, 0, 255); //Ikke brown
-    QColor beige(225, 225, 225); //Not beige
+    QColor blue(0, 0, 255);
+  //  QColor beige(225, 225, 225); //Not beige
     QColor slightlyOpaqueBlack(0, 0, 0, 67);
 
-    QPixmap backgroundImage(":/background/pictures/compassBackground.jpg");
+    QPixmap backgroundImage(":/background/pictures/lighterBackground.jpg");
     QPixmap buttonImage(":/palette/Resources/Palette/black brick.jpg");
 
     QPixmap midImage = buttonImage;

@@ -4,9 +4,14 @@
 #include <QMainWindow>
 #include <QToolBar>
 #include <QAction>
+#include <QSettings>
+#include <QMessageBox>
 
+#include "Screen/screendata.h"
 #include "Palette/styleone.h"
 #include "hmi/instrumentform.h"
+#include "Communication/Bluetooth/bluetooththread.h"
+#include "hmi/sensoroverviewform.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,14 +25,43 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+
+private slots:
+    void on_actionCommunication_triggered();
+    void on_pushButtonSetupCommunication_clicked();
+    void on_pushButtonSaveAndReturn_clicked();
+    void on_boatInstrument_clicked();
+    void on_boatSensors_clicked();
+    void on_boatStatus_clicked();
+    void on_boatMusic_clicked();
+
+signals:
+
+
 private:
     Ui::MainWindow *ui;
     void createToolbar();
+    void initObjectAndConnection();
+    void readSetting();
+    void writeSetting();
 
+    //Toolbar button and actions
     QAction *mBoatPanel;
     QAction *mBoatSensors;
+    QAction *mBoatStatus;
+    QAction *mBoatMusic;
 
     InstrumentForm *mInstrumentForm;
+
+    SensorOverviewForm *mSensorOverviewForm;
+
+    //Screen data, set font and sizes
+    void setupApperance();
+    ScreenData *mScreen;
+    QFont fontNormalSize;
+
+
 };
 
 #endif // MAINWINDOW_H

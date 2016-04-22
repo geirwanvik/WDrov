@@ -18,17 +18,24 @@ SOURCES += main.cpp\
     Palette/styleone.cpp \
     hmi/instrumentform.cpp \
     Communication/Bluetooth/bluetooth_setup.cpp \
-    Communication/Bluetooth/bluetooththread.cpp
+    Communication/Bluetooth/bluetooththread.cpp \
+    Screen/screendata.cpp \
+    Scale/qscale.cpp \
+    hmi/sensoroverviewform.cpp
 
 HEADERS  += mainwindow.h \
     Palette/styleone.h \
     hmi/instrumentform.h \
     Communication/Bluetooth/bluetooth_setup.h \
-    Communication/Bluetooth/bluetooththread.h
+    Communication/Bluetooth/bluetooththread.h \
+    Screen/screendata.h \
+    Scale/qscale.h \
+    hmi/sensoroverviewform.h
 
 FORMS    += mainwindow.ui \
     hmi/instrumentform.ui \
-    Communication/Bluetooth/bluetooth_setup.ui
+    Communication/Bluetooth/bluetooth_setup.ui \
+    hmi/sensoroverviewform.ui
 
 CONFIG += mobility
 MOBILITY = 
