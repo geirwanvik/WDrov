@@ -35,7 +35,7 @@ void MainWindow::setupApperance()
     ui->toolBar->setMovable(false);
 
 
-    QApplication::setStyle(new styleOne);
+    //QApplication::setStyle(new styleOne);
 
     //trying to sett correct font for screen specs
     fontNormalSize.setFamily(fontNormalSize.defaultFamily());
@@ -57,13 +57,13 @@ void MainWindow::createToolbar()
     mBoatPanel = new QAction(QIcon(":/icons/pictures/Boat icon/motor-boat-512.png"), "Instrument", this);
     mBoatPanel->setCheckable(true);
     ui->toolBar->addAction(mBoatPanel);
-    connect(mBoatPanel, SIGNAL(triggered(bool)), this, SLOT(on_boatInstrument_clicked()));
+    connect(mBoatPanel, SIGNAL(triggered(bool)), this, SLOT(click_BoatInstrument()));
 
 
     mBoatSensors = new QAction(QIcon(":/icons/pictures/Boat icon/compass.png"), "Sensors", this);
     mBoatSensors->setCheckable(true);
     ui->toolBar->addAction(mBoatSensors);
-    connect(mBoatSensors, SIGNAL(triggered(bool)), this, SLOT(on_boatSensors_clicked()));
+    connect(mBoatSensors, SIGNAL(triggered(bool)), this, SLOT(click_BoatSensors()));
 
     mBoatStatus = new QAction(QIcon(":/icons/pictures/Boat icon/boat_propeller.png"), "Motor", this);
     mBoatStatus->setCheckable(true);
@@ -136,22 +136,14 @@ void MainWindow::on_pushButtonSaveAndReturn_clicked()
     ui->stackedWidget->setCurrentIndex(0);
 }
 
-void MainWindow::on_boatInstrument_clicked()
+void MainWindow::click_BoatInstrument()
 {
-
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
-void MainWindow::on_boatSensors_clicked()
+void MainWindow::click_BoatSensors()
 {
-
+    ui->stackedWidget->setCurrentIndex(1);
 }
 
-void MainWindow::on_boatStatus_clicked()
-{
 
-}
-
-void MainWindow::on_boatMusic_clicked()
-{
-
-}

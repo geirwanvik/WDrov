@@ -31,10 +31,8 @@ private slots:
     void on_actionCommunication_triggered();
     void on_pushButtonSetupCommunication_clicked();
     void on_pushButtonSaveAndReturn_clicked();
-    void on_boatInstrument_clicked();
-    void on_boatSensors_clicked();
-    void on_boatStatus_clicked();
-    void on_boatMusic_clicked();
+    void click_BoatInstrument();
+    void click_BoatSensors();
 
 signals:
 

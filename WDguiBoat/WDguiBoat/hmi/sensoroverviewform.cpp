@@ -11,6 +11,7 @@ SensorOverviewForm::SensorOverviewForm(QWidget *parent) :
     mVoltageScale->setMaximum(16);
     mVoltageScale->setMinimum(0);
     mVoltageScale->setLabelsVisible(true);
+    mVoltageScale->setLabelsFormat('V', 1);
     ui->verticalLayoutVoltage->addWidget(mVoltageScale);
 
     mTempScale = new QScale(this);
