@@ -33,6 +33,8 @@ private slots:
     void on_pushButtonSaveAndReturn_clicked();
     void click_BoatInstrument();
     void click_BoatSensors();
+    void click_BoatStatus();
+    void click_BoatMusic();
 
 signals:
 
@@ -58,6 +60,8 @@ private:
     void setupApperance();
     ScreenData *mScreen;
     QFont fontNormalSize;
+
+    bluetooththread *mSocket;
 
 
 };

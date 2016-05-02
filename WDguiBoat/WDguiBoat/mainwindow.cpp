@@ -7,13 +7,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
+   //Read settings
+   readSetting();
    //Navigation Toolbar
    createToolbar();
    //Generel objects
    initObjectAndConnection();
-   //Read settings
-   readSetting();
+
 
    //The apperacen off the app
    setupApperance();
@@ -83,6 +83,18 @@ void MainWindow::initObjectAndConnection()
 
     mSensorOverviewForm = new SensorOverviewForm(this);
     ui->scrollAreaSensorOverview->setWidget(mSensorOverviewForm);
+
+    mSocket = new bluetooththread(this);
+
+    if(ui->checkBoxConnectAtStart->isChecked())
+    {
+        mSocket->connectToSocketNow();
+    }
+    else
+    {
+        return;
+    }
+
 }
 
 void MainWindow::readSetting()
@@ -117,10 +129,12 @@ void MainWindow::on_pushButtonSetupCommunication_clicked()
     if(ui->radioButtonBluetooth->isChecked())
     {
         //Bluetooth
+       mSocket->showSetupWindow();
         qDebug() << "Bluetooth";
     }
     else if(ui->radioButtonTcp->isChecked())
     {
+        QMessageBox::information(this, "WD Gui Boat", "No Support for TCP at the moment!");
         qDebug() << "TCP";
     }
     else
@@ -144,6 +158,16 @@ void MainWindow::click_BoatInstrument()
 void MainWindow::click_BoatSensors()
 {
     ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::click_BoatStatus()
+{
+
+}
+
+void MainWindow::click_BoatMusic()
+{
+
 }
 
 
