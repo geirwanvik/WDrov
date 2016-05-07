@@ -6,6 +6,8 @@
 #include <QDebug>
 
 
+
+
 namespace Ui {
 class InstrumentForm;
 }
@@ -23,18 +25,21 @@ private slots:
     void on_pushButtonBilgePump_released();
     void on_pushButtonInteriorLights_released();
     void on_pushButtonWindowWiper_released();
-
-
-
     void on_pushButtonHeater_released();
-
     void on_pushButtonHorn_pressed();
-
     void on_pushButtonHorn_released();
 
 private:
     Ui::InstrumentForm *ui;
     void setupApperance();
+
+
+
+signals:
+    void writeToSocket(QString String);
+
+public slots:
+    void showSensorConfig();
 };
 
 #endif // INSTRUMENTFORM_H

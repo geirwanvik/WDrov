@@ -14,50 +14,50 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QGroupBox" name="groupBoxVoltage">
+   <item row="1" column="1">
+    <widget class="QGroupBox" name="groupBoxFourthView">
      <property name="title">
-      <string>Battery Voltage</string>
+      <string> Humidity</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
+     <layout class="QGridLayout" name="gridLayout_5">
       <item row="0" column="0">
-       <layout class="QVBoxLayout" name="verticalLayoutVoltage"/>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="title">
-      <string>Temperature</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="0">
-       <layout class="QVBoxLayout" name="verticalLayoutTemp"/>
+       <layout class="QVBoxLayout" name="verticalLayoutFourtView"/>
       </item>
      </layout>
     </widget>
    </item>
    <item row="1" column="0">
-    <widget class="QGroupBox" name="groupBox_3">
+    <widget class="QGroupBox" name="groupBoxThirdView">
      <property name="title">
-      <string>Roll </string>
+      <string> Water Temperature</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
       <item row="0" column="0">
-       <layout class="QVBoxLayout" name="verticalLayoutRoll"/>
+       <layout class="QVBoxLayout" name="verticalLayoutThirdView"/>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="QGroupBox" name="groupBox_4">
+   <item row="0" column="1">
+    <widget class="QGroupBox" name="groupBoxSecondView">
      <property name="title">
-      <string>Pitch</string>
+      <string> Temperature</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_5">
+     <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
-       <layout class="QVBoxLayout" name="verticalLayoutPitch"/>
+       <layout class="QVBoxLayout" name="verticalLayoutSecondView"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBoxFirstView">
+     <property name="title">
+      <string> Battery Voltage</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <layout class="QVBoxLayout" name="verticalLayoutFirstView"/>
       </item>
      </layout>
     </widget>

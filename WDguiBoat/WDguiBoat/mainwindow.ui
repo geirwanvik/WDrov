@@ -18,12 +18,18 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
          <widget class="QScrollArea" name="scrollAreaIntrumentForm">
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
           <property name="widgetResizable">
            <bool>true</bool>
           </property>
@@ -32,8 +38,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>928</width>
-             <height>318</height>
+             <width>945</width>
+             <height>332</height>
             </rect>
            </property>
           </widget>
@@ -53,8 +59,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>928</width>
-             <height>318</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
           </widget>
@@ -87,8 +93,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>928</width>
-             <height>318</height>
+             <width>189</width>
+             <height>149</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -168,8 +174,46 @@
    </layout>
   </widget>
   <widget class="QToolBar" name="toolBar">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolBar {
+    spacing: 10px; /* spacing between items in the tool bar */
+}
+
+QToolButton { /* all types of tool button */
+    border: 2px solid #8f8f91;
+    border-radius: 6px;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #f6f7fa, stop: 1 #dadbde);
+}
+
+QToolButton:pressed {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+
+QToolButton:checked {
+	border-radius: 16px;
+	border-color: blue;
+}
+
+QToolBar::handle {
+    border-radius: 30px;
+}</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonFollowStyle</enum>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
    </property>
    <attribute name="toolBarArea">
     <enum>LeftToolBarArea</enum>
@@ -184,7 +228,7 @@
      <x>0</x>
      <y>0</y>
      <width>991</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuConfigure">
@@ -192,6 +236,7 @@
      <string>Configure</string>
     </property>
     <addaction name="actionCommunication"/>
+    <addaction name="actionSensor_View"/>
    </widget>
    <addaction name="menuConfigure"/>
   </widget>
@@ -199,6 +244,11 @@
   <action name="actionCommunication">
    <property name="text">
     <string>Communication</string>
+   </property>
+  </action>
+  <action name="actionSensor_View">
+   <property name="text">
+    <string>Sensor View</string>
    </property>
   </action>
  </widget>

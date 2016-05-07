@@ -12,6 +12,12 @@
 #include "hmi/instrumentform.h"
 #include "Communication/Bluetooth/bluetooththread.h"
 #include "hmi/sensoroverviewform.h"
+#include "WD_Link/WDlink.h"
+#include "progressBar/QProgressIndicator.h"
+
+#if  defined(Q_OS_ANDROID)
+#include <QtAndroidExtras>
+#endif
 
 namespace Ui {
 class MainWindow;
@@ -34,7 +40,13 @@ private slots:
     void click_BoatInstrument();
     void click_BoatSensors();
     void click_BoatStatus();
+    void click_Navigation();
     void click_BoatMusic();
+    void bluetoothStartConnection();
+    void bluetoothDoneConnection();
+    void bluetoothFailedConnection();
+
+    void on_actionSensor_View_triggered();
 
 signals:
 
@@ -51,6 +63,7 @@ private:
     QAction *mBoatSensors;
     QAction *mBoatStatus;
     QAction *mBoatMusic;
+    QAction *mBoatNavigation;
 
     InstrumentForm *mInstrumentForm;
 
@@ -62,6 +75,17 @@ private:
     QFont fontNormalSize;
 
     bluetooththread *mSocket;
+
+    WDlink *mWdLink;
+
+    //Progress window when things take time
+    QProgressIndicator *mProgressInd;
+
+#if  defined(Q_OS_ANDROID)
+    void initAndroidStuff();
+    void setScreenAwake();
+
+#endif
 
 
 };

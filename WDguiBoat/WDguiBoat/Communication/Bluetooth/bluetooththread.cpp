@@ -11,6 +11,17 @@ bluetooththread::bluetooththread(QObject *parent) :
     connect(serial, SIGNAL(disconnected()), this, SLOT(disconnected()));
     connect(mBluetooth_setup, SIGNAL(PairDevicesNow()),this,SLOT(pairDeviceNow()));
 
+
+    if(mBluetooth_setup->hostStatus() == 0)
+    {
+        bluetoothPowerOn();        
+    }
+    else
+    {
+        qDebug() << "Bluetooth was ON before APP started" << mBluetooth_setup->hostStatus();
+    }
+
+    qDebug() << "Bluetooth Host Status: " << mBluetooth_setup->hostStatus();
 }
 
 void bluetooththread::showSetupWindow()
@@ -182,6 +193,16 @@ void bluetooththread::pairDeviceNow()
 void bluetooththread::writeBytes(QByteArray array)
 {
     serial->write(array, array.length());
+}
+
+void bluetooththread::writeString(QString &String)
+{
+        String += '\n';
+       QByteArray array(String.toStdString().c_str(), String.length());
+
+       serial->write(array, array.length());
+
+       array.clear();
 }
 
 

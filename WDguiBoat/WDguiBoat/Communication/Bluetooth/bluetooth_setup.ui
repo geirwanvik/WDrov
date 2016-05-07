@@ -24,7 +24,7 @@ border-radius: 6px;
 }
 </string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" rowstretch="8,2">
+  <layout class="QGridLayout" name="gridLayout" rowstretch="7,3">
    <item row="0" column="0">
     <widget class="QListWidget" name="listViewBluetoothDevices">
      <property name="minimumSize">

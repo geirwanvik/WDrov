@@ -53,6 +53,7 @@ public slots:
     void pairDeviceNow(void);
     //Signal for writing bytes with bluetooth socket
     void writeBytes(QByteArray array);
+    void writeString(QString &String);
 
 private slots:
     void readyRead();

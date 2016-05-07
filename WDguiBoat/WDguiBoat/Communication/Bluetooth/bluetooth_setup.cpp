@@ -77,7 +77,7 @@ void bluetooth_setup::setBluetoothAddress(const QString &value)
 
 void bluetooth_setup::WriteSettings()
 {
-    QSettings settings("Kongsberg Maritime", "Cnode");
+    QSettings settings("WD Electronics", "WDBoat");
     settings.beginGroup("Bluetooth");
     settings.setValue("BluetoothAdress",BluetoothAddress);
     settings.endGroup();
@@ -85,7 +85,7 @@ void bluetooth_setup::WriteSettings()
 
 void bluetooth_setup::ReadSettings()
 {
-    QSettings settings("Kongsberg Maritime", "Cnode");
+    QSettings settings("WD Electronics", "WDBoat");
     settings.beginGroup("Bluetooth");
     BluetoothAddress = settings.value("BluetoothAdress").toString();
     settings.endGroup();

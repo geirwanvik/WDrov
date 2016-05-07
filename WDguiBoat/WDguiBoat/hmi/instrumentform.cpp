@@ -9,6 +9,8 @@ InstrumentForm::InstrumentForm(QWidget *parent) :
 
     setupApperance();
 
+
+
 }
 
 InstrumentForm::~InstrumentForm()
@@ -47,15 +49,24 @@ void InstrumentForm::setupApperance()
     ui->pushButtonHorn->setIconSize(QSize(100,100));
 }
 
+void InstrumentForm::showSensorConfig()
+{
+
+}
+
 void InstrumentForm::on_pushButtonLatern_released()
 {
     if(ui->pushButtonLatern->isChecked())
     {
+        writeToSocket("RELAY_LANTERN,ON");
         ui->pushButtonLatern->setText("Lantern\nON");
+        ui->pushButtonLatern->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
     }
     else
     {
+        writeToSocket("RELAY_LANTERN,OFF");
         ui->pushButtonLatern->setText("Lantern\nOFF");
+        ui->pushButtonLatern->setStyleSheet("QPushButton {}");
     }
 }
 
@@ -64,10 +75,12 @@ void InstrumentForm::on_pushButtonBilgePump_released()
     if(ui->pushButtonBilgePump->isChecked())
     {
         ui->pushButtonBilgePump->setText("Bilge Pump\nON");
+        ui->pushButtonBilgePump->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
     }
     else
     {
        ui->pushButtonBilgePump->setText("Bilge Pump\nOFF");
+       ui->pushButtonBilgePump->setStyleSheet("QPushButton {}");
     }
 }
 
@@ -76,10 +89,12 @@ void InstrumentForm::on_pushButtonInteriorLights_released()
     if(ui->pushButtonInteriorLights->isChecked())
     {
         ui->pushButtonInteriorLights->setText("Interior Lights\nON");
+        ui->pushButtonInteriorLights->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
     }
     else
     {
         ui->pushButtonInteriorLights->setText("Interior Lights\nOFF");
+        ui->pushButtonInteriorLights->setStyleSheet("QPushButton {}");
     }
 }
 
@@ -88,10 +103,12 @@ void InstrumentForm::on_pushButtonWindowWiper_released()
     if(ui->pushButtonWindowWiper->isChecked())
     {
         ui->pushButtonWindowWiper->setText("Window Wiper\nON");
+        ui->pushButtonWindowWiper->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
     }
     else
     {
         ui->pushButtonWindowWiper->setText("Window Wiper\nOFF");
+        ui->pushButtonWindowWiper->setStyleSheet("QPushButton {}");
     }
 }
 
@@ -101,21 +118,24 @@ void InstrumentForm::on_pushButtonHeater_released()
     if(ui->pushButtonHeater->isChecked())
     {
         ui->pushButtonHeater->setText("Heater\nON");
+        ui->pushButtonHeater->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
     }
     else
     {
         ui->pushButtonHeater->setText("Heater\nOFF");
+        ui->pushButtonHeater->setStyleSheet("QPushButton {}");
     }
 }
 
 void InstrumentForm::on_pushButtonHorn_pressed()
 {
-    qDebug() << "Pressed!";
     ui->pushButtonHorn->setText("Horn\nTUUUUT!!");
+    ui->pushButtonHorn->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
 }
 
 void InstrumentForm::on_pushButtonHorn_released()
 {
-    qDebug() << "Released!";
+
     ui->pushButtonHorn->setText("Horn");
+    ui->pushButtonHorn->setStyleSheet("QPushButton {}");
 }

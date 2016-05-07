@@ -10,6 +10,7 @@
         <file>pictures/Boat icon/compass2.jpg</file>
         <file>pictures/Boat icon/boat_propeller.png</file>
         <file>pictures/Boat icon/MusicNote.png</file>
+        <file>pictures/Boat icon/Map-512.png</file>
     </qresource>
     <qresource prefix="/instrumentIcons">
         <file>pictures/Instrument/bilge pump.png</file>
