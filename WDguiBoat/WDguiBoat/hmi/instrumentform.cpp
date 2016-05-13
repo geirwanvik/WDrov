@@ -21,10 +21,10 @@ InstrumentForm::~InstrumentForm()
 
 void InstrumentForm::setupApperance()
 {
-    ui->pushButton_2->setVisible(false);
+  /*  ui->pushButton_2->setVisible(false);
     ui->pushButton_5->setVisible(false);
     ui->pushButton->setVisible(false);
-
+*/
     ui->pushButtonBilgePump->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/bilge pump.png"));
     ui->pushButtonBilgePump->setIconSize(QSize(100,100));
     ui->pushButtonBilgePump->setCheckable(true);
@@ -74,11 +74,13 @@ void InstrumentForm::on_pushButtonBilgePump_released()
 {
     if(ui->pushButtonBilgePump->isChecked())
     {
+        writeToSocket("RELAY_BILGE_PP,ON");
         ui->pushButtonBilgePump->setText("Bilge Pump\nON");
         ui->pushButtonBilgePump->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
     }
     else
     {
+       writeToSocket("RELAY_BILGE_PP,OFF");
        ui->pushButtonBilgePump->setText("Bilge Pump\nOFF");
        ui->pushButtonBilgePump->setStyleSheet("QPushButton {}");
     }
@@ -102,11 +104,13 @@ void InstrumentForm::on_pushButtonWindowWiper_released()
 {
     if(ui->pushButtonWindowWiper->isChecked())
     {
+        writeToSocket("RELAY_WIPER,ON");
         ui->pushButtonWindowWiper->setText("Window Wiper\nON");
         ui->pushButtonWindowWiper->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
     }
     else
     {
+        writeToSocket("RELAY_WIPER,OFF");
         ui->pushButtonWindowWiper->setText("Window Wiper\nOFF");
         ui->pushButtonWindowWiper->setStyleSheet("QPushButton {}");
     }

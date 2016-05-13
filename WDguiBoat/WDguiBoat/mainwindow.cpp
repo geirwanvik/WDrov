@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 #ifdef Q_OS_ANDROID
-   initAndroidStuff();
+  // initAndroidStuff();
 #endif
 
    ui->stackedWidget->setCurrentIndex(0);
@@ -140,8 +140,8 @@ void MainWindow::click_BoatMusic()
 
 void MainWindow::bluetoothStartConnection()
 {
-    mProgressInd->show();
-    mProgressInd->startAnimation();
+   // mProgressInd->show();
+    //mProgressInd->startAnimation();
     ui->statusBar->showMessage("Connecting....");
 }
 
@@ -186,8 +186,8 @@ void MainWindow::initObjectAndConnection()
 
     if(ui->checkBoxConnectAtStart->isChecked())
     {
-        mSocket->connectToSocketNow();
-        bluetoothStartConnection();
+       // mSocket->connectToSocketNow();
+        //bluetoothStartConnection();
     }
     else
     {

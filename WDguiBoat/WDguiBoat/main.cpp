@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
      QString logFile(qgetenv("EXTERNAL_STORAGE") + QStringLiteral("/WDBoat-log.txt"));
      if (QFile::exists(logFile)) // remove previous file if exists
        QFile::remove(logFile);
-   qInstallMessageHandler(myMessageOutput);
+   //qInstallMessageHandler(myMessageOutput);
    qDebug() << "==== WD Boat LOG =======\n" << QDateTime::currentDateTime().toString(); // first log message
  #endif
 

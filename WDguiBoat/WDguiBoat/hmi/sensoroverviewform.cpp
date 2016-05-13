@@ -9,20 +9,10 @@ SensorOverviewForm::SensorOverviewForm(QWidget *parent) :
 
     mSensorConfigView = new SensorConfigDialog(this);
 
-    createGpsSpeedScale();
-    createRollScale();
-    createSystemCurrentScale();
-    createSystemVoltageScale();
-
-    if(!ui->verticalLayoutFirstView->isEmpty())
-    {
-        qDebug() << "It has a widget!";
-    }
-    else
-    {
-        qDebug() << "It empty!";
-    }
-
+    createBatteryVscale();
+    createTempScale();
+    createWaterTempScale();
+    createHumidityScale();
 
 
 }

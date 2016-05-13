@@ -69,24 +69,32 @@ void SensorConfigDialog::groupRadioButtons()
 {
 
     QList<QRadioButton *> firstGroup = ui->groupBoxFirst->findChildren<QRadioButton *>();
-    qDebug() <<firstGroup.size();
     for(int i = 0; i < firstGroup.size(); ++i)
     {
         firstButtonGroup.addButton(firstGroup[i],i);
     }
-    qDebug() << firstButtonGroup.checkedId();
-    qDebug() << firstButtonGroup.checkedButton();
 
 
     QList<QRadioButton *> secondGroup = ui->groupBoxSecond->findChildren<QRadioButton *>();
-    qDebug() << secondGroup.size();
     for(int i = 0; i < secondGroup.size(); ++i)
     {
         secondButtonGroup.addButton(secondGroup[i],i);
     }
-    qDebug() << secondButtonGroup.checkedId();
-    qDebug() << secondButtonGroup.checkedButton();
 
+
+    QList<QRadioButton *> thirdGroup = ui->groupBoxThird->findChildren<QRadioButton *>();
+    for(int i = 0; i < thirdGroup.size(); ++i)
+    {
+        thirdButtonGroup.addButton(thirdGroup[i],i);
+    }
+
+    QList<QRadioButton *> fourthGroup = ui->groupBoxFourth->findChildren<QRadioButton *>();
+    for(int i = 0; i < fourthGroup.size(); ++i)
+    {
+        fourthButtonGroup.addButton(fourthGroup[i],i);
+    }
+    qDebug() << fourthButtonGroup.checkedId();
+    qDebug() << fourthButtonGroup.checkedButton();
 
 }
 
