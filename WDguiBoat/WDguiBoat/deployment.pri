@@ -18,16 +18,16 @@ android{
 }
 
 
-#unix:QT +=  serialport
+unix:QT +=  serialport
 
-#unix{
- #  SOURCES +=   Communication/Serial/serialport.cpp\
- #               Communication/Serial/serial_setup.cpp
+unix{
+  SOURCES +=   Communication/Serial/serialport.cpp\
+               Communication/Serial/serial_setup.cpp
 
-  # HEADERS += Communication/Serial/serialport.h\
-   #           Communication/Serial/serial_setup.h
+  HEADERS += Communication/Serial/serialport.h\
+             Communication/Serial/serial_setup.h
 
-  #  FORMS += Communication/Serial/serial_setup.ui
+  FORMS += Communication/Serial/serial_setup.ui
 
-#}
+}
 

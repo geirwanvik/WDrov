@@ -55,7 +55,7 @@
      <property name="title">
       <string> Battery Voltage</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
+     <layout class="QGridLayout" name="gridLayout_2" rowstretch="0">
       <item row="0" column="0">
        <layout class="QVBoxLayout" name="verticalLayoutFirstView"/>
       </item>

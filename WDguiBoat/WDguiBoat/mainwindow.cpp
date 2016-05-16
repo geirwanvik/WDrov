@@ -18,9 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-#ifdef Q_OS_ANDROID
-  // initAndroidStuff();
-#endif
 
    ui->stackedWidget->setCurrentIndex(0);
    mBoatPanel->setChecked(true);
@@ -53,6 +50,7 @@ void MainWindow::setupApperance()
 
 
 }
+
 
 
 
@@ -174,15 +172,27 @@ void MainWindow::initObjectAndConnection()
     mProgressInd->move(QApplication::desktop()->screen()->rect().center() - mProgressInd->rect().center());
     mProgressInd->hide();
 
+    mWdLink = new WDLink(this);
 
-    mSocket = new bluetooththread(this);
-    connect(mSocket, SIGNAL(Doneconnecting()), this, SLOT(bluetoothDoneConnection()));
-    connect(mSocket, SIGNAL(DoneDisconnecting()), this, SLOT(bluetoothFailedConnection()));
-    connect(mSocket, SIGNAL(failedToConnect()), this, SLOT(bluetoothFailedConnection()));
+    mWdParser = new wdParser(this);
+    connect(mWdLink, SIGNAL(freshData(QString)), mWdParser, SLOT(dataForParsing(QString)));
 
-    mWdLink = new WDlink(this);
-    connect(mInstrumentForm, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(sendWdLink(QString)));
-    connect(mWdLink, SIGNAL(WDlinkSend(QString&)), mSocket, SLOT(writeString(QString&)));
+#ifdef Q_OS_ANDROID
+    ui->actionSerial_Port->setVisible(false);
+   initAndroidStuff();
+   mSocket = new bluetooththread(this);
+   connect(mSocket, SIGNAL(Doneconnecting()), this, SLOT(bluetoothDoneConnection()));
+   connect(mSocket, SIGNAL(DoneDisconnecting()), this, SLOT(bluetoothFailedConnection()));
+   connect(mSocket, SIGNAL(failedToConnect()), this, SLOT(bluetoothFailedConnection()));
+#else
+   mSocket = new serialPort(this);
+   connect(mInstrumentForm, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(sendData(QString)));
+   connect(mSocket, SIGNAL(readyRead(QByteArray)), mWdLink, SLOT(inncommingData(QByteArray)));
+   connect(mWdLink, SIGNAL(sendByteArrayToSocket(QByteArray)), mSocket, SLOT(writeBytes(QByteArray)));
+   connect(mWdParser, SIGNAL(GpsData(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
+   connect(mWdParser, SIGNAL(ImuData(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
+   connect(mWdParser, SIGNAL(Dht22Data(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
+#endif
 
     if(ui->checkBoxConnectAtStart->isChecked())
     {
@@ -272,10 +282,43 @@ void MainWindow::setScreenAwake()
        }
      }
 }
+
+#else
+
+
+
+void MainWindow::ShowSetupSerial()
+{
+    mSocket->showSetupWindow();
+}
+
+
+
+
 #endif
 
 
 void MainWindow::on_actionSensor_View_triggered()
 {
     mSensorOverviewForm->showSensorConfig();
+}
+
+void MainWindow::on_actionSerial_Port_triggered()
+{
+#if  defined(Q_OS_ANDROID)
+
+
+#else
+    ShowSetupSerial();
+#endif
+}
+
+void MainWindow::on_actionAll_Sensor_triggered()
+{
+    mAllSensorOverview = new AllSensorsDialog(this);
+    connect(mWdParser, SIGNAL(ImuData(QStringList)), mAllSensorOverview, SLOT(sensorData(QStringList)));
+    connect(mWdParser, SIGNAL(Dht22Data(QStringList)), mAllSensorOverview, SLOT(sensorData(QStringList)));
+    connect(mWdParser, SIGNAL(GpsData(QStringList)), mAllSensorOverview, SLOT(sensorData(QStringList)));
+
+    mAllSensorOverview->show();
 }

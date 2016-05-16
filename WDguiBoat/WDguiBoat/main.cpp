@@ -4,11 +4,12 @@
 #define MY_ASSERT(c) if(c == false){};
 #define MY_ASSERT_X(c, where, what) if (c == false) ;
 
+#ifdef Q_OS_ANDROID
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
 
-#ifdef Q_OS_ANDROID
+
     Q_UNUSED(context)
 
     QFile outFile(qgetenv("EXTERNAL_STORAGE") + QStringLiteral("/WDBoat-log.txt"));
@@ -73,10 +74,10 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
           break;
       }
       out.flush();
-
+}
 #endif
 
-}
+//}
 
 
 int main(int argc, char *argv[])

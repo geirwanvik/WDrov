@@ -11,12 +11,17 @@
 #include "Palette/styleone.h"
 #include "hmi/instrumentform.h"
 #include "Communication/Bluetooth/bluetooththread.h"
+#include "wdLink/wdlink.h"
+#include "wdLink/wdparser.h"
 #include "hmi/sensoroverviewform.h"
-#include "WD_Link/WDlink.h"
 #include "progressBar/QProgressIndicator.h"
+#include "hmi/allsensorsdialog.h"
 
 #if  defined(Q_OS_ANDROID)
 #include <QtAndroidExtras>
+#else
+#include "Communication/Serial/serialport.h"
+
 #endif
 
 namespace Ui {
@@ -45,8 +50,17 @@ private slots:
     void bluetoothStartConnection();
     void bluetoothDoneConnection();
     void bluetoothFailedConnection();
-
     void on_actionSensor_View_triggered();
+    void on_actionSerial_Port_triggered();
+
+#if  defined(Q_OS_ANDROID)
+
+
+#else
+
+#endif
+
+    void on_actionAll_Sensor_triggered();
 
 signals:
 
@@ -65,26 +79,31 @@ private:
     QAction *mBoatMusic;
     QAction *mBoatNavigation;
 
+    WDLink *mWdLink;
+    wdParser *mWdParser;
+
     InstrumentForm *mInstrumentForm;
 
     SensorOverviewForm *mSensorOverviewForm;
+
+    AllSensorsDialog *mAllSensorOverview;
 
     //Screen data, set font and sizes
     void setupApperance();
     ScreenData *mScreen;
     QFont fontNormalSize;
 
-    bluetooththread *mSocket;
-
-    WDlink *mWdLink;
-
     //Progress window when things take time
     QProgressIndicator *mProgressInd;
 
 #if  defined(Q_OS_ANDROID)
+    bluetooththread *mSocket;
     void initAndroidStuff();
     void setScreenAwake();
 
+#else
+    serialPort *mSocket;
+    void ShowSetupSerial();
 #endif
 
 

@@ -69,7 +69,7 @@
         <item row="1" column="0">
          <widget class="QRadioButton" name="radioButtonTemperature">
           <property name="text">
-           <string>Temperatur </string>
+           <string>Temperature</string>
           </property>
          </widget>
         </item>
@@ -122,7 +122,7 @@
         <item row="2" column="0">
          <widget class="QRadioButton" name="radioButtonWaterTemp">
           <property name="text">
-           <string>WaterTemperatur</string>
+           <string>Water Temperature</string>
           </property>
          </widget>
         </item>

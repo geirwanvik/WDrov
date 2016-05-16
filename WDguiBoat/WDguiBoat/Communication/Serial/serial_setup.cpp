@@ -25,7 +25,8 @@ serial_setup::serial_setup(QWidget *parent) :
 
     readSettings();
 
-    ui->baudBox->setEnabled(false);
+    ui->baudBox->setCurrentIndex(4);
+    //ui->baudBox->setEnabled(false);
 }
 
 serial_setup::~serial_setup()

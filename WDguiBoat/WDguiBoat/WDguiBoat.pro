@@ -24,9 +24,11 @@ SOURCES += main.cpp\
     Screen/screendata.cpp \
     Scale/qscale.cpp \
     hmi/sensoroverviewform.cpp \
-    WD_Link/WDlink.cpp \
     progressBar/QProgressIndicator.cpp \
-    hmi/ConfigClasses/sensorconfigdialog.cpp
+    hmi/ConfigClasses/sensorconfigdialog.cpp \
+    wdLink/wdlink.cpp \
+    wdLink/wdparser.cpp \
+    hmi/allsensorsdialog.cpp
 
 HEADERS  += mainwindow.h \
     Palette/styleone.h \
@@ -37,15 +39,18 @@ HEADERS  += mainwindow.h \
     Scale/qscale.h \
     hmi/sensoroverviewform.h \
     CommandList.h \
-    WD_Link/WDlink.h \
     progressBar/QProgressIndicator.h \
-    hmi/ConfigClasses/sensorconfigdialog.h
+    hmi/ConfigClasses/sensorconfigdialog.h \
+    wdLink/wdlink.h \
+    wdLink/wdparser.h \
+    hmi/allsensorsdialog.h
 
 FORMS    += mainwindow.ui \
     hmi/instrumentform.ui \
     Communication/Bluetooth/bluetooth_setup.ui \
     hmi/sensoroverviewform.ui \
-    hmi/ConfigClasses/sensorconfigdialog.ui
+    hmi/ConfigClasses/sensorconfigdialog.ui \
+    hmi/allsensorsdialog.ui
 
 CONFIG += mobility
 MOBILITY = 

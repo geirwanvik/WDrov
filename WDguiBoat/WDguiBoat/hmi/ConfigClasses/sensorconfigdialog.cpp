@@ -7,8 +7,11 @@ SensorConfigDialog::SensorConfigDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+#ifdef Q_OS_ANDROID
     this->setWindowState(Qt::WindowMaximized);
+#else
 
+#endif
     readSetting();
 
     groupRadioButtons();
@@ -93,8 +96,6 @@ void SensorConfigDialog::groupRadioButtons()
     {
         fourthButtonGroup.addButton(fourthGroup[i],i);
     }
-    qDebug() << fourthButtonGroup.checkedId();
-    qDebug() << fourthButtonGroup.checkedButton();
 
 }
 

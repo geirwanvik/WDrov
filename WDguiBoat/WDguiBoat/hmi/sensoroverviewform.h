@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QPalette>
 #include <QDebug>
+#include <QStringList>
+#include <QString>
 
 #include "Scale/qscale.h"
 
@@ -52,7 +54,7 @@ private:
     SensorConfigDialog *mSensorConfigView;
 
 public slots:
-
+    void sensorData(QStringList StringList);
 
 
 };
