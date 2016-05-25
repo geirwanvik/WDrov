@@ -66,6 +66,7 @@ private:
     QString BluetoothPairAddress;
      void pairDevice();
      void unpairDevice();
+     void showFailedToConnectMessage();
 };
 
 #endif // BLUETOOTHTHREAD_H

@@ -102,6 +102,37 @@ void bluetooththread::unpairDevice()
 
 }
 
+void bluetooththread::showFailedToConnectMessage()
+{
+    QMessageBox::StandardButton resBtn = QMessageBox::question( qobject_cast<QWidget *>(parent()), "Bluetooth Error",
+                                                                tr("Cant connect to bluetooth adress: %1!\n"
+                                                                   "Would You Like To Open Setup Window?").arg(mBluetooth_setup->getAddress()),
+                                                                QMessageBox::No | QMessageBox::Yes | QMessageBox::Retry,
+                                                                QMessageBox::Retry);
+
+
+    if (resBtn == QMessageBox::Yes || resBtn == QMessageBox::Retry)
+    {
+       if(resBtn == QMessageBox::Retry)
+       {
+           connectToSocketNow();
+       }
+       else
+       {
+           mBluetooth_setup->setModal(true);
+           mBluetooth_setup->show();
+       }
+    }
+    else
+    {
+      return;
+    }
+
+
+
+
+}
+
 void bluetooththread::disconnectDevice()
 {
     unpairDevice();
@@ -143,9 +174,7 @@ void bluetooththread::error(QBluetoothSocket::SocketError error)
             break;
          case QBluetoothSocket::ServiceNotFoundError:
             emit failedToConnect();
-            QMessageBox::information(qobject_cast<QWidget *>(parent()), tr("Bluetooth Error"), tr("The Bluetooth is not in range or turned off\nCheck the status on the Bluetooth unit!"));
-
-
+            showFailedToConnectMessage();
             break;
     case QBluetoothSocket::OperationError:
             //QMessageBox::information(qobject_cast<QWidget *>(parent()), tr("Bluetooth Error"), tr("Lost the Bluetooth communication"));

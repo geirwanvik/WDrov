@@ -70,6 +70,7 @@ private:
     void ReadSettings(void);
 
 
+
      QToolBar *ToolBar;
      QLabel *LabelToolBar;
      void createToolBar(void);

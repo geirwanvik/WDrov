@@ -12,6 +12,11 @@ SensorConfigDialog::SensorConfigDialog(QWidget *parent) :
 #else
 
 #endif
+
+    ui->radioButtonBatteryV->setChecked(true);
+    ui->radioButtonTemperature->setChecked(true);
+    ui->radioButtonPitch->setChecked(true);
+    ui->radioButtonRoll->setChecked(true);
     readSetting();
 
     groupRadioButtons();

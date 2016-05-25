@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-#define MY_ASSERT(c) if(c == false){};
-#define MY_ASSERT_X(c, where, what) if (c == false) ;
 
 #ifdef Q_OS_ANDROID
 
@@ -41,10 +39,13 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
             out.flush();
       }
 
-#endif
+#else
 
-#ifdef Q_OS_WIN
+#define MY_ASSERT(c) if(c == false){};
+#define MY_ASSERT_X(c, where, what) if (c == false) ;
 
+void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
       Q_UNUSED(context); //Not used
 
       QFile file("WD_Logg");
@@ -77,7 +78,7 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 }
 #endif
 
-//}
+}
 
 
 int main(int argc, char *argv[])

@@ -92,6 +92,8 @@ void bluetooth_setup::ReadSettings()
 
 }
 
+
+
 void bluetooth_setup::createToolBar()
 {
     LabelToolBar = new QLabel(this);

@@ -39,6 +39,7 @@ void SensorOverviewForm::createBatteryVscale()
     mBatteryVoltageScale->setRange(8,16);
     mBatteryVoltageScale->setLabelsVisible(true);
     mBatteryVoltageScale->setLabelsFormat('V', 0);
+    mBatteryVoltageScale->setValue(12);
     mBatteryVoltageScale->setVisible(false);
     ui->verticalLayoutFirstView->addWidget(mBatteryVoltageScale);
 }

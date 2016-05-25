@@ -138,8 +138,8 @@ void MainWindow::click_BoatMusic()
 
 void MainWindow::bluetoothStartConnection()
 {
-   // mProgressInd->show();
-    //mProgressInd->startAnimation();
+    mProgressInd->show();
+    mProgressInd->startAnimation();
     ui->statusBar->showMessage("Connecting....");
 }
 
@@ -147,6 +147,7 @@ void MainWindow::bluetoothDoneConnection()
 {
     mProgressInd->stopAnimation();
     mProgressInd->hide();
+    ui->statusBar->showMessage("Bluetooth Connected!");
 }
 
 void MainWindow::bluetoothFailedConnection()
@@ -184,6 +185,7 @@ void MainWindow::initObjectAndConnection()
    connect(mSocket, SIGNAL(Doneconnecting()), this, SLOT(bluetoothDoneConnection()));
    connect(mSocket, SIGNAL(DoneDisconnecting()), this, SLOT(bluetoothFailedConnection()));
    connect(mSocket, SIGNAL(failedToConnect()), this, SLOT(bluetoothFailedConnection()));
+   connect(mSocket, SIGNAL(startConnecting()), this, SLOT(bluetoothStartConnection()));
 #else
    mSocket = new serialPort(this);
    connect(mInstrumentForm, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(sendData(QString)));
@@ -196,8 +198,7 @@ void MainWindow::initObjectAndConnection()
 
     if(ui->checkBoxConnectAtStart->isChecked())
     {
-       // mSocket->connectToSocketNow();
-        //bluetoothStartConnection();
+       mSocket->connectToSocketNow();
     }
     else
     {
