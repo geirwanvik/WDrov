@@ -186,6 +186,12 @@ void MainWindow::initObjectAndConnection()
    connect(mSocket, SIGNAL(DoneDisconnecting()), this, SLOT(bluetoothFailedConnection()));
    connect(mSocket, SIGNAL(failedToConnect()), this, SLOT(bluetoothFailedConnection()));
    connect(mSocket, SIGNAL(startConnecting()), this, SLOT(bluetoothStartConnection()));
+   connect(mInstrumentForm, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(sendData(QString)));
+   connect(mWdLink, SIGNAL(sendByteArrayToSocket(QByteArray)), mSocket, SLOT(writeBytes(QByteArray)));
+   connect(mSocket, SIGNAL(readyRead(QByteArray)), mWdLink, SLOT(inncommingData(QByteArray)));
+   connect(mWdParser, SIGNAL(GpsData(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
+   connect(mWdParser, SIGNAL(ImuData(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
+   connect(mWdParser, SIGNAL(Dht22Data(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
 #else
    mSocket = new serialPort(this);
    connect(mInstrumentForm, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(sendData(QString)));
@@ -195,6 +201,11 @@ void MainWindow::initObjectAndConnection()
    connect(mWdParser, SIGNAL(ImuData(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
    connect(mWdParser, SIGNAL(Dht22Data(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
 #endif
+
+
+ //  mAndroidGpsSource = new androidGps(this);
+     mAndroidAccelerometer = new androidAccelerometer(this);
+
 
     if(ui->checkBoxConnectAtStart->isChecked())
     {

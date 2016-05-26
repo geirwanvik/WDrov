@@ -17,6 +17,9 @@
 #include "progressBar/QProgressIndicator.h"
 #include "hmi/allsensorsdialog.h"
 
+#include "Android_Sensors/androidgps.h"
+#include "Android_Sensors/androidaccelerometer.h"
+
 #if  defined(Q_OS_ANDROID)
 #include <QtAndroidExtras>
 #else
@@ -87,6 +90,10 @@ private:
     SensorOverviewForm *mSensorOverviewForm;
 
     AllSensorsDialog *mAllSensorOverview;
+
+    androidGps *mAndroidGpsSource;
+
+    androidAccelerometer *mAndroidAccelerometer;
 
     //Screen data, set font and sizes
     void setupApperance();

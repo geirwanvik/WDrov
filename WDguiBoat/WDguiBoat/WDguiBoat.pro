@@ -6,6 +6,8 @@
 
 QT       += core gui
 QT       += bluetooth
+QT       += positioning
+QT       += sensors
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,7 +30,10 @@ SOURCES += main.cpp\
     hmi/ConfigClasses/sensorconfigdialog.cpp \
     wdLink/wdlink.cpp \
     wdLink/wdparser.cpp \
-    hmi/allsensorsdialog.cpp
+    hmi/allsensorsdialog.cpp \
+    Android_Sensors/androidgps.cpp \
+    Android_Sensors/androidaccelerometer.cpp
+
 
 HEADERS  += mainwindow.h \
     Palette/styleone.h \
@@ -43,7 +48,10 @@ HEADERS  += mainwindow.h \
     hmi/ConfigClasses/sensorconfigdialog.h \
     wdLink/wdlink.h \
     wdLink/wdparser.h \
-    hmi/allsensorsdialog.h
+    hmi/allsensorsdialog.h \
+    Android_Sensors/androidgps.h \
+    Android_Sensors/androidaccelerometer.h
+
 
 FORMS    += mainwindow.ui \
     hmi/instrumentform.ui \

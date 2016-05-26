@@ -49,10 +49,12 @@ void InstrumentForm::setupApperance()
     ui->pushButtonHorn->setIconSize(QSize(100,100));
 }
 
-void InstrumentForm::showSensorConfig()
+void InstrumentForm::dataFromWdCore(QStringList StringList)
 {
 
 }
+
+
 
 void InstrumentForm::on_pushButtonLatern_released()
 {

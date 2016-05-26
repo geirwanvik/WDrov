@@ -39,7 +39,8 @@ signals:
     void writeToSocket(QString String);
 
 public slots:
-    void showSensorConfig();
+    void dataFromWdCore(QStringList StringList);
+
 };
 
 #endif // INSTRUMENTFORM_H
