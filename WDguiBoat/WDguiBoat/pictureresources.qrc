@@ -19,5 +19,7 @@
         <file>pictures/Instrument/windshield wiper.png</file>
         <file>pictures/Instrument/heaterFan.png</file>
         <file>pictures/Instrument/Horn.png</file>
+        <file>pictures/Instrument/instrument.png</file>
+        <file>pictures/Instrument/searchlight.png</file>
     </qresource>
 </RCC>

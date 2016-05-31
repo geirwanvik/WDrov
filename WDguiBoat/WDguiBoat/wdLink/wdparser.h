@@ -18,6 +18,7 @@ signals:
     void ImuData(QStringList StringList);
     void Dht22Data(QStringList StringList);
     void GpsData(QStringList StringList);
+    void PowerData(QStringList StringList);
 
 
 public slots:

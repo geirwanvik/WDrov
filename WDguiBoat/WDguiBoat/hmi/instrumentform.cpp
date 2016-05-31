@@ -24,6 +24,7 @@ void InstrumentForm::setupApperance()
     ui->pushButton_2->setVisible(false);
     ui->pushButton_5->setVisible(false);
     ui->pushButton->setVisible(false);
+    ui->pushButton_6->setVisible(false);
 
     ui->pushButtonBilgePump->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/bilge pump.png"));
     ui->pushButtonBilgePump->setIconSize(QSize(100,100));
@@ -47,6 +48,14 @@ void InstrumentForm::setupApperance()
 
     ui->pushButtonHorn->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/Horn.png"));
     ui->pushButtonHorn->setIconSize(QSize(100,100));
+
+    ui->pushButtonInstruments->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/instrument.png"));
+    ui->pushButtonInstruments->setIconSize(QSize(100,100));
+    ui->pushButtonInstruments->setCheckable(true);
+
+    ui->pushButtonFloodlight->setCheckable(true);
+    ui->pushButtonFloodlight->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/searchlight.png"));
+    ui->pushButtonFloodlight->setIconSize(QSize(100,100));
 }
 
 void InstrumentForm::dataFromWdCore(QStringList StringList)
@@ -92,11 +101,13 @@ void InstrumentForm::on_pushButtonInteriorLights_released()
 {
     if(ui->pushButtonInteriorLights->isChecked())
     {
+        writeToSocket("ARDU,RED_LED,255,GREEN_LED,255,BLUE_LED,255");
         ui->pushButtonInteriorLights->setText("Interior Lights\nON");
         ui->pushButtonInteriorLights->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
     }
     else
     {
+        writeToSocket("ARDU,RED_LED,0,GREEN_LED,0,BLUE_LED,0");
         ui->pushButtonInteriorLights->setText("Interior Lights\nOFF");
         ui->pushButtonInteriorLights->setStyleSheet("QPushButton {}");
     }
@@ -123,11 +134,13 @@ void InstrumentForm::on_pushButtonHeater_released()
 {
     if(ui->pushButtonHeater->isChecked())
     {
+        writeToSocket("ARDU,HEATER,ON");
         ui->pushButtonHeater->setText("Heater\nON");
         ui->pushButtonHeater->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
     }
     else
     {
+        writeToSocket("ARDU,HEATER,OFF");
         ui->pushButtonHeater->setText("Heater\nOFF");
         ui->pushButtonHeater->setStyleSheet("QPushButton {}");
     }
@@ -144,4 +157,35 @@ void InstrumentForm::on_pushButtonHorn_released()
 
     ui->pushButtonHorn->setText("Horn");
     ui->pushButtonHorn->setStyleSheet("QPushButton {}");
+}
+
+void InstrumentForm::on_pushButtonInstruments_clicked()
+{
+    if(ui->pushButtonInstruments->isChecked())
+    {
+        writeToSocket("ARDU,INSTRUMENT,ON");
+        ui->pushButtonInstruments->setText("Instrument\nPower ON");
+        ui->pushButtonInstruments->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
+    }
+    else
+    {
+        writeToSocket("ARDU,INSTRUMENT,OFF");
+        ui->pushButtonInstruments->setText("Instrument\nPower OFF");
+        ui->pushButtonInstruments->setStyleSheet("QPushButton {}");
+    }
+}
+
+void InstrumentForm::on_pushButtonFloodlight_clicked()
+{
+    if(ui->pushButtonFloodlight->isChecked())
+    {
+        ui->pushButtonFloodlight->setText("Floodlight\nON");
+        ui->pushButtonFloodlight->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
+
+    }
+    else
+    {
+        ui->pushButtonFloodlight->setText("Floodlight\nOFF");
+        ui->pushButtonFloodlight->setStyleSheet("QPushButton {}");
+    }
 }

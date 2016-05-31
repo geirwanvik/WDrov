@@ -38,6 +38,10 @@ void wdParser::dataForParsing(QString string)
           emit ImuData(fields);
         //  qDebug () << fields[0] << fields[1] << "  " << fields[2] << fields[3] << "  " << fields[4] << fields[5];
       }
+      else if(fields.contains("VOLTAGE") || fields.contains("CURRENT"))
+      {
+          emit PowerData(fields);
+      }
       else
       {
           return;

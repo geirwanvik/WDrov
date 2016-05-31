@@ -29,6 +29,10 @@ private slots:
     void on_pushButtonHorn_pressed();
     void on_pushButtonHorn_released();
 
+    void on_pushButtonInstruments_clicked();
+
+    void on_pushButtonFloodlight_clicked();
+
 private:
     Ui::InstrumentForm *ui;
     void setupApperance();

@@ -48,6 +48,15 @@ void AllSensorsDialog::sensorData(QStringList StringList)
         ui->labelDhtTemp->setText(StringList[0] + " : " + StringList[1]);
         ui->labelDhtHumidity->setText(StringList[2] + " : " + StringList[3]);
     }
+    else if(StringList.contains("VOLTAGE") || StringList.contains("CURRENT"))
+    {
+        ui->labelVoltage12v->setText(StringList[0] + " : " + StringList[1]);
+        ui->labelSystemCurrent->setText(StringList[2] + " : " + StringList[3]);
+    }
+    else
+    {
+        return;
+    }
 }
 
 void AllSensorsDialog::on_pushButtonClose_clicked()

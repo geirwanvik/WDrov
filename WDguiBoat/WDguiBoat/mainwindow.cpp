@@ -331,6 +331,7 @@ void MainWindow::on_actionAll_Sensor_triggered()
     connect(mWdParser, SIGNAL(ImuData(QStringList)), mAllSensorOverview, SLOT(sensorData(QStringList)));
     connect(mWdParser, SIGNAL(Dht22Data(QStringList)), mAllSensorOverview, SLOT(sensorData(QStringList)));
     connect(mWdParser, SIGNAL(GpsData(QStringList)), mAllSensorOverview, SLOT(sensorData(QStringList)));
+    connect(mWdParser, SIGNAL(PowerData(QStringList)), mAllSensorOverview, SLOT(sensorData(QStringList)));
 
     mAllSensorOverview->show();
 }
