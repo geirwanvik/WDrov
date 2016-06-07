@@ -20,7 +20,7 @@ android{
 
 unix:QT +=  serialport
 
-unix{
+unix || win32{
   SOURCES +=   Communication/Serial/serialport.cpp\
                Communication/Serial/serial_setup.cpp
 
