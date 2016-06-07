@@ -1,4 +1,5 @@
 #include "wdparser.h"
+#include "CommandList.h"
 
 wdParser::wdParser(QObject *parent) : QObject(parent)
 {
@@ -7,52 +8,74 @@ wdParser::wdParser(QObject *parent) : QObject(parent)
 
 void wdParser::dataForParsing(QString string)
 {
-    QStringList fields = string.split(",");
+    string = string.trimmed();
+    string = string.remove(string.lastIndexOf('*'),3);
 
-   /* for(int i= 0; i < fields.length(); i++)
+    QStringList parsedList;
+    parsedList = string.split(',');
+    if (parsedList.isEmpty())
+        return;
+
+    parsedList.removeFirst(); // Remove talker
+
+    if ((parsedList.length() % 2) != 0)
+        return; // Must be even number of fields
+
+
+    for (int i = 0; i < parsedList.length(); i += 2)
     {
-       qDebug() << fields[i];
-
-    }*/
-
-
-    if(fields.contains("ardu"))
-    {
-        fields.removeFirst();
-
-      if(fields.contains("RELAY_BILGE_PP") || fields.contains("RELAY_LANTERN") || fields.contains("RELAY_WIPER"))
-      {
-            emit instrumentData(fields);
-      }
-      else if(fields.contains("DHT22_TEMP") || fields.contains("DHT22_HUM"))
-      {
-          emit Dht22Data(fields);
-      }
-      else if(fields.contains("GPS_LAT") || fields.contains("GPS_LON") || fields.contains("GPS_ALT"))
-      {
-          emit GpsData(fields);
-         // qDebug () << fields[6] << fields[7] << "  " << fields[8] << fields[9] << fields[10] << fields[11] << fields[12] << fields[13];
-      }
-      else if(fields.contains("IMU_ROLL") || fields.contains("IMU_PITCH") || fields.contains("IMU_HEADING"))
-      {
-          emit ImuData(fields);
-        //  qDebug () << fields[0] << fields[1] << "  " << fields[2] << fields[3] << "  " << fields[4] << fields[5];
-      }
-      else if(fields.contains("VOLTAGE") || fields.contains("CURRENT"))
-      {
-          emit PowerData(fields);
-      }
-      else
-      {
-          return;
-      }
-
+        findCommand(parsedList.at(i), parsedList.at(i+1));
     }
-    else
+}
+
+void wdParser::findCommand(QString command, QString value)
+{
+    ushort i = 0;
+    for (;i < sizeof(Commands) / sizeof(Commands[0]); i++)
     {
-
+        if (command == Commands[i])
+        {
+            break;
+        }
     }
-
-
+    qDebug() << "Pac, implementer denne commandoen -> " << command << " " << value;
+    switch (i)
+    {
+    case GPS_LAT:
+    case GPS_LON:
+    case GPS_ALT:
+    case GPS_GROUND_SPEED:
+    case GPS_3D_SPEED:
+    case GPS_GROUND_COURSE:
+    case GPS_NUM_SATS:
+    case GPS_FIX:
+        //emit GpsData(command, value);;
+        break;
+    case IMU_ROLL:
+    case IMU_PITCH:
+    case IMU_HEADING:
+        //emit ImuData(command, value);
+        break;
+    case DHT22_TEMP:
+    case DHT22_HUM:
+        //emit Dht22Data(command, value);
+        break;
+    case RELAY_BILGE_PP:
+    case RELAY_LANTERN:
+    case RELAY_WIPER:
+        //emit instrumentData(command, value);
+        break;
+    case VOLTAGE:
+    case CURRENT:
+        //emit PowerData(command, value);
+        break;
+    case LED_RED:
+    case LED_GREEN:
+    case LED_BLUE:
+        //emit LedFeedback(command, value);
+        break;
+    default:
+        qDebug() << "Ooops i fucked up";
+    }
 }
 

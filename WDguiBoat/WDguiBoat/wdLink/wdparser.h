@@ -27,7 +27,7 @@ public slots:
 private slots:
 
 private:
-    QByteArray reSendData;
+    void findCommand(QString command, QString value);
 };
 
 #endif // WDPARSER_H

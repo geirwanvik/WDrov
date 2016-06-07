@@ -3,15 +3,13 @@
 WDLink::WDLink(QObject *parent) : QObject(parent)
 {
     state = Start;
-
-
-    connect(this, SIGNAL(freshSendData(QString)), this, SLOT(sendFreshSocketData(QString)));
 }
 
-void WDLink::Receive(unsigned char data)
+void WDLink::Receive(QByteArray array)
 {
-
-
+    for(int i = 0; i < array.length(); i++)
+    {
+        char data = array.at(i);
         switch (state)
         {
         case Start:
@@ -31,138 +29,50 @@ void WDLink::Receive(unsigned char data)
                 state = End;
             }
         case End:
-            if (CheckCRC(rx.toStdString().c_str()))
+            if (CheckCRC(rx) == true)
             {
-                unsigned char index = rx.lastIndexOf('*');
-                rx.remove(index,3);
                 emit freshData(rx);
             }
-            rx = "";
+            rx.clear();
             state = Start;
             break;
         }
-
-
-
+     }
 }
 
-void WDLink::Send(QString *buffer) //Adding protocoll data to a string
+void WDLink::Send(QString buffer)
 {
-    char crcHex[2];
-        tx += '$';
-        tx += *buffer;
-        unsigned char crc = CalculateCRC(buffer->toStdString().c_str());
-        tx += '*';
-        sprintf(crcHex,"%02x", crc);
-        tx += crcHex;
-
-
-        emit freshSendData(tx);
-
-        tx.clear();
+    buffer.prepend("app");
+    buffer.append("*");
+    buffer += CalculateCRC(buffer);
+    buffer.prepend("$");
+    emit sendByteArrayToSocket(buffer.toLatin1());
 }
 
 
-
-unsigned char WDLink::CalculateCRC(const char *buffer)
+QString WDLink::CalculateCRC(const QString &string)
 {
-    unsigned char c = 0;
-        while (*buffer)
-        {
-            c ^= *buffer++;
-        }
-        return c;
-}
-
-unsigned char WDLink::CheckCRC(const char *buffer)
-{
-    unsigned char c = 0;
-        unsigned char crc = 0;
-        while (*buffer != '*')
-        {
-            c ^= *buffer++;
-        }
-        buffer++;
-        crc = strtoul(buffer, 0, 16);
-
-        if (c == crc)
-        {
-            return true;
-        }
-        return false;
-}
-
-
-
-void WDLink::ReveiveSlot(unsigned char data) //Wd link decoder
-{
-    switch (state)
+    uint8_t i = 0, c = 0;
+    while ((i < string.length()) && (string.at(i) != '*'))
     {
-    case Start:
-        if (data == '$')
-        {
-            state = Receiving;
-        }
-        break;
-    case Receiving:
-        if ((data != '\r') && (data != '\n') && (data != '0'))
-        {
-            rx += char(data);
-            break;
-        }
-        else
-        {
-            state = End;
-        }
-    case End:
-        if (CheckCRC(rx.toStdString().c_str()))
-        {
-            unsigned char index = rx.lastIndexOf('*');
-            rx.remove(index,3);
-           emit freshData(rx);
-        }
-        rx = "";
-        state = Start;
-        break;
+        c ^= (uint8_t)string.at(i).toLatin1();
+        i++;
     }
-}
-
-void WDLink::inncommingData(QByteArray Array) //Data from inncomming socket in bytearray
-{
-  //  qDebug() << Array;
-    for(int i = 0; i < Array.length(); i++)
+    if (c < 0x10)
     {
-        Receive(Array.at(i));
+        return ("0" + QString::number(c,16).toUpper());
     }
+    return QString::number(c,16).toUpper();
 }
 
-void WDLink::sendFreshSocketData(QString string) //Send to socket/serialport Array
+bool WDLink::CheckCRC(const QString &string)
 {
-    string += '\n';
-    QByteArray array(string.toStdString().c_str(), string.length());
+    QString cCalculated, cReceived;
+    cCalculated = CalculateCRC(string);
+    int index = string.lastIndexOf('*');
+    cReceived = string.mid(index +1);
+    if (QString::compare(cReceived,cCalculated,Qt::CaseInsensitive) == 0)
+        return true;
 
-    emit sendByteArrayToSocket(array);
-
-    array.clear();
+    return false;
 }
-
-void WDLink::sendData(QString buffer) //Wd link data packer adding $ and crc
-{
-    char crcHex[2];
-        tx += '$';
-        tx += buffer;
-        unsigned char crc = CalculateCRC(buffer.toStdString().c_str());
-        tx += '*';
-        sprintf(crcHex,"%02x", crc);
-        tx += crcHex;
-
-        qDebug() << "After wrapping: " << tx;
-        emit freshSendData(tx);
-
-        tx.clear();
-
-
-
-}
-
-
