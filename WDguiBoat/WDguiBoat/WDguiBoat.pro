@@ -43,7 +43,7 @@ HEADERS  += mainwindow.h \
     Screen/screendata.h \
     Scale/qscale.h \
     hmi/sensoroverviewform.h \
-    CommandList.h \
+    ../../WDboat/CommandList.h \
     progressBar/QProgressIndicator.h \
     hmi/ConfigClasses/sensorconfigdialog.h \
     wdLink/wdlink.h \

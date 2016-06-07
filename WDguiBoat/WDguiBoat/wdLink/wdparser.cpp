@@ -1,5 +1,5 @@
 #include "wdparser.h"
-#include "CommandList.h"
+#include "../../WDboat/CommandList.h"
 
 wdParser::wdParser(QObject *parent) : QObject(parent)
 {
