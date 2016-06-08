@@ -64,7 +64,6 @@ void InstrumentForm::dataFromWdCore(QStringList StringList)
 }
 
 
-
 void InstrumentForm::on_pushButtonLatern_released()
 {
     if(ui->pushButtonLatern->isChecked())
