@@ -49,30 +49,30 @@ void wdParser::findCommand(QString command, QString value)
     case GPS_GROUND_COURSE:
     case GPS_NUM_SATS:
     case GPS_FIX:
-        //emit GpsData(command, value);;
+    emit GpsData(command, value);
         break;
     case IMU_ROLL:
     case IMU_PITCH:
     case IMU_HEADING:
-        //emit ImuData(command, value);
+    emit ImuData(command, value);
         break;
     case DHT22_TEMP:
     case DHT22_HUM:
-        //emit Dht22Data(command, value);
+    emit Dht22Data(command, value);
         break;
     case RELAY_BILGE_PP:
     case RELAY_LANTERN:
     case RELAY_WIPER:
-        //emit instrumentData(command, value);
+    emit instrumentData(command, value);
         break;
     case VOLTAGE:
     case CURRENT:
-        //emit PowerData(command, value);
+    emit PowerData(command, value);
         break;
     case LED_RED:
     case LED_GREEN:
     case LED_BLUE:
-        //emit LedFeedback(command, value);
+    emit LedFeedback(command, value);
         break;
     default:
         qDebug() << "Ooops i fucked up";

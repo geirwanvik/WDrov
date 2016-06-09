@@ -78,6 +78,7 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 }
 #endif
 
+}
 
 int main(int argc, char *argv[])
 {

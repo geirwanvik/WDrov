@@ -20,6 +20,13 @@ signals:
     void GpsData(QStringList StringList);
     void PowerData(QStringList StringList);
 
+    void GpsData(QString command,QString value);
+    void ImuData(QString command,QString value);
+    void Dht22Data(QString command,QString value);
+    void instrumentData(QString command,QString value);
+    void PowerData(QString command,QString value);
+    void LedFeedback(QString command,QString value);
+
 
 public slots:
     void dataForParsing(QString string);
