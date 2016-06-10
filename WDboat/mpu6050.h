@@ -1,6 +1,5 @@
 #pragma once
 #include "Arduino.h"
-#if !(defined USE_MPU600)
 class _MPU
 {
 public:
@@ -22,4 +21,3 @@ private:
 	int16_t magOffset[3];
 };
 extern _MPU MPU;
-#endif

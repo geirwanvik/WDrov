@@ -3,24 +3,24 @@
 #include <EEPROM.h>
 #include "imu.h"
 #include "dht11.h"
-#include "gps_ublox.h"
 #include "link.h"
 #include "pins.h"
 #include "VoltCurrent.h"
 #include "RGBdriver.h"
+#include "TinyGPS++.h"
 
 RGBdriver Driver(LED_CLK, LED_DATA);
-
 RGB_STATE RGB;
+
 
 
 
 void setup()
 {
+	Serial1.begin(115200);
 	WDlink.Init();
 	IMU.Init();
 	DHT.Init(DHT_DATA_PIN);
-	GPS.Init();
 	VoltCurrent.Init();
 
 	digitalWrite(BILGE_PP_PIN, LOW);
@@ -55,6 +55,11 @@ void loop()
 	IMU.Update();
 	WDlink.Read();
 
+	while (Serial1.available())
+	{
+		Gps.encode(Serial1.read());
+	}
+
 	//int red = 128 + 127 * cos(2 * PI / RGB.fade * (millis()));
 
 	Driver.begin(); // begin
@@ -70,11 +75,6 @@ void loop()
 	{
 		updateFastLoop = millis();
 		VoltCurrent.Update();
-		GPS.Read();
-		if (GPS.NewData)
-		{
-			GPS.NewData = 0;
-		}
 		WDlink.Write();
 	}
 	

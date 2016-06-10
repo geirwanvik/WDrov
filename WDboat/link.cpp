@@ -6,12 +6,9 @@
 #include "pins.h"
 #include "RGBdriver.h"
 #include "EEPROM.h"
-#ifdef USE_MPU600
-#include "mpu6000.h"
-#else
 #include "mpu6050.h"
-#endif
 #include "VoltCurrent.h"
+#include "TinyGPS++.h"
 
 _WDlink WDlink;
 
@@ -40,42 +37,37 @@ void _WDlink::Write()
 	case SEND_GPS:
 		tx += Commands[GPS_LAT];
 		tx += ",";
-		tx += String((double)(GPS.Lattitude / 10000000.0), 7);
+		tx += String(Gps.location.lat(), 6);
 		tx += ",";
 
 		tx += Commands[GPS_LON];
 		tx += ",";
-		tx += String((double)(GPS.Longitude / 10000000.0), 7);
+		tx += String(Gps.location.lng(), 6);
 		tx += ",";
 
-		tx += Commands[GPS_ALT];
+		tx += Commands[GPS_GROUND_SPEED_KNOTS];
 		tx += ",";
-		tx += String((double)(GPS.Altitude / 100.0), 2);
-		tx += ",";
-
-		tx += Commands[GPS_GROUND_SPEED];
-		tx += ",";
-		tx += String((double)(GPS.Ground_Speed / 100.0), 2);
+		tx += String(Gps.speed.knots(), 2);
 		tx += ",";
 
-		tx += Commands[GPS_3D_SPEED];
+		tx += Commands[GPS_GROUND_SPEED_KMH];
 		tx += ",";
-		tx += String((double)(GPS.Speed_3d / 100.0), 2);
+		tx += String(Gps.speed.kmph(), 2);
 		tx += ",";
 
 		tx += Commands[GPS_GROUND_COURSE];
 		tx += ",";
-		tx += String((double)(GPS.Ground_Course / 100.0), 2);
+		tx += String(Gps.course.deg(), 2);
 		tx += ",";
 
 		tx += Commands[GPS_NUM_SATS];
 		tx += ",";
-		tx += GPS.NumSats;
+		tx += String(Gps.satellites.value());
 		tx += ",";
 
-		tx += Commands[GPS_FIX];
+		tx += Commands[GPS_HDOP];
 		tx += ",";
-		tx += GPS.Fix;
+		tx += String(Gps.hdop.value());
 		break;
 	case SEND_IMU:
 		tx += Commands[IMU_ROLL];

@@ -1,7 +1,5 @@
 #include "mpu6050.h"
-#if !(defined USE_MPU600)
 #include "i2chelper.h"
-#include "Streaming.h"
 #include <EEPROM.h>
 
 #define MAG_ADDRESS 0x1E
@@ -372,4 +370,3 @@ void _MPU::initAcc()
 	accOffset[YAW] = save.data[YAW];
 	//Serial << "Acc offsets " << accOffset[0] << " " << accOffset[1] << " " << accOffset[2] << endl;
 }
-#endif

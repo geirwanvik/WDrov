@@ -12,12 +12,11 @@ _String Commands[] =
 {
     "GPS_LAT",
     "GPS_LON",
-    "GPS_ALT",
-    "GPS_GROUND_SPEED",
-    "GPS_3D_SPEED",
+    "GPS_GROUND_SPEED_KNOTS",
+    "GPS_GROUND_SPEED_KMH",
     "GPS_GROUND_COURSE",
     "GPS_NUM_SATS",
-    "GPS_FIX",
+    "GPS_HDOP",
 
     "IMU_ROLL",
     "IMU_PITCH",
@@ -44,12 +43,11 @@ enum Commands
 {
     GPS_LAT = 0,
     GPS_LON,
-    GPS_ALT,
-    GPS_GROUND_SPEED,
-    GPS_3D_SPEED,
+	GPS_GROUND_SPEED_KNOTS,
+	GPS_GROUND_SPEED_KMH,
     GPS_GROUND_COURSE,
     GPS_NUM_SATS,
-    GPS_FIX,
+	GPS_HDOP,
 
     IMU_ROLL,
     IMU_PITCH,

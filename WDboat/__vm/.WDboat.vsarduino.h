@@ -12,7 +12,7 @@
 #define _VSARDUINO_H_
 #define __AVR_ATmega2560__
 #define F_CPU 16000000L
-#define ARDUINO 10607
+#define ARDUINO 10609
 #define ARDUINO_AVR_MEGA2560
 #define ARDUINO_ARCH_AVR
 #define __cplusplus 201103L
@@ -66,13 +66,12 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <..\WDboat\CommandList.h>
 #include <..\WDboat\RGBdriver.cpp>
 #include <..\WDboat\RGBdriver.h>
-#include <..\WDboat\Streaming.h>
+#include <..\WDboat\TinyGPS++.cpp>
+#include <..\WDboat\TinyGPS++.h>
 #include <..\WDboat\VoltCurrent.cpp>
 #include <..\WDboat\VoltCurrent.h>
 #include <..\WDboat\dht11.cpp>
 #include <..\WDboat\dht11.h>
-#include <..\WDboat\gps_ublox.cpp>
-#include <..\WDboat\gps_ublox.h>
 #include <..\WDboat\hmc5843.cpp>
 #include <..\WDboat\hmc5843.h>
 #include <..\WDboat\i2cHelper.cpp>
@@ -83,11 +82,7 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <..\WDboat\imuHelper.h>
 #include <..\WDboat\link.cpp>
 #include <..\WDboat\link.h>
-#include <..\WDboat\mpu6000.cpp>
-#include <..\WDboat\mpu6000.h>
 #include <..\WDboat\mpu6050.cpp>
 #include <..\WDboat\mpu6050.h>
 #include <..\WDboat\pins.h>
-#include <..\WDboat\spihelper.cpp>
-#include <..\WDboat\spihelper.h>
 #endif
