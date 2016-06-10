@@ -5,7 +5,6 @@
 #include "mpu6050.h"
 #endif
 #include "imuHelper.h"
-#include "Streaming.h"
 _IMU IMU;
 
 void _IMU::Init()

@@ -33,22 +33,10 @@
     <ClInclude Include="imu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mpu6000.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="spihelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dht11.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gps_ublox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="link.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Streaming.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pins.h">
@@ -69,15 +57,12 @@
     <ClInclude Include="CommandList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TinyGPS++.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mpu6000.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="spihelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="i2cHelper.cpp">
@@ -92,9 +77,6 @@
     <ClCompile Include="dht11.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gps_ublox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="link.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -105,6 +87,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RGBdriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TinyGPS++.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -2,7 +2,6 @@
 #include "CommandList.h"
 #include "imu.h"
 #include "dht11.h"
-#include "gps_ublox.h"
 #include "pins.h"
 #include "RGBdriver.h"
 #include "EEPROM.h"

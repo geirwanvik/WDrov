@@ -12,9 +12,6 @@
 RGBdriver Driver(LED_CLK, LED_DATA);
 RGB_STATE RGB;
 
-
-
-
 void setup()
 {
 	Serial1.begin(115200);
