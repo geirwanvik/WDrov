@@ -16,6 +16,7 @@
 #include "hmi/sensoroverviewform.h"
 #include "progressBar/QProgressIndicator.h"
 #include "hmi/allsensorsdialog.h"
+#include "hmi/debug/wdlinkdebugdialog.h"
 
 #include "Android_Sensors/androidgps.h"
 #include "Android_Sensors/androidaccelerometer.h"
@@ -64,6 +65,8 @@ private slots:
 #endif
 
     void on_actionAll_Sensor_triggered();
+
+    void on_actionCommunication_Debug_triggered();
 
 signals:
 

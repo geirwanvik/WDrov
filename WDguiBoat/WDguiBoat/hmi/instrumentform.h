@@ -43,7 +43,7 @@ signals:
     void writeToSocket(QString String);
 
 public slots:
-    void dataFromWdCore(QStringList StringList);
+    void dataFromWdCore(QString command,QString value);
 
 };
 

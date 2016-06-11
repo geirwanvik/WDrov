@@ -38,7 +38,7 @@ void wdParser::findCommand(QString command, QString value)
             break;
         }
     }
-    qDebug() << "Pac, implementer denne commandoen -> " << command << " " << value;
+   // qDebug() << "Pac, implementer denne commandoen -> " << command << " " << value;
     switch (i)
     {
     case GPS_LAT:

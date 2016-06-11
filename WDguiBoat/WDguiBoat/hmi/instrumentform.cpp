@@ -58,9 +58,9 @@ void InstrumentForm::setupApperance()
     ui->pushButtonFloodlight->setIconSize(QSize(100,100));
 }
 
-void InstrumentForm::dataFromWdCore(QStringList StringList)
+void InstrumentForm::dataFromWdCore(QString command, QString value)
 {
-
+    qDebug() << "Instrument: " << command << " " << value;
 }
 
 

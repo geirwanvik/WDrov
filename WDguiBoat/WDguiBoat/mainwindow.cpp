@@ -188,20 +188,21 @@ void MainWindow::initObjectAndConnection()
    connect(mSocket, SIGNAL(startConnecting()), this, SLOT(bluetoothStartConnection()));
    connect(mInstrumentForm, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(Send(QString)));
    connect(mWdLink, SIGNAL(sendByteArrayToSocket(QByteArray)), mSocket, SLOT(writeBytes(QByteArray)));
-   connect(mSocket, SIGNAL(readyRead(QByteArray)), mWdLink, SLOT(Receive(QByteArray)));
-   connect(mWdParser, SIGNAL(GpsData(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
-   connect(mWdParser, SIGNAL(ImuData(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
-   connect(mWdParser, SIGNAL(Dht22Data(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
+   connect(mSocket, SIGNAL(readyRead(QByteArray)), mWdLink, SLOT(Receive(QByteArray)));  
 #else
    mSocket = new serialPort(this);
    connect(mInstrumentForm, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(Send(QString)));
    connect(mSocket, SIGNAL(readyRead(QByteArray)), mWdLink, SLOT(Receive(QByteArray)));
    connect(mWdLink, SIGNAL(sendByteArrayToSocket(QByteArray)), mSocket, SLOT(writeBytes(QByteArray)));
-   connect(mWdParser, SIGNAL(GpsData(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
-   connect(mWdParser, SIGNAL(ImuData(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
-   connect(mWdParser, SIGNAL(Dht22Data(QStringList)), mSensorOverviewForm, SLOT(sensorData(QStringList)));
+   this->resize(1300, 800);
 #endif
 
+    connect(mWdParser, SIGNAL(ImuData(QString,QString)), mSensorOverviewForm, SLOT(imuData(QString,QString)));
+    connect(mWdParser, SIGNAL(PowerData(QString,QString)), mSensorOverviewForm, SLOT(powerData(QString,QString)));
+    connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mSensorOverviewForm, SLOT(dht22Data(QString,QString)));
+    connect(mWdParser, SIGNAL(GpsData(QString,QString)), mSensorOverviewForm, SLOT(gpsData(QString,QString)));
+
+    connect(mWdParser, SIGNAL(instrumentData(QString,QString)), mInstrumentForm, SLOT(dataFromWdCore(QString,QString)));
 
  //  mAndroidGpsSource = new androidGps(this);
      mAndroidAccelerometer = new androidAccelerometer(this);
@@ -328,10 +329,26 @@ void MainWindow::on_actionSerial_Port_triggered()
 void MainWindow::on_actionAll_Sensor_triggered()
 {
     mAllSensorOverview = new AllSensorsDialog(this);
-    connect(mWdParser, SIGNAL(ImuData(QStringList)), mAllSensorOverview, SLOT(sensorData(QStringList)));
-    connect(mWdParser, SIGNAL(Dht22Data(QStringList)), mAllSensorOverview, SLOT(sensorData(QStringList)));
-    connect(mWdParser, SIGNAL(GpsData(QStringList)), mAllSensorOverview, SLOT(sensorData(QStringList)));
-    connect(mWdParser, SIGNAL(PowerData(QStringList)), mAllSensorOverview, SLOT(sensorData(QStringList)));
+    connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mWdParser, SIGNAL(GpsData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mWdParser, SIGNAL(ImuData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mWdParser, SIGNAL(PowerData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mWdParser, SIGNAL(LedFeedback(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
 
+    mAllSensorOverview->setModal(true);
     mAllSensorOverview->show();
+}
+
+void MainWindow::on_actionCommunication_Debug_triggered()
+{
+    wdLinkDebugDialog *mWdlinkDebug = new wdLinkDebugDialog(this);
+
+    connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
+    connect(mWdParser, SIGNAL(GpsData(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
+    connect(mWdParser, SIGNAL(ImuData(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
+    connect(mWdParser, SIGNAL(instrumentData(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
+    connect(mWdParser, SIGNAL(LedFeedback(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
+
+    mWdlinkDebug->setModal(true);
+    mWdlinkDebug->show();
 }

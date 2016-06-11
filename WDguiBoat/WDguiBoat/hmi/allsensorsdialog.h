@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QDebug>
+#include "../../WDboat/CommandList.h"
 
 namespace Ui {
 class AllSensorsDialog;
@@ -17,7 +18,8 @@ public:
     ~AllSensorsDialog();
 
 public slots:
-    void sensorData(QStringList StringList);
+    void sensorData(QString command,QString value);
+
 
 private slots:
     void on_pushButtonClose_clicked();

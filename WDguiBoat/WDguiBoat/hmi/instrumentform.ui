@@ -28,6 +28,9 @@
      <property name="text">
       <string>PushButton</string>
      </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="2" column="3">
@@ -187,6 +190,15 @@ Wiper</string>
       <string>Instrument
 Power</string>
      </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>true</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
     </widget>
    </item>
    <item row="0" column="3">
@@ -315,6 +327,9 @@ Lights</string>
      </property>
      <property name="text">
       <string>Floodlight</string>
+     </property>
+     <property name="default">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

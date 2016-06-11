@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     wdLink/wdparser.cpp \
     hmi/allsensorsdialog.cpp \
     Android_Sensors/androidgps.cpp \
-    Android_Sensors/androidaccelerometer.cpp
+    Android_Sensors/androidaccelerometer.cpp \
+    hmi/debug/wdlinkdebugdialog.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -50,7 +51,8 @@ HEADERS  += mainwindow.h \
     wdLink/wdparser.h \
     hmi/allsensorsdialog.h \
     Android_Sensors/androidgps.h \
-    Android_Sensors/androidaccelerometer.h
+    Android_Sensors/androidaccelerometer.h \
+    hmi/debug/wdlinkdebugdialog.h
 
 
 FORMS    += mainwindow.ui \
@@ -58,7 +60,8 @@ FORMS    += mainwindow.ui \
     Communication/Bluetooth/bluetooth_setup.ui \
     hmi/sensoroverviewform.ui \
     hmi/ConfigClasses/sensorconfigdialog.ui \
-    hmi/allsensorsdialog.ui
+    hmi/allsensorsdialog.ui \
+    hmi/debug/wdlinkdebugdialog.ui
 
 CONFIG += mobility
 MOBILITY = 

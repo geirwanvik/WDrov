@@ -54,7 +54,10 @@ private:
     SensorConfigDialog *mSensorConfigView;
 
 public slots:
-    void sensorData(QStringList StringList);
+    void imuData(QString command,QString value);
+    void powerData(QString command,QString value);
+    void dht22Data(QString command,QString value);
+    void gpsData(QString command,QString value);
 
 
 };

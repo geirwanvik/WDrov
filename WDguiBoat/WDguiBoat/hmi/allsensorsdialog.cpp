@@ -10,7 +10,7 @@ AllSensorsDialog::AllSensorsDialog(QWidget *parent) :
 #ifdef Q_OS_ANDROID
     this->setWindowState(Qt::WindowMaximized);
 #else
-
+    this->resize(1000,750);
 #endif
 }
 
@@ -19,45 +19,78 @@ AllSensorsDialog::~AllSensorsDialog()
     delete ui;
 }
 
-void AllSensorsDialog::sensorData(QStringList StringList)
+void AllSensorsDialog::sensorData(QString command, QString value)
 {
-    if(StringList.contains("GPS_LAT") || StringList.contains("GPS_LON"))
+    ushort i = 0;
+    for (;i < sizeof(Commands) / sizeof(Commands[0]); i++)
     {
-        //qDebug() << StringList[6] << StringList[7] << StringList[8] << StringList[9];
-       ui->labelGpsLat->setText(StringList[0] + " : " + StringList[1]);
-       ui->labelGpsLon->setText(StringList[2] + " : " + StringList[3]);
-       ui->labelGpsAlt->setText(StringList[4] + " : " + StringList[5]);
-       ui->labelGpsGroundSpeed->setText(StringList[6] + " : " + StringList[7]);
-       ui->labelGps3DSpeed->setText(StringList[8] + " : " + StringList[9]);
-       ui->labelGpsGroundCourse->setText(StringList[10] + " : " + StringList[11]);
-       ui->labelGpsNumberSats->setText(StringList[12] + " : " + StringList[13]);
-       ui->labelGpsFix->setText(StringList[14] + " : " + StringList[15]);
+        if (command == Commands[i])
+        {
+            break;
+        }
+    }
 
-    }
-    else if(StringList.contains("IMU_ROLL") || StringList.contains("IMU_PITCH"))
-    {
-       // qDebug() << StringList[0] << StringList[1] << StringList[2] << StringList[3];
-        ui->labelRoll->setText(StringList[0] + " : " + StringList[1]);
-        ui->labelPitch->setText(StringList[2] + " : " + StringList[3]);
-        ui->labelHeading->setText(StringList[4] + " : " + StringList[5]);
-
-    }
-    else if(StringList.contains("DHT22_TEMP") || StringList.contains("DHT22_HUM"))
-    {
-       qDebug() << StringList[0] << StringList[1] << StringList[2] << StringList[3];
-        ui->labelDhtTemp->setText(StringList[0] + " : " + StringList[1]);
-        ui->labelDhtHumidity->setText(StringList[2] + " : " + StringList[3]);
-    }
-    else if(StringList.contains("VOLTAGE") || StringList.contains("CURRENT"))
-    {
-        ui->labelVoltage12v->setText(StringList[0] + " : " + StringList[1]);
-        ui->labelSystemCurrent->setText(StringList[2] + " : " + StringList[3]);
-    }
-    else
-    {
-        return;
+    switch (i) {
+    case GPS_LAT:
+        ui->labelGpsLat->setText(command + " " + value);
+        break;
+    case GPS_LON:
+        ui->labelGpsLon->setText(command + " " + value);
+        break;
+    case GPS_ALT:
+        ui->labelGpsAlt->setText(command + " " + value);
+        break;
+    case GPS_GROUND_SPEED:
+        ui->labelGpsGroundSpeed->setText(command + " " + value);
+        break;
+    case GPS_3D_SPEED:
+        ui->labelGps3DSpeed->setText(command + " " + value);
+        break;
+    case GPS_GROUND_COURSE:
+        ui->labelGpsGroundCourse->setText(command + " " + value);
+        break;
+    case GPS_NUM_SATS:
+        ui->labelGpsNumberSats->setText(command + " " + value);
+        break;
+    case GPS_FIX:
+        ui->labelGpsFix->setText(command + " " + value);
+        break;
+    case IMU_ROLL:
+        ui->labelRoll->setText(command + " " + value);
+        break;
+    case IMU_PITCH:
+        ui->labelPitch->setText(command + " " + value);
+        break;
+    case IMU_HEADING:
+        ui->labelHeading->setText(command + " " + value);
+        break;
+    case DHT22_TEMP:
+        ui->labelDhtTemp->setText(command + " " + value);
+        break;
+    case DHT22_HUM:
+        ui->labelDhtHumidity->setText(command + "  " + value);
+        break;
+    case VOLTAGE:
+        ui->labelVoltage12v->setText(command + " " + value);
+        break;
+    case CURRENT:
+        ui->labelSystemCurrent->setText(command + " " + value);
+        break;
+    case LED_RED:
+        ui->labelRedLed->setText(command + " " + value);
+        break;
+    case LED_GREEN:
+        ui->labelGreenLed->setText(command + " " + value);
+        break;
+    case LED_BLUE:
+        ui->labelBlueLed->setText(command + " " + value);
+        break;
+    default:
+        break;
     }
 }
+
+
 
 void AllSensorsDialog::on_pushButtonClose_clicked()
 {

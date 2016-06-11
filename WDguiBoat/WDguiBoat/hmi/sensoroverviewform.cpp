@@ -36,10 +36,8 @@ void SensorOverviewForm::showSensorConfig()
 void SensorOverviewForm::createBatteryVscale()
 {
     mBatteryVoltageScale = new QScale(this);
-    mBatteryVoltageScale->setRange(8,16);
-    mBatteryVoltageScale->setLabelsVisible(true);
-    mBatteryVoltageScale->setLabelsFormat('V', 0);
-    mBatteryVoltageScale->setValue(12);
+    mBatteryVoltageScale->setRange(6,16);
+    mBatteryVoltageScale->setValue(10);
     mBatteryVoltageScale->setVisible(false);
     ui->verticalLayoutFirstView->addWidget(mBatteryVoltageScale);
 }
@@ -200,31 +198,73 @@ void SensorOverviewForm::createLayout()
 
 }
 
-void SensorOverviewForm::sensorData(QStringList StringList)
+
+
+void SensorOverviewForm::imuData(QString command, QString value)
+{
+    if(command == "IMU_ROLL")
+    {
+         QString RollValue = value;
+         mRoll->setValue(RollValue.toDouble());
+    }
+    else if(command == "IMU_PITCH")
+    {
+        QString pitchValue = value;
+        mPitch->setValue(pitchValue.toDouble());
+    }
+    else
+    {
+        return;
+    }
+}
+
+void SensorOverviewForm::powerData(QString command, QString value)
 {
     createLayout();
 
-    if(StringList.contains("GPS_LAT") || StringList.contains("GPS_LON"))
+    if(command == "VOLTAGE")
     {
-      //  qDebug() << StringList[6] << StringList[7] << StringList[8] << StringList[9];
-        QString GpsGroundSpeed = StringList[7];
-       // QString Gps3Dspeed = StringList[9];
+         QString voltage = value;
+         mBatteryVoltageScale->setValue(voltage.toDouble());
+    }
+    else if(command == "CURRENT")
+    {
+        QString systemCurrent = value;
+        mSystemCurrent->setValue(systemCurrent.toDouble());
+    }
+    else
+    {
+        return;
+    }
+}
+
+void SensorOverviewForm::dht22Data(QString command, QString value)
+{
+    if(command == "DHT22_TEMP")
+    {
+         QString temp = value;
+         mTempScale->setValue(temp.toDouble());
+    }
+    else if(command == "DHT22_HUM")
+    {
+        QString humidity = value;
+        mHumidityScale->setValue(humidity.toDouble());
+    }
+    else
+    {
+        return;
+    }
+}
+
+void SensorOverviewForm::gpsData(QString command, QString value)
+{
+    if(command == "GPS_GROUND_SPEED")
+    {
+        QString GpsGroundSpeed = value;
         mGpsSpeed->setValue(GpsGroundSpeed.toDouble());
     }
-    else if(StringList.contains("IMU_ROLL") || StringList.contains("IMU_PITCH"))
+    else
     {
-       // qDebug() << StringList[0] << StringList[1] << StringList[2] << StringList[3];
-        QString RollValue = StringList[1];
-        QString pitchValue = StringList[3];
-        mRoll->setValue(RollValue.toDouble());
-        mPitch->setValue(pitchValue.toDouble());
-    }
-    else if(StringList.contains("DHT22_TEMP") || StringList.contains("DHT22_HUM"))
-    {
-        //qDebug() << StringList[0] << StringList[1] << StringList[2] << StringList[3];
-        QString temp = StringList[1];
-        QString humidity = StringList[3];
-        mTempScale->setValue(temp.toDouble());
-        mHumidityScale->setValue(humidity.toDouble());
+        return;
     }
 }
