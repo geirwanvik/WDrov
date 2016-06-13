@@ -13,7 +13,7 @@ _WDlink WDlink;
 
 void _WDlink::Init()
 {
-	Serial.begin(115200);
+	Serial3.begin(115200);
 	tx.reserve(100);
 	rx.reserve(100);
 	rx = "";
@@ -128,7 +128,7 @@ void _WDlink::Write()
 	}
 	tx += String(crc, HEX);
 
-	Serial.println(tx);
+	Serial3.println(tx);
 
 	select++;
 	if (select > SEND_LED)
@@ -139,9 +139,9 @@ void _WDlink::Write()
 
 void _WDlink::Read()
 {
-	while (Serial.available())
+	while (Serial3.available())
 	{
-		char data = Serial.read();
+		char data = Serial3.read();
 		if ((data != '\n') && (data != '\r'))
 		{
 			rx.concat(data);

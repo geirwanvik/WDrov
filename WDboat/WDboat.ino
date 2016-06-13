@@ -1,5 +1,4 @@
 #include "Arduino.h"
-#include <SPI.h>
 #include <EEPROM.h>
 #include "imu.h"
 #include "dht11.h"

@@ -46,10 +46,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\GeirW\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\cores\arduino;C:\Users\GeirW\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\variants\mega;C:\Users\GeirW\Dropbox\Stash\Git Projects\WDrov\WDboat;C:\Users\GeirW\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\libraries\EEPROM\src;C:\Users\GeirW\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\libraries\EEPROM\src\utility;C:\Users\GeirW\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\libraries\SPI\src;C:\Users\GeirW\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\libraries\SPI\src\utility;C:\Program Files (x86)\Arduino\libraries;C:\Users\GeirW\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\libraries;C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\Extensions\yrsetqvd.lic\Micro Platforms\default\debuggers;C:\Users\GeirW\Documents\Arduino\libraries;C:\Users\GeirW\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\cores\arduino;C:\Users\GeirW\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\variants\mega;C:\Users\GeirW\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\libraries\SPI\src;C:\Users\GeirW\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\libraries\EEPROM\src;C:\Program Files (x86)\Arduino\libraries;C:\Users\GeirW\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.11\libraries;C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\Extensions\yrsetqvd.lic\Micro Platforms\default\debuggers;C:\Users\GeirW\Documents\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;C:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;C:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>C:\Users\GeirW\Dropbox\Stash\Git Projects\WDrov\WDboat\__vm\.WDboat.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=10609;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;C:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;C:\Users\geir_\Dropbox\Stash\Git Projects\WDrov\WDboat;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\EEPROM;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\EEPROM\utility;C:\Program Files (x86)\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers;C:\Users\geir_\Dropbox\Stash\Projects\Arduino\libraries;C:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;C:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;C:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>C:\Users\geir_\Dropbox\Stash\Git Projects\WDrov\WDboat\Visual Micro\.WDboat.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=165;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -79,7 +79,6 @@
       <FileType>CppCode</FileType>
     </ClInclude>
     <ClInclude Include="dht11.h" />
-    <ClInclude Include="hmc5843.h" />
     <ClInclude Include="i2cHelper.h" />
     <ClInclude Include="imu.h" />
     <ClInclude Include="imuHelper.h" />
@@ -94,7 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dht11.cpp" />
-    <ClCompile Include="hmc5843.cpp" />
     <ClCompile Include="i2cHelper.cpp" />
     <ClCompile Include="imu.cpp" />
     <ClCompile Include="imuHelper.cpp" />

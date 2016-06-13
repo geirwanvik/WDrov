@@ -24,9 +24,6 @@
     <ClInclude Include="i2cHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hmc5843.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="imuHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -69,9 +66,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imuHelper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hmc5843.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dht11.cpp">

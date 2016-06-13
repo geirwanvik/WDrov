@@ -1,9 +1,5 @@
 #include "imu.h"
-#ifdef USE_MPU600
-#include "mpu6000.h"
-#else
 #include "mpu6050.h"
-#endif
 #include "imuHelper.h"
 _IMU IMU;
 
@@ -100,8 +96,8 @@ void _IMU::getEstimatedAttitude()
 	// Attitude of the estimated vector
 	int32_t sqGX_sqGZ = sq(EstG32.V.X) + sq(EstG32.V.Z);
 	invG = InvSqrt(sqGX_sqGZ + sq(EstG32.V.Y));
-	Roll = (float)_atan2(EstG32.V.X, EstG32.V.Z)/10;
-	Pitch = (float)_atan2(EstG32.V.Y, InvSqrt(sqGX_sqGZ)*sqGX_sqGZ)/10;
+	Pitch = (float)_atan2(EstG32.V.X, EstG32.V.Z)/10;
+	Roll = (float)_atan2(EstG32.V.Y, InvSqrt(sqGX_sqGZ)*sqGX_sqGZ)/10;
 
 	Heading = (float)_atan2(EstM32.V.Z * EstG32.V.X - EstM32.V.X * EstG32.V.Z,
 		(EstM.V.Y * sqGX_sqGZ - (EstM32.V.X * EstG32.V.X + EstM32.V.Z * EstG32.V.Z) * EstG.V.Y)*invG)/10;
