@@ -43,12 +43,11 @@ void wdParser::findCommand(QString command, QString value)
     {
     case GPS_LAT:
     case GPS_LON:
-    case GPS_ALT:
-    case GPS_GROUND_SPEED:
-    case GPS_3D_SPEED:
+    case GPS_GROUND_SPEED_KNOTS:
+    case GPS_GROUND_SPEED_KMH:
     case GPS_GROUND_COURSE:
     case GPS_NUM_SATS:
-    case GPS_FIX:
+    case GPS_HDOP:
     emit GpsData(command, value);
         break;
     case IMU_ROLL:

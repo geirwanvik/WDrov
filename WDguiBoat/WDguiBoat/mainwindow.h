@@ -20,6 +20,7 @@
 
 #include "Android_Sensors/androidgps.h"
 #include "Android_Sensors/androidaccelerometer.h"
+#include "Android_Sensors/androidcompass.h"
 
 #if  defined(Q_OS_ANDROID)
 #include <QtAndroidExtras>
@@ -51,6 +52,8 @@ private slots:
     void click_BoatStatus();
     void click_Navigation();
     void click_BoatMusic();
+    void click_Settings();
+    void click_RawSensorData();
     void bluetoothStartConnection();
     void bluetoothDoneConnection();
     void bluetoothFailedConnection();
@@ -65,7 +68,6 @@ private slots:
 #endif
 
     void on_actionAll_Sensor_triggered();
-
     void on_actionCommunication_Debug_triggered();
 
 signals:
@@ -84,6 +86,8 @@ private:
     QAction *mBoatStatus;
     QAction *mBoatMusic;
     QAction *mBoatNavigation;
+    QAction *mRawSensorData;
+    QAction *mSettings;
 
     WDLink *mWdLink;
     wdParser *mWdParser;
@@ -97,6 +101,8 @@ private:
     androidGps *mAndroidGpsSource;
 
     androidAccelerometer *mAndroidAccelerometer;
+
+    androidCompass *mCompass;
 
     //Screen data, set font and sizes
     void setupApperance();

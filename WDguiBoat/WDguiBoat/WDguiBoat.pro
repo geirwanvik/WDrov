@@ -9,6 +9,7 @@ QT       += bluetooth
 QT       += positioning
 QT       += sensors
 
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = WDguiBoat
@@ -33,7 +34,10 @@ SOURCES += main.cpp\
     hmi/allsensorsdialog.cpp \
     Android_Sensors/androidgps.cpp \
     Android_Sensors/androidaccelerometer.cpp \
-    hmi/debug/wdlinkdebugdialog.cpp
+    hmi/debug/wdlinkdebugdialog.cpp \
+    hmi/seamapform.cpp \
+    Android_Sensors/androidcompass.cpp \
+    hmi/ConfigClasses/colordialog.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -52,7 +56,10 @@ HEADERS  += mainwindow.h \
     hmi/allsensorsdialog.h \
     Android_Sensors/androidgps.h \
     Android_Sensors/androidaccelerometer.h \
-    hmi/debug/wdlinkdebugdialog.h
+    hmi/debug/wdlinkdebugdialog.h \
+    hmi/seamapform.h \
+    Android_Sensors/androidcompass.h \
+    hmi/ConfigClasses/colordialog.h
 
 
 FORMS    += mainwindow.ui \
@@ -61,7 +68,9 @@ FORMS    += mainwindow.ui \
     hmi/sensoroverviewform.ui \
     hmi/ConfigClasses/sensorconfigdialog.ui \
     hmi/allsensorsdialog.ui \
-    hmi/debug/wdlinkdebugdialog.ui
+    hmi/debug/wdlinkdebugdialog.ui \
+    hmi/seamapform.ui \
+    hmi/ConfigClasses/colordialog.ui
 
 CONFIG += mobility
 MOBILITY = 

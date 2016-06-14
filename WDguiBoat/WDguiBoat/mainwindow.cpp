@@ -37,18 +37,12 @@ void MainWindow::setupApperance()
     //We try to size toolbar for screen size
     ui->toolBar->setIconSize(QSize(140*mScreen->ratio(),140*mScreen->ratio()));
     ui->toolBar->setMovable(false);
-
-
-   // QApplication::setStyle(new styleOne);
-
     //trying to sett correct font for screen specs
     fontNormalSize.setFamily(fontNormalSize.defaultFamily());
     fontNormalSize.setBold(true);
     fontNormalSize.setPointSize(12 + mScreen->ratioFont());
 
     QApplication::setFont(fontNormalSize);
-
-
 }
 
 
@@ -80,9 +74,17 @@ void MainWindow::createToolbar()
 
     mBoatMusic = new QAction(QIcon(":/icons/pictures/Boat icon/MusicNote.png"), "Music", this);
     mBoatMusic->setCheckable(true);
-    ui->toolBar->addAction(mBoatMusic);
+   // ui->toolBar->addAction(mBoatMusic);
     connect(mBoatMusic, SIGNAL(triggered(bool)), this, SLOT(click_BoatMusic()));
 
+    mRawSensorData = new QAction(QIcon(":/icons/pictures/Instrument/RawSensor.png"), "Raw Sensors", this);
+    mBoatMusic->setCheckable(true);
+    ui->toolBar->addAction(mRawSensorData);
+    connect(mRawSensorData, SIGNAL(triggered(bool)), this, SLOT(click_RawSensorData()));
+
+    mSettings = new QAction(QIcon(":/icon/pictures/Icons/settingSVG.png"), "Settings", this);
+    ui->toolBar->addAction(mSettings);
+    connect(mSettings, SIGNAL(triggered(bool)), this, SLOT(click_Settings()));
 
 }
 
@@ -134,6 +136,26 @@ void MainWindow::click_BoatMusic()
     mBoatStatus->setChecked(false);
     mBoatNavigation->setChecked(false);
     mBoatMusic->setChecked(true);
+}
+
+void MainWindow::click_Settings()
+{
+
+}
+
+void MainWindow::click_RawSensorData()
+{
+
+    mAllSensorOverview = new AllSensorsDialog(this);
+    connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mWdParser, SIGNAL(GpsData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mWdParser, SIGNAL(ImuData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mWdParser, SIGNAL(PowerData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mWdParser, SIGNAL(LedFeedback(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+
+    mAllSensorOverview->setModal(true);
+    mAllSensorOverview->show();
+
 }
 
 void MainWindow::bluetoothStartConnection()
@@ -206,6 +228,7 @@ void MainWindow::initObjectAndConnection()
 
  //  mAndroidGpsSource = new androidGps(this);
      mAndroidAccelerometer = new androidAccelerometer(this);
+     mCompass = new androidCompass(this);
 
 
     if(ui->checkBoxConnectAtStart->isChecked())
@@ -328,15 +351,7 @@ void MainWindow::on_actionSerial_Port_triggered()
 
 void MainWindow::on_actionAll_Sensor_triggered()
 {
-    mAllSensorOverview = new AllSensorsDialog(this);
-    connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
-    connect(mWdParser, SIGNAL(GpsData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
-    connect(mWdParser, SIGNAL(ImuData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
-    connect(mWdParser, SIGNAL(PowerData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
-    connect(mWdParser, SIGNAL(LedFeedback(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
-
-    mAllSensorOverview->setModal(true);
-    mAllSensorOverview->show();
+   mInstrumentForm->showColorDialog();
 }
 
 void MainWindow::on_actionCommunication_Debug_triggered()
@@ -348,6 +363,7 @@ void MainWindow::on_actionCommunication_Debug_triggered()
     connect(mWdParser, SIGNAL(ImuData(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
     connect(mWdParser, SIGNAL(instrumentData(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
     connect(mWdParser, SIGNAL(LedFeedback(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
+    connect(mWdlinkDebug, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(Send(QString)));
 
     mWdlinkDebug->setModal(true);
     mWdlinkDebug->show();

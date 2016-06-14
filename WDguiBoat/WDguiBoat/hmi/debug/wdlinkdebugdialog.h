@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QDebug>
+#include <QScroller>
 
 namespace Ui {
 class wdLinkDebugDialog;
@@ -18,14 +19,17 @@ public:
 
 private:
     Ui::wdLinkDebugDialog *ui;
+    QScroller *scroller;
 
 public slots:
     void wdLinkData(QString command, QString value);
 
 signals:
-    void writeDataToConsole(QString command, QString value);
+    void writeToSocket(QString string);
+
 private slots:
     void on_pushButtonClose_clicked();
+    void on_pushButtonSend_clicked();
 };
 
 #endif // WDLINKDEBUGDIALOG_H

@@ -13,12 +13,16 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="pictureresources.qrc">
+    <normaloff>:/icons/pictures/Boat icon/motor-boat-512.png</normaloff>:/icons/pictures/Boat icon/motor-boat-512.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -59,8 +63,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>28</height>
+             <width>945</width>
+             <height>332</height>
             </rect>
            </property>
           </widget>
@@ -169,6 +173,7 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="page_2"/>
      </widget>
     </item>
    </layout>
@@ -277,6 +282,8 @@ QToolBar::handle {
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="pictureresources.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -2,6 +2,8 @@
 #include <QApplication>
 
 
+
+
 #ifdef Q_OS_ANDROID
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -10,7 +12,7 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 
     Q_UNUSED(context)
 
-    QFile outFile(qgetenv("EXTERNAL_STORAGE") + QStringLiteral("/WDBoat-log.txt"));
+    QFile outFile(qgetenv("EXTERNAL_STORAGE") + QStringLiteral("/WD-Boat/WDBoat-log.txt"));
 
     // EXTERNAL_STORAGE determines writable inner storage of device, for memory card use SECONDARY_STORAGE, but it may not exists
         if (outFile.open(QIODevice::WriteOnly | QIODevice::Append)) { // append line by line
@@ -78,16 +80,31 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 }
 #endif
 
-//}
+#ifdef Q_OS_ANDROID
+}
+#endif
 
 int main(int argc, char *argv[])
 {
 
 #if defined (Q_OS_ANDROID)
-     QString logFile(qgetenv("EXTERNAL_STORAGE") + QStringLiteral("/WDBoat-log.txt"));
-     if (QFile::exists(logFile)) // remove previous file if exists
-       QFile::remove(logFile);
-   //qInstallMessageHandler(myMessageOutput);
+     QString logFile(qgetenv("EXTERNAL_STORAGE") + QStringLiteral("/WD-Boat/WDBoat-log.txt"));
+     QString logFolder(qgetenv("EXTERNAL_STORAGE") + QStringLiteral("/WD-Boat"));
+     if(QDir(logFolder).exists())
+     {
+        qDebug() << "it exisist?";
+        if (QFile::exists(logFile)) // remove previous file if exists
+        QFile::remove(logFile);
+     }
+     else
+     {
+         QDir().mkdir(logFolder);
+         if (QFile::exists(logFile)) // remove previous file if exists
+           QFile::remove(logFile);
+     }
+
+
+   qInstallMessageHandler(myMessageOutput);
    qDebug() << "==== WD Boat LOG =======\n" << QDateTime::currentDateTime().toString(); // first log message
  #endif
 

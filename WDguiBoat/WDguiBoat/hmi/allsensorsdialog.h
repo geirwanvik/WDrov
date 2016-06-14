@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QDebug>
+#include <QScroller>
 #include "../../WDboat/CommandList.h"
 
 namespace Ui {
@@ -26,6 +27,7 @@ private slots:
 
 private:
     Ui::AllSensorsDialog *ui;
+    QScroller *scroller;
 };
 
 #endif // ALLSENSORSDIALOG_H

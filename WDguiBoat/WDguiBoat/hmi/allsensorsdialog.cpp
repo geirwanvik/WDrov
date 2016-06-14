@@ -12,6 +12,10 @@ AllSensorsDialog::AllSensorsDialog(QWidget *parent) :
 #else
     this->resize(1000,750);
 #endif
+
+
+     QScroller *scroller = QScroller::scroller(ui->scrollArea);
+     scroller->grabGesture(ui->scrollArea, QScroller::LeftMouseButtonGesture);
 }
 
 AllSensorsDialog::~AllSensorsDialog()
@@ -37,23 +41,20 @@ void AllSensorsDialog::sensorData(QString command, QString value)
     case GPS_LON:
         ui->labelGpsLon->setText(command + " " + value);
         break;
-    case GPS_ALT:
-        ui->labelGpsAlt->setText(command + " " + value);
+    case GPS_GROUND_SPEED_KNOTS:
+        ui->labelGpsSpeedKnots->setText(command + " " + value);
         break;
-    case GPS_GROUND_SPEED:
-        ui->labelGpsGroundSpeed->setText(command + " " + value);
-        break;
-    case GPS_3D_SPEED:
-        ui->labelGps3DSpeed->setText(command + " " + value);
+    case GPS_GROUND_SPEED_KMH:
+        ui->labelGpsGroundSpeedKmH->setText(command + " " + value);
         break;
     case GPS_GROUND_COURSE:
-        ui->labelGpsGroundCourse->setText(command + " " + value);
+        ui->labelGpsGroundSpeed->setText(command + " " + value);
         break;
     case GPS_NUM_SATS:
         ui->labelGpsNumberSats->setText(command + " " + value);
         break;
-    case GPS_FIX:
-        ui->labelGpsFix->setText(command + " " + value);
+    case GPS_HDOP:
+        ui->labelGpsGPS_HDOP->setText(command + " " + value);
         break;
     case IMU_ROLL:
         ui->labelRoll->setText(command + " " + value);

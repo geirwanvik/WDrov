@@ -3,8 +3,7 @@
 
 win32{
 
-    win32:QT +=  serialport
-
+    QT +=  serialport
 
 
 }
@@ -12,8 +11,6 @@ win32{
 android{
 
      QT += androidextras
-
-
 
 }
 

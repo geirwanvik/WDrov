@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QDebug>
 
+#include "hmi/ConfigClasses/colordialog.h"
 
 
 
@@ -19,6 +20,7 @@ class InstrumentForm : public QWidget
 public:
     explicit InstrumentForm(QWidget *parent = 0);
     ~InstrumentForm();
+    void showColorDialog();
 
 private slots:
     void on_pushButtonLatern_released();
@@ -28,15 +30,13 @@ private slots:
     void on_pushButtonHeater_released();
     void on_pushButtonHorn_pressed();
     void on_pushButtonHorn_released();
-
     void on_pushButtonInstruments_clicked();
-
     void on_pushButtonFloodlight_clicked();
 
 private:
     Ui::InstrumentForm *ui;
     void setupApperance();
-
+    ColorDialog *mColorDialog;
 
 
 signals:

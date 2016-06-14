@@ -8,7 +8,7 @@ InstrumentForm::InstrumentForm(QWidget *parent) :
     ui->setupUi(this);
 
     setupApperance();
-
+    mColorDialog = new ColorDialog(this);
 
 
 }
@@ -16,6 +16,12 @@ InstrumentForm::InstrumentForm(QWidget *parent) :
 InstrumentForm::~InstrumentForm()
 {
     delete ui;
+}
+
+void InstrumentForm::showColorDialog()
+{
+    mColorDialog->setModal(true);
+    mColorDialog->show();
 }
 
 

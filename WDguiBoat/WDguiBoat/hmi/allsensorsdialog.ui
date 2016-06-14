@@ -85,6 +85,20 @@
             </property>
            </widget>
           </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="pushButtonAccCalibration">
+            <property name="text">
+             <string>Acc Calibration</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="pushButtonMagCalibration">
+            <property name="text">
+             <string>Mag Calibration</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -102,9 +116,9 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLabel" name="labelGps3DSpeed">
+           <widget class="QLabel" name="labelGpsGroundSpeed">
             <property name="text">
-             <string>GPS 3D SPEED</string>
+             <string>GPS_GROUND_COURSE:</string>
             </property>
            </widget>
           </item>
@@ -116,16 +130,16 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLabel" name="labelGpsGroundCourse">
+           <widget class="QLabel" name="labelGpsGPS_HDOP">
             <property name="text">
-             <string>GPS_GROUND_COURSE</string>
+             <string>GPS_HDOP:</string>
             </property>
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QLabel" name="labelGpsAlt">
+           <widget class="QLabel" name="labelGpsSpeedKnots">
             <property name="text">
-             <string>Alt: </string>
+             <string>GPS_GROUND_SPEED_KNOTS:</string>
             </property>
            </widget>
           </item>
@@ -137,16 +151,16 @@
            </widget>
           </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="labelGpsGroundSpeed">
+           <widget class="QLabel" name="labelGpsGroundSpeedKmH">
             <property name="text">
-             <string>GPS Speed: </string>
+             <string>GPS_GROUND_SPEED_KMH:</string>
             </property>
            </widget>
           </item>
           <item row="3" column="1">
            <widget class="QLabel" name="labelGpsFix">
             <property name="text">
-             <string>GPS_FIX</string>
+             <string/>
             </property>
            </widget>
           </item>
