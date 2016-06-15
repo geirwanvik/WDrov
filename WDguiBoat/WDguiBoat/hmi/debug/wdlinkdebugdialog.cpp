@@ -35,6 +35,18 @@ void wdLinkDebugDialog::wdLinkData(QString command, QString value)
     }
 }
 
+void wdLinkDebugDialog::wdlinkRaw(QString string)
+{
+    if(ui->checkBoxStopPrint->isChecked())
+    {
+        return;
+    }
+    else
+    {
+        ui->textBrowser->append(string);
+    }
+}
+
 void wdLinkDebugDialog::on_pushButtonClose_clicked()
 {
     this->hide();

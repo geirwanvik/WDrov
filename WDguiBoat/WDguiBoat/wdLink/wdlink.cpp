@@ -42,11 +42,14 @@ void WDLink::Receive(QByteArray array)
 
 void WDLink::Send(QString buffer)
 {
-    buffer.prepend("app");
+    buffer.prepend("APP");
     buffer.append("*");
     buffer += CalculateCRC(buffer);
     buffer.prepend("$");
+    buffer.append("\n");
     emit sendByteArrayToSocket(buffer.toLatin1());
+    buffer.clear();
+    qDebug() << "after wrappen: " << buffer;
 }
 
 

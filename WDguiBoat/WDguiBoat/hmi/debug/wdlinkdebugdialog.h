@@ -23,6 +23,7 @@ private:
 
 public slots:
     void wdLinkData(QString command, QString value);
+    void wdlinkRaw(QString string);
 
 signals:
     void writeToSocket(QString string);
