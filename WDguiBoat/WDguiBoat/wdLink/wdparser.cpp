@@ -31,9 +31,9 @@ void wdParser::dataForParsing(QString string)
 void wdParser::findCommand(QString command, QString value)
 {
     ushort i = 0;
-    for (;i < sizeof(Commands) / sizeof(Commands[0]); i++)
+    for (;i < sizeof(CommandString) / sizeof(CommandString[0]); i++)
     {
-        if (command == Commands[i])
+        if (command == CommandString[i])
         {
             break;
         }

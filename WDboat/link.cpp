@@ -8,12 +8,14 @@
 #include "mpu6050.h"
 #include "VoltCurrent.h"
 #include "TinyGPS++.h"
+#include "master_node.h"
 
 _WDlink WDlink;
 
-void _WDlink::Init()
+void _WDlink::Init(HardwareSerial *_serial)
 {
-	Serial3.begin(115200);
+	serial = _serial;
+	serial->begin(115200);
 	tx.reserve(100);
 	rx.reserve(100);
 	rx = "";
@@ -24,97 +26,116 @@ void _WDlink::Init()
 	savePending = false;
 }
 
-enum { SEND_GPS, SEND_IMU, SEND_MISC, SEND_LED };
+enum { SEND_GPS, SEND_IMU, SEND_MISC, SEND_BUTTONS, SEND_LED };
 
 void _WDlink::Write()
 {
 	static byte select = 0;
-	byte ret;
 	tx = "$ardu,";
 	switch (select)
 	{
 	case SEND_GPS:
-		tx += Commands[GPS_LAT];
+		tx += CommandString[GPS_LAT];
 		tx += ",";
 		tx += String(Gps.location.lat(), 6);
 		tx += ",";
 
-		tx += Commands[GPS_LON];
+		tx += CommandString[GPS_LON];
 		tx += ",";
 		tx += String(Gps.location.lng(), 6);
 		tx += ",";
 
-		tx += Commands[GPS_GROUND_SPEED_KNOTS];
+		tx += CommandString[GPS_GROUND_SPEED_KNOTS];
 		tx += ",";
 		tx += String(Gps.speed.knots(), 2);
 		tx += ",";
 
-		tx += Commands[GPS_GROUND_SPEED_KMH];
+		tx += CommandString[GPS_GROUND_SPEED_KMH];
 		tx += ",";
 		tx += String(Gps.speed.kmph(), 2);
 		tx += ",";
 
-		tx += Commands[GPS_GROUND_COURSE];
+		tx += CommandString[GPS_GROUND_COURSE];
 		tx += ",";
 		tx += String(Gps.course.deg(), 2);
 		tx += ",";
 
-		tx += Commands[GPS_NUM_SATS];
+		tx += CommandString[GPS_NUM_SATS];
 		tx += ",";
 		tx += String(Gps.satellites.value());
 		tx += ",";
 
-		tx += Commands[GPS_HDOP];
+		tx += CommandString[GPS_HDOP];
 		tx += ",";
 		tx += String(Gps.hdop.value());
 		break;
 	case SEND_IMU:
-		tx += Commands[IMU_ROLL];
+		tx += CommandString[IMU_ROLL];
 		tx += ",";
 		tx += String(IMU.Roll, 1);
 		tx += ",";
 
-		tx += Commands[IMU_PITCH];
+		tx += CommandString[IMU_PITCH];
 		tx += ",";
 		tx += String(IMU.Pitch, 1);
 		tx += ",";
 
-		tx += Commands[IMU_HEADING];
+		tx += CommandString[IMU_HEADING];
 		tx += ",";
 		tx += String(IMU.Heading, 1);
 		break;
 	case SEND_MISC:
-		tx += Commands[DHT22_TEMP];
+		tx += CommandString[DHT22_TEMP];
 		tx += ",";
 		tx += String(DHT.Temperature, 1);
 		tx += ",";
 
-		tx += Commands[DHT22_HUM];
+		tx += CommandString[DHT22_HUM];
 		tx += ",";
 		tx += String(DHT.Humidity, 1);
 		tx += ",";
 
-		tx += Commands[VOLTAGE];
+		tx += CommandString[VOLTAGE];
 		tx += ",";
 		tx += String(VoltCurrent.Voltage, 3);
 		tx += ",";
 
-		tx += Commands[CURRENT];
+		tx += CommandString[CURRENT];
 		tx += ",";
 		tx += String(VoltCurrent.Current, 3);
 		break;
+	case SEND_BUTTONS:
+		tx += CommandString[BUTTON_BILGE_PP];
+		tx += ",";
+		tx += String(WDmasterNode.GetPinState(BUTTON_BILGE_PP));
+		tx += ",";
+
+		tx += CommandString[BUTTON_LANTERN];
+		tx += ",";
+		tx += String(WDmasterNode.GetPinState(BUTTON_LANTERN));
+		tx += ",";
+
+		tx += CommandString[BUTTON_WIPER];
+		tx += ",";
+		tx += String(WDmasterNode.GetPinState(BUTTON_WIPER));
+		tx += ",";
+
+		tx += CommandString[BUTTON_INSTRUMENT];
+		tx += ",";
+		tx += String(WDmasterNode.GetPinState(BUTTON_INSTRUMENT));
+		break;
 	case SEND_LED:
-		tx += Commands[LED_RED];
+		tx += CommandString[LED_RED];
 		tx += ",";
 		tx += String((int)RGB.r);
 		tx += ",";
 
-		tx += Commands[LED_GREEN];
+		tx += CommandString[LED_GREEN];
 		tx += ",";
 		tx += String((int)RGB.g);
 		tx += ",";
 
-		tx += Commands[LED_BLUE];
+		tx += CommandString[LED_BLUE];
 		tx += ",";
 		tx += String((int)RGB.b);
 		break;
@@ -128,20 +149,31 @@ void _WDlink::Write()
 	}
 	tx += String(crc, HEX);
 
-	Serial3.println(tx);
+	serial->println(tx);
 
 	select++;
 	if (select > SEND_LED)
 	{
 		select = SEND_GPS;
 	}
+
+	if (savePending)
+	{
+		savePending = false;
+		byte *ptr;
+		ptr = (byte*)&RGB;
+		for (byte i = 0; i < 6; i++)
+		{
+			EEPROM.write(0x30 + i, ptr[i]);
+		}
+	}
 }
 
 void _WDlink::Read()
 {
-	while (Serial3.available())
+	while (serial->available())
 	{
-		char data = Serial3.read();
+		char data = serial->read();
 		if ((data != '\n') && (data != '\r'))
 		{
 			rx.concat(data);
@@ -198,25 +230,14 @@ void _WDlink::NewMessage(const String &s)
 		}
 		ProcessCommand(cmd, val);
 	}
-
-	if (savePending)
-	{
-		savePending = false;
-		byte *ptr;
-		ptr = (byte*)&RGB;
-		for (byte i = 0; i < 6; i++)
-		{
-			EEPROM.write(0x30 + i, ptr[i]);
-		}
-	}
 }
 
 void _WDlink::ProcessCommand(const String &cmd, const String &val)
 {
 	int i;
-	for (i = 0; i < sizeof(Commands) / sizeof(Commands[0]); i++)
+	for (i = 0; i < sizeof(CommandString) / sizeof(CommandString[0]); i++)
 	{
-		if (cmd == Commands[i])
+		if (cmd == CommandString[i])
 		{
 			break;
 		}
@@ -228,7 +249,7 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 		MPU.calibrateAcc();
 		break;
 	case MAG_CALIBRATE:
-		if (val == "ON")
+		if (val == ValueString[ON])
 		{
 			MPU.beginCalibration();
 		}
@@ -238,7 +259,7 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 		}
 		break;
 	case RELAY_BILGE_PP:
-		if (val == "ON")
+		if (val == ValueString[ON])
 		{
 			digitalWrite(BILGE_PP_PIN, HIGH);
 		}
@@ -246,9 +267,10 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 		{
 			digitalWrite(BILGE_PP_PIN, LOW);
 		}
+		WDmasterNode.UpdatePin(BUTTON_BILGE_PP, val.toInt());
 		break;
 	case RELAY_LANTERN:
-		if (val == "ON")
+		if (val == ValueString[ON])
 		{
 			digitalWrite(LANTERN_PIN, HIGH);
 		}
@@ -256,9 +278,10 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 		{
 			digitalWrite(LANTERN_PIN, LOW);
 		}
+		WDmasterNode.UpdatePin(BUTTON_LANTERN, val.toInt());
 		break;
 	case RELAY_WIPER:
-		if (val == "ON")
+		if (val == ValueString[ON])
 		{
 			digitalWrite(WIPER_PIN, HIGH);
 		}
@@ -266,6 +289,18 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 		{
 			digitalWrite(WIPER_PIN, LOW);
 		}
+		WDmasterNode.UpdatePin(BUTTON_WIPER, val.toInt());
+		break;
+	case RELAY_INSTRUMENT:
+		if (val == ValueString[ON])
+		{
+			digitalWrite(INSTRUMENT_PIN, HIGH);
+		}
+		else
+		{
+			digitalWrite(INSTRUMENT_PIN, LOW);
+		}
+		WDmasterNode.UpdatePin(BUTTON_INSTRUMENT, val.toInt());
 		break;
 	case LED_RED:
 		RGB.r = val.toInt();
@@ -280,8 +315,6 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 		savePending = true;
 		break;
 	}
-
-
 }
 
 byte _WDlink::CalculateCRC(const char *buffer)

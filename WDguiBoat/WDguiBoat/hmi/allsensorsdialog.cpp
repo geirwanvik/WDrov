@@ -26,9 +26,9 @@ AllSensorsDialog::~AllSensorsDialog()
 void AllSensorsDialog::sensorData(QString command, QString value)
 {
     ushort i = 0;
-    for (;i < sizeof(Commands) / sizeof(Commands[0]); i++)
+    for (;i < sizeof(CommandString) / sizeof(CommandString[0]); i++)
     {
-        if (command == Commands[i])
+        if (command == CommandString[i])
         {
             break;
         }

@@ -3,6 +3,7 @@
 #include "imu.h"
 #include "dht11.h"
 #include "link.h"
+#include "master_node.h"
 #include "pins.h"
 #include "VoltCurrent.h"
 #include "RGBdriver.h"
@@ -14,7 +15,8 @@ RGB_STATE RGB;
 void setup()
 {
 	Serial1.begin(115200);
-	WDlink.Init();
+	WDlink.Init(&Serial);
+	WDmasterNode.Init(&Serial2);
 	IMU.Init();
 	DHT.Init(DHT_DATA_PIN);
 	VoltCurrent.Init();
@@ -50,6 +52,7 @@ void loop()
 	delayImuLoop = millis();
 	IMU.Update();
 	WDlink.Read();
+	WDmasterNode.Read();
 
 	while (Serial1.available())
 	{
@@ -72,6 +75,7 @@ void loop()
 		updateFastLoop = millis();
 		VoltCurrent.Update();
 		WDlink.Write();
+		WDmasterNode.Write();
 	}
 	
 	if ((millis() - delayImuLoop) < 3)
