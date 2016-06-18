@@ -17,12 +17,12 @@ MainWindow::MainWindow(QWidget *parent) :
    initObjectAndConnection();
 
 
-
-
    ui->stackedWidget->setCurrentIndex(0);
    mBoatPanel->setChecked(true);
 
    ui->statusBar->showMessage("Welcomme To WD Boat!");
+
+
 }
 
 MainWindow::~MainWindow()
@@ -41,7 +41,6 @@ void MainWindow::setupApperance()
     fontNormalSize.setFamily(fontNormalSize.defaultFamily());
     fontNormalSize.setBold(true);
     fontNormalSize.setPointSize(12 + mScreen->ratioFont());
-
     QApplication::setFont(fontNormalSize);
 }
 
@@ -201,7 +200,7 @@ void MainWindow::initObjectAndConnection()
     connect(mWdLink, SIGNAL(freshData(QString)), mWdParser, SLOT(dataForParsing(QString)));
 
 #ifdef Q_OS_ANDROID
-    ui->actionSerial_Port->setVisible(false);
+   ui->actionSerial_Port->setVisible(false);
    initAndroidStuff();
    mSocket = new bluetooththread(this);
    connect(mSocket, SIGNAL(Doneconnecting()), this, SLOT(bluetoothDoneConnection()));
@@ -225,6 +224,7 @@ void MainWindow::initObjectAndConnection()
     connect(mWdParser, SIGNAL(GpsData(QString,QString)), mSensorOverviewForm, SLOT(gpsData(QString,QString)));
 
     connect(mWdParser, SIGNAL(instrumentData(QString,QString)), mInstrumentForm, SLOT(dataFromWdCore(QString,QString)));
+    connect(mInstrumentForm->mColorDialog, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(Send(QString)));
 
  //  mAndroidGpsSource = new androidGps(this);
      mAndroidAccelerometer = new androidAccelerometer(this);
@@ -239,6 +239,7 @@ void MainWindow::initObjectAndConnection()
     {
         return;
     }
+
 
 }
 

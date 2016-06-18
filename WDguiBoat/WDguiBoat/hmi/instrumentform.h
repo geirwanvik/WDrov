@@ -21,6 +21,8 @@ public:
     explicit InstrumentForm(QWidget *parent = 0);
     ~InstrumentForm();
     void showColorDialog();
+    ColorDialog *mColorDialog;
+
 
 private slots:
     void on_pushButtonLatern_released();
@@ -36,7 +38,6 @@ private slots:
 private:
     Ui::InstrumentForm *ui;
     void setupApperance();
-    ColorDialog *mColorDialog;
 
 
 signals:

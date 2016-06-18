@@ -106,7 +106,7 @@ void InstrumentForm::on_pushButtonInteriorLights_released()
 {
     if(ui->pushButtonInteriorLights->isChecked())
     {
-        writeToSocket(",LED_RED,255,LED_GREEN,255,LED_BLUE,255");
+        writeToSocket(tr(",LED_RED,%1,LED_GREEN,%2,LED_BLUE,%3").arg(mColorDialog->getRed()).arg(mColorDialog->getGreen()).arg(mColorDialog->getBlue()));
         ui->pushButtonInteriorLights->setText("Interior Lights\nON");
         ui->pushButtonInteriorLights->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
     }

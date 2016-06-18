@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
      }
 
 
-   qInstallMessageHandler(myMessageOutput);
+   //qInstallMessageHandler(myMessageOutput);
    qDebug() << "==== WD Boat LOG =======\n" << QDateTime::currentDateTime().toString(); // first log message
  #endif
 
