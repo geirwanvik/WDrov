@@ -7,7 +7,7 @@ class _WDmasterNode : public _WDlink
 public:
 	virtual void Init(HardwareSerial *_serial);
 	virtual void Write();
-	void NodeAlive();
+	byte NodeAlive();
 	void UpdatePin(CommandEnum pin, byte value);
 	byte GetPinState(CommandEnum pin);
 
@@ -20,7 +20,9 @@ private:
 	};
 	virtual void ProcessCommand(const String &cmd, const String &val);
 	PinState pinState[8];
-	byte nodeAlive;
+	uint32_t slaveTime;
+	uint32_t masterTime;
+	byte aliveCounter;
 
 };
 extern _WDmasterNode WDmasterNode;

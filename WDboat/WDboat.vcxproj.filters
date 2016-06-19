@@ -60,6 +60,9 @@
     <ClInclude Include="master_node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Panel\slave_node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imu.cpp">
@@ -90,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="master_node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Panel\slave_node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -105,24 +105,29 @@ void _WDlink::Write()
 		tx += String(VoltCurrent.Current, 3);
 		break;
 	case SEND_BUTTONS:
+		tx += CommandString[NODE_ALIVE];
+		tx += ",";
+		tx += ValueString[WDmasterNode.NodeAlive()];
+		tx += ",";
+
 		tx += CommandString[BUTTON_BILGE_PP];
 		tx += ",";
-		tx += String(WDmasterNode.GetPinState(BUTTON_BILGE_PP));
+		tx += ValueString[WDmasterNode.GetPinState(BUTTON_BILGE_PP)];
 		tx += ",";
 
 		tx += CommandString[BUTTON_LANTERN];
 		tx += ",";
-		tx += String(WDmasterNode.GetPinState(BUTTON_LANTERN));
+		tx += ValueString[WDmasterNode.GetPinState(BUTTON_LANTERN)];
 		tx += ",";
 
 		tx += CommandString[BUTTON_WIPER];
 		tx += ",";
-		tx += String(WDmasterNode.GetPinState(BUTTON_WIPER));
+		tx += ValueString[WDmasterNode.GetPinState(BUTTON_WIPER)];
 		tx += ",";
 
 		tx += CommandString[BUTTON_INSTRUMENT];
 		tx += ",";
-		tx += String(WDmasterNode.GetPinState(BUTTON_INSTRUMENT));
+		tx += ValueString[WDmasterNode.GetPinState(BUTTON_INSTRUMENT)];
 		break;
 	case SEND_LED:
 		tx += CommandString[LED_RED];
@@ -218,7 +223,7 @@ void _WDlink::NewMessage(const String &s)
 		outdex = s.indexOf(delim, index);
 		cmd = s.substring(index, outdex);
 
-		index = outdex +1;
+		index = outdex + 1;
 		outdex = s.indexOf(delim, index);
 		val = s.substring(index, outdex);
 		index = outdex;
@@ -262,45 +267,53 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 		if (val == ValueString[ON])
 		{
 			digitalWrite(BILGE_PP_PIN, HIGH);
+			WDmasterNode.UpdatePin(BUTTON_BILGE_PP, 1);
 		}
 		else
 		{
 			digitalWrite(BILGE_PP_PIN, LOW);
+			WDmasterNode.UpdatePin(BUTTON_BILGE_PP, 0);
 		}
-		WDmasterNode.UpdatePin(BUTTON_BILGE_PP, val.toInt());
+		
 		break;
 	case RELAY_LANTERN:
 		if (val == ValueString[ON])
 		{
 			digitalWrite(LANTERN_PIN, HIGH);
+			WDmasterNode.UpdatePin(BUTTON_LANTERN, 1);
 		}
 		else
 		{
 			digitalWrite(LANTERN_PIN, LOW);
+			WDmasterNode.UpdatePin(BUTTON_LANTERN, 0);
 		}
-		WDmasterNode.UpdatePin(BUTTON_LANTERN, val.toInt());
+		
 		break;
 	case RELAY_WIPER:
 		if (val == ValueString[ON])
 		{
 			digitalWrite(WIPER_PIN, HIGH);
+			WDmasterNode.UpdatePin(BUTTON_WIPER, 1);
 		}
 		else
 		{
 			digitalWrite(WIPER_PIN, LOW);
+			WDmasterNode.UpdatePin(BUTTON_WIPER, 0);
 		}
-		WDmasterNode.UpdatePin(BUTTON_WIPER, val.toInt());
+		
 		break;
 	case RELAY_INSTRUMENT:
 		if (val == ValueString[ON])
 		{
 			digitalWrite(INSTRUMENT_PIN, HIGH);
+			WDmasterNode.UpdatePin(BUTTON_INSTRUMENT, 1);
 		}
 		else
 		{
 			digitalWrite(INSTRUMENT_PIN, LOW);
+			WDmasterNode.UpdatePin(BUTTON_INSTRUMENT, 0);
 		}
-		WDmasterNode.UpdatePin(BUTTON_INSTRUMENT, val.toInt());
+
 		break;
 	case LED_RED:
 		RGB.r = val.toInt();

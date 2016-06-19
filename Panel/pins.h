@@ -1,0 +1,55 @@
+#pragma once
+
+const String CommandString[] =
+{
+	"BUTTON_BILGE_PP",
+	"BUTTON_LANTERN",
+	"BUTTON_WIPER",
+	"BUTTON_INSTRUMENT",
+	"NODE_ALIVE"
+};
+
+enum CommandEnum
+{
+	BUTTON_BILGE_PP,
+	BUTTON_LANTERN,
+	BUTTON_WIPER,
+	BUTTON_INSTRUMENT,
+	NODE_ALIVE,
+
+	UNUSED = 0xff
+};
+
+const String ValueString[] =
+{
+	"OFF",
+	"ON",
+	"STATUS"
+};
+
+enum ValueEnum
+{
+	OFF = 0,
+	ON,
+	STATUS
+};
+
+enum Arduino_Pins
+{
+	BUTTON_BILGE_PIN	= 2,
+	BUTTON_LANTERN_PIN  = 3,
+	BUTTON_WIPER_PIN	= 4,
+	BUTTON_INSTRUMENT_PIN = 5,
+	BUTTON_5_PIN		= 6,
+	BUTTON_6_PIN		= 7,
+	BUTTON_7_PIN		= 8,
+	BUTTON_8_PIN		= 9,
+	LED_BILGE_PIN		= 10,
+	LED_LANTERN_PIN		= 11,
+	LED_WIPER_PIN		= 12,
+	LED_INSTRUMENT_PIN  = 13,
+	LED_5_PIN			= A0,
+	LED_6_PIN			= A1,
+	LED_7_PIN			= A2,
+	LED_8_PIN			= A3
+};
