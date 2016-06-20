@@ -37,7 +37,8 @@ SOURCES += main.cpp\
     hmi/debug/wdlinkdebugdialog.cpp \
     hmi/seamapform.cpp \
     Android_Sensors/androidcompass.cpp \
-    hmi/ConfigClasses/colordialog.cpp
+    hmi/ConfigClasses/colordialog.cpp \
+    mainwindowmenuactions.cpp
 
 
 HEADERS  += mainwindow.h \

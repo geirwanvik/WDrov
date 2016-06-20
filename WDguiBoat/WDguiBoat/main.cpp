@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
      QString logFolder(qgetenv("EXTERNAL_STORAGE") + QStringLiteral("/WD-Boat"));
      if(QDir(logFolder).exists())
      {
-        qDebug() << "it exisist?";
+
         if (QFile::exists(logFile)) // remove previous file if exists
         QFile::remove(logFile);
      }
@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
      }
 
 
-   //qInstallMessageHandler(myMessageOutput);
+   qInstallMessageHandler(myMessageOutput);
    qDebug() << "==== WD Boat LOG =======\n" << QDateTime::currentDateTime().toString(); // first log message
  #endif
 

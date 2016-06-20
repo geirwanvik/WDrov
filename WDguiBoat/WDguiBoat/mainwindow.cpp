@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+   ui->checkBoxConnectAtStart->setChecked(true);
+   ui->radioButtonBluetooth->setChecked(true);
    //Read settings
    readSetting();
    //Navigation Toolbar
@@ -20,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
    ui->stackedWidget->setCurrentIndex(0);
    mBoatPanel->setChecked(true);
 
-   ui->statusBar->showMessage("Welcomme To WD Boat!");
+   ui->statusBar->showMessage("WD Boat!");
 
 
 }
@@ -162,6 +164,7 @@ void MainWindow::bluetoothStartConnection()
     mProgressInd->show();
     mProgressInd->startAnimation();
     ui->statusBar->showMessage("Connecting....");
+    ui->statusBar->setStyleSheet("QStatusBar{background:rgba(255, 255, 127)}");
 }
 
 void MainWindow::bluetoothDoneConnection()
@@ -169,12 +172,15 @@ void MainWindow::bluetoothDoneConnection()
     mProgressInd->stopAnimation();
     mProgressInd->hide();
     ui->statusBar->showMessage("Bluetooth Connected!");
+    ui->statusBar->setStyleSheet("QStatusBar{background:rgba(0, 255, 0, 255)}");
 }
 
 void MainWindow::bluetoothFailedConnection()
 {
     mProgressInd->stopAnimation();
     mProgressInd->hide();
+    ui->statusBar->showMessage("Disconncted!");
+    ui->statusBar->setStyleSheet("QStatusBar{background:rgba(255, 0, 0, 255)}");
 }
 
 
@@ -265,10 +271,6 @@ void MainWindow::writeSetting()
     settings.endGroup();
 }
 
-void MainWindow::on_actionCommunication_triggered()
-{
-    ui->stackedWidget->setCurrentIndex(3);
-}
 
 void MainWindow::on_pushButtonSetupCommunication_clicked()
 {
@@ -329,44 +331,8 @@ void MainWindow::ShowSetupSerial()
     mSocket->showSetupWindow();
 }
 
-
-
-
 #endif
 
 
-void MainWindow::on_actionSensor_View_triggered()
-{
-    mSensorOverviewForm->showSensorConfig();
-}
-
-void MainWindow::on_actionSerial_Port_triggered()
-{
-#if  defined(Q_OS_ANDROID)
 
 
-#else
-    ShowSetupSerial();
-#endif
-}
-
-void MainWindow::on_actionAll_Sensor_triggered()
-{
-   mInstrumentForm->showColorDialog();
-}
-
-void MainWindow::on_actionCommunication_Debug_triggered()
-{
-    wdLinkDebugDialog *mWdlinkDebug = new wdLinkDebugDialog(this);
-
-    connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
-    connect(mWdParser, SIGNAL(GpsData(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
-    connect(mWdParser, SIGNAL(ImuData(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
-    connect(mWdParser, SIGNAL(instrumentData(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
-    connect(mWdParser, SIGNAL(LedFeedback(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
-    connect(mWdlinkDebug, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(Send(QString)));
-    connect(mWdLink, SIGNAL(freshData(QString)), mWdlinkDebug, SLOT(wdlinkRaw(QString)));
-
-    mWdlinkDebug->setModal(true);
-    mWdlinkDebug->show();
-}
