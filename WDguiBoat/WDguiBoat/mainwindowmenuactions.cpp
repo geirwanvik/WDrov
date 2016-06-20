@@ -18,7 +18,7 @@ void MainWindow::on_actionSerial_Port_triggered()
 
 void MainWindow::on_actionAll_Sensor_triggered()
 {
-   mInstrumentForm->showColorDialog();
+
 }
 
 void MainWindow::on_actionCommunication_triggered()
@@ -40,4 +40,8 @@ void MainWindow::on_actionCommunication_Debug_triggered()
 
     mWdlinkDebug->setModal(true);
     mWdlinkDebug->show();
+}
+void MainWindow::on_actionInterior_Light_Color_triggered()
+{
+      mInstrumentForm->showColorDialog();
 }

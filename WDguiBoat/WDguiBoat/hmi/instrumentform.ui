@@ -29,7 +29,7 @@
       <string>PushButton</string>
      </property>
      <property name="default">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
     </widget>
    </item>
@@ -54,7 +54,7 @@
       <bool>false</bool>
      </property>
      <property name="default">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="flat">
       <bool>false</bool>
@@ -82,7 +82,7 @@
       <bool>false</bool>
      </property>
      <property name="default">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="flat">
       <bool>false</bool>
@@ -110,7 +110,7 @@
       <bool>false</bool>
      </property>
      <property name="default">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="flat">
       <bool>false</bool>
@@ -139,7 +139,7 @@ Pump</string>
       <bool>false</bool>
      </property>
      <property name="default">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="flat">
       <bool>false</bool>
@@ -168,7 +168,7 @@ Wiper</string>
       <bool>false</bool>
      </property>
      <property name="default">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="flat">
       <bool>false</bool>
@@ -194,7 +194,7 @@ Power</string>
       <bool>false</bool>
      </property>
      <property name="default">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="flat">
       <bool>false</bool>
@@ -222,7 +222,7 @@ Power</string>
       <bool>false</bool>
      </property>
      <property name="default">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="flat">
       <bool>false</bool>
@@ -251,7 +251,7 @@ Lights</string>
       <bool>false</bool>
      </property>
      <property name="default">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="flat">
       <bool>false</bool>
@@ -279,7 +279,7 @@ Lights</string>
       <bool>false</bool>
      </property>
      <property name="default">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="flat">
       <bool>false</bool>
@@ -307,7 +307,7 @@ Lights</string>
       <bool>false</bool>
      </property>
      <property name="default">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="flat">
       <bool>false</bool>
@@ -329,7 +329,7 @@ Lights</string>
       <string>Floodlight</string>
      </property>
      <property name="default">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
     </widget>
    </item>

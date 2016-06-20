@@ -24,6 +24,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
    ui->statusBar->showMessage("WD Boat!");
 
+   this->setAttribute(Qt::WA_AcceptTouchEvents);
+   this->grabGesture(Qt::SwipeGesture);
+   this->setAttribute(Qt::WA_TouchPadAcceptSingleTouchEvents);
 
 }
 
@@ -44,6 +47,44 @@ void MainWindow::setupApperance()
     fontNormalSize.setBold(true);
     fontNormalSize.setPointSize(12 + mScreen->ratioFont());
     QApplication::setFont(fontNormalSize);
+}
+
+bool MainWindow::event(QEvent *event)
+{
+
+    if (event->type() == QEvent::Gesture)
+           return gestureEvent(static_cast<QGestureEvent*>(event));
+       return QWidget::event(event);
+}
+
+bool MainWindow::gestureEvent(QGestureEvent *event)
+{
+
+    if (QGesture *swipe = event->gesture(Qt::SwipeGesture))
+    {
+           swipeTriggered(static_cast<QSwipeGesture *>(swipe));
+    }
+
+
+    return true;
+
+}
+
+void MainWindow::swipeTriggered(QSwipeGesture *swipe)
+{
+    if (swipe->state() == Qt::GestureFinished) {
+           if (swipe->horizontalDirection() == QSwipeGesture::Left
+               || swipe->verticalDirection() == QSwipeGesture::Up) {
+               qDebug() << "swipeTriggered(): swipe to previous";
+
+           } else {
+               qDebug() << "swipeTriggered(): swipe to next";
+                AndroidSensorDialog *mAndroidSensors = new AndroidSensorDialog(this);
+                mAndroidSensors->setModal(true);
+                mAndroidSensors->show();
+           }
+           update();
+       }
 }
 
 
@@ -236,6 +277,8 @@ void MainWindow::initObjectAndConnection()
      mAndroidAccelerometer = new androidAccelerometer(this);
      mCompass = new androidCompass(this);
 
+     mLightSensor = new lightSensor(this);
+
 
     if(ui->checkBoxConnectAtStart->isChecked())
     {
@@ -332,6 +375,8 @@ void MainWindow::ShowSetupSerial()
 }
 
 #endif
+
+
 
 
 

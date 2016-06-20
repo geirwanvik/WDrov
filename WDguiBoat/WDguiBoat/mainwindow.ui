@@ -22,7 +22,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -42,8 +42,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>945</width>
-             <height>332</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
           </widget>
@@ -63,8 +63,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>945</width>
-             <height>332</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
           </widget>
@@ -241,6 +241,7 @@ QToolBar::handle {
      <string>Configure</string>
     </property>
     <addaction name="actionCommunication"/>
+    <addaction name="actionInterior_Light_Color"/>
     <addaction name="actionSensor_View"/>
     <addaction name="actionSerial_Port"/>
    </widget>
@@ -278,6 +279,11 @@ QToolBar::handle {
   <action name="actionCommunication_Debug">
    <property name="text">
     <string>Communication Debug</string>
+   </property>
+  </action>
+  <action name="actionInterior_Light_Color">
+   <property name="text">
+    <string>Interior Light Color</string>
    </property>
   </action>
  </widget>

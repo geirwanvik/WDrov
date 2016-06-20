@@ -38,7 +38,9 @@ SOURCES += main.cpp\
     hmi/seamapform.cpp \
     Android_Sensors/androidcompass.cpp \
     hmi/ConfigClasses/colordialog.cpp \
-    mainwindowmenuactions.cpp
+    mainwindowmenuactions.cpp \
+    Android_Sensors/lightsensor.cpp \
+    Android_Sensors/androidsensordialog.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -60,7 +62,9 @@ HEADERS  += mainwindow.h \
     hmi/debug/wdlinkdebugdialog.h \
     hmi/seamapform.h \
     Android_Sensors/androidcompass.h \
-    hmi/ConfigClasses/colordialog.h
+    hmi/ConfigClasses/colordialog.h \
+    Android_Sensors/lightsensor.h \
+    Android_Sensors/androidsensordialog.h
 
 
 FORMS    += mainwindow.ui \
@@ -71,7 +75,8 @@ FORMS    += mainwindow.ui \
     hmi/allsensorsdialog.ui \
     hmi/debug/wdlinkdebugdialog.ui \
     hmi/seamapform.ui \
-    hmi/ConfigClasses/colordialog.ui
+    hmi/ConfigClasses/colordialog.ui \
+    Android_Sensors/androidsensordialog.ui
 
 CONFIG += mobility
 MOBILITY = 

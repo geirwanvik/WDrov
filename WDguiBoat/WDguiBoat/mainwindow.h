@@ -6,6 +6,7 @@
 #include <QAction>
 #include <QSettings>
 #include <QMessageBox>
+#include <QSwipeGesture>
 
 #include "Screen/screendata.h"
 #include "Palette/styleone.h"
@@ -21,6 +22,8 @@
 #include "Android_Sensors/androidgps.h"
 #include "Android_Sensors/androidaccelerometer.h"
 #include "Android_Sensors/androidcompass.h"
+#include "Android_Sensors/lightsensor.h"
+#include "Android_Sensors/androidsensordialog.h"
 
 #if  defined(Q_OS_ANDROID)
 #include <QtAndroidExtras>
@@ -69,6 +72,7 @@ private slots:
 
     void on_actionAll_Sensor_triggered();
     void on_actionCommunication_Debug_triggered();
+    void on_actionInterior_Light_Color_triggered();
 
 signals:
 
@@ -104,6 +108,10 @@ private:
 
     androidCompass *mCompass;
 
+    lightSensor *mLightSensor;
+
+
+
     //Screen data, set font and sizes
     void setupApperance();
     ScreenData *mScreen;
@@ -111,6 +119,10 @@ private:
 
     //Progress window when things take time
     QProgressIndicator *mProgressInd;
+
+    bool event(QEvent *event);
+    bool gestureEvent(QGestureEvent *event);
+    void swipeTriggered(QSwipeGesture *swipe);
 
 #if  defined(Q_OS_ANDROID)
     bluetooththread *mSocket;
