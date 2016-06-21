@@ -12,17 +12,16 @@ class androidCompass : public QObject
     Q_OBJECT
 public:
     explicit androidCompass(QObject *parent = 0);
+     QCompass *mCompass;
 
 signals:
 
 public slots:
 
 private:
-    QCompass *mCompass;
-
 
 private slots:
-    void readyReadSensor();
+
 };
 
 #endif // ANDROIDCOMPASS_H

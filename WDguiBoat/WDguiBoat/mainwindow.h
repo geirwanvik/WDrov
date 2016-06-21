@@ -19,10 +19,6 @@
 #include "hmi/allsensorsdialog.h"
 #include "hmi/debug/wdlinkdebugdialog.h"
 
-#include "Android_Sensors/androidgps.h"
-#include "Android_Sensors/androidaccelerometer.h"
-#include "Android_Sensors/androidcompass.h"
-#include "Android_Sensors/lightsensor.h"
 #include "Android_Sensors/androidsensordialog.h"
 
 #if  defined(Q_OS_ANDROID)
@@ -102,13 +98,7 @@ private:
 
     AllSensorsDialog *mAllSensorOverview;
 
-    androidGps *mAndroidGpsSource;
 
-    androidAccelerometer *mAndroidAccelerometer;
-
-    androidCompass *mCompass;
-
-    lightSensor *mLightSensor;
 
 
 

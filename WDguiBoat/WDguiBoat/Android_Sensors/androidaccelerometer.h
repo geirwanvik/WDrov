@@ -11,15 +11,13 @@ class androidAccelerometer : public QObject
     Q_OBJECT
 public:
     explicit androidAccelerometer(QObject *parent = 0);
+    QAccelerometer *accmeter;
 
 signals:
 
 public slots:
 
 private:
-     QAccelerometer *accmeter;
-     QAccelerometerReading *reading;
-
      qreal x;
      qreal y;
      qreal z;

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>991</width>
-    <height>411</height>
+    <height>494</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
       <property name="currentIndex">
        <number>4</number>
       </property>
-      <widget class="QWidget" name="page">
+      <widget class="QWidget" name="pageInstruments">
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
          <widget class="QScrollArea" name="scrollAreaIntrumentForm">
@@ -42,8 +42,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>28</height>
+             <width>945</width>
+             <height>415</height>
             </rect>
            </property>
           </widget>
@@ -63,8 +63,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
-             <height>28</height>
+             <width>945</width>
+             <height>415</height>
             </rect>
            </property>
           </widget>
@@ -98,7 +98,7 @@
              <x>0</x>
              <y>0</y>
              <width>945</width>
-             <height>332</height>
+             <height>415</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -173,7 +173,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_2"/>
+      <widget class="QWidget" name="pageNotConnected"/>
      </widget>
     </item>
    </layout>

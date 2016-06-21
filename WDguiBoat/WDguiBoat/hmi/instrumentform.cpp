@@ -24,6 +24,18 @@ void InstrumentForm::showColorDialog()
     mColorDialog->show();
 }
 
+void InstrumentForm::connectedToWdCore(bool status)
+{
+    if(status == true)
+    {
+        ui->pushButtonLatern->setEnabled(true);
+    }
+    else
+    {
+        ui->pushButtonLatern->setEnabled(false);
+    }
+}
+
 
 void InstrumentForm::setupApperance()
 {
@@ -33,7 +45,7 @@ void InstrumentForm::setupApperance()
     ui->pushButton_6->setVisible(false);
 
     ui->pushButtonBilgePump->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/bilge pump.png"));
-    ui->pushButtonBilgePump->setIconSize(QSize(100,100));
+    ui->pushButtonBilgePump->setIconSize(QSize(80,80));
     ui->pushButtonBilgePump->setCheckable(true);
 
     ui->pushButtonLatern->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/lantern.png"));
@@ -90,15 +102,17 @@ void InstrumentForm::on_pushButtonBilgePump_released()
 {
     if(ui->pushButtonBilgePump->isChecked())
     {
+        ui->pushButtonBilgePump->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
         writeToSocket(",RELAY_BILGE_PP,ON");
         ui->pushButtonBilgePump->setText("Bilge Pump\nON");
-        ui->pushButtonBilgePump->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
+
     }
     else
     {
        writeToSocket(",RELAY_BILGE_PP,OFF");
-       ui->pushButtonBilgePump->setText("Bilge Pump\nOFF");
        ui->pushButtonBilgePump->setStyleSheet("QPushButton {}");
+       ui->pushButtonBilgePump->setText("Bilge Pump\nOFF");
+
     }
 }
 

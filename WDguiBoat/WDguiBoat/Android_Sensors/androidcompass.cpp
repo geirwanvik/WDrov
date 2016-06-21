@@ -3,12 +3,6 @@
 androidCompass::androidCompass(QObject *parent) : QObject(parent)
 {
     mCompass = new QCompass(this);
-
-
-    connect(mCompass, SIGNAL(readingChanged()),this, SLOT(readyReadSensor()));
+    mCompass->start();
 }
 
-void androidCompass::readyReadSensor()
-{
-    //qDebug() << mCompass->reading()->calibrationLevel();
-}

@@ -40,6 +40,7 @@ void SensorOverviewForm::createBatteryVscale()
     mBatteryVoltageScale->setValue(10);
     mBatteryVoltageScale->setVisible(false);
     ui->verticalLayoutFirstView->addWidget(mBatteryVoltageScale);
+    //mBatteryVoltageScale->setStyleSheet("color: white; background-color: red");
 }
 
 void SensorOverviewForm::createTempScale()

@@ -4,7 +4,6 @@ lightSensor::lightSensor(QObject *parent) : QObject(parent)
 {
 
     mLightSensor = new QLightSensor(this);
-    connect(mLightSensor, SIGNAL(readingChanged()), this, SLOT(ReadLightSensor()));
     mLightSensor->start();
 
 
@@ -18,7 +17,7 @@ lightSensor::lightSensor(QObject *parent) : QObject(parent)
 
 void lightSensor::ReadLightSensor()
 {
-    qDebug() << "READING LIGHT SENSOR:" << mLightSensor->reading()->lux();
+
 }
 
 void lightSensor::ReadAmbientSensor()

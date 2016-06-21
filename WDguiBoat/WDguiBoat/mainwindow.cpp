@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
    this->grabGesture(Qt::SwipeGesture);
    this->setAttribute(Qt::WA_TouchPadAcceptSingleTouchEvents);
 
+
+
 }
 
 MainWindow::~MainWindow()
@@ -206,6 +208,8 @@ void MainWindow::bluetoothStartConnection()
     mProgressInd->startAnimation();
     ui->statusBar->showMessage("Connecting....");
     ui->statusBar->setStyleSheet("QStatusBar{background:rgba(255, 255, 127)}");
+    mInstrumentForm->connectedToWdCore(true);
+
 }
 
 void MainWindow::bluetoothDoneConnection()
@@ -222,6 +226,9 @@ void MainWindow::bluetoothFailedConnection()
     mProgressInd->hide();
     ui->statusBar->showMessage("Disconncted!");
     ui->statusBar->setStyleSheet("QStatusBar{background:rgba(255, 0, 0, 255)}");
+    mInstrumentForm->connectedToWdCore(false);
+   // ui->toolBar->setEnabled(false);
+   // ui->stackedWidget->setCurrentIndex(4);
 }
 
 
@@ -273,11 +280,6 @@ void MainWindow::initObjectAndConnection()
     connect(mWdParser, SIGNAL(instrumentData(QString,QString)), mInstrumentForm, SLOT(dataFromWdCore(QString,QString)));
     connect(mInstrumentForm->mColorDialog, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(Send(QString)));
 
- //  mAndroidGpsSource = new androidGps(this);
-     mAndroidAccelerometer = new androidAccelerometer(this);
-     mCompass = new androidCompass(this);
-
-     mLightSensor = new lightSensor(this);
 
 
     if(ui->checkBoxConnectAtStart->isChecked())

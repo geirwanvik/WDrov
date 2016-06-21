@@ -22,6 +22,7 @@ public:
     ~InstrumentForm();
     void showColorDialog();
     ColorDialog *mColorDialog;
+    void connectedToWdCore(bool status);
 
 
 private slots:
@@ -45,6 +46,8 @@ signals:
 
 public slots:
     void dataFromWdCore(QString command,QString value);
+
+
 
 };
 

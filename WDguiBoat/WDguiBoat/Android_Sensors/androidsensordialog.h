@@ -3,6 +3,12 @@
 
 #include <QDialog>
 
+#include "Android_Sensors/androidgps.h"
+#include "Android_Sensors/androidaccelerometer.h"
+#include "Android_Sensors/androidcompass.h"
+#include "Android_Sensors/lightsensor.h"
+
+
 namespace Ui {
 class AndroidSensorDialog;
 }
@@ -17,9 +23,30 @@ public:
 
 private slots:
     void on_pushButtonClose_clicked();
+    void lightSensorData();
+    void accSensorData();
+    void gyroSensorData();
+    void headingData();
 
 private:
     Ui::AndroidSensorDialog *ui;
+    androidGps *mAndroidGpsSource;
+    androidAccelerometer *mAndroidAccelerometer;
+    androidCompass *mCompass;
+    lightSensor *mLightSensor;
+
+    quint32 Lux;
+
+    qreal accX;
+    qreal accY;
+    qreal accZ;
+
+    qreal gyroX;
+    qreal gyroY;
+    qreal gyroZ;
+
+    qreal azimuth;
+
 };
 
 #endif // ANDROIDSENSORDIALOG_H

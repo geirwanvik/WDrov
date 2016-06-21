@@ -13,5 +13,5 @@ void androidAccelerometer::readyReadSensor()
 {
     x = accmeter->reading()->x();
     y = accmeter->reading()->y();
-    //qDebug() << x << y;
+
 }

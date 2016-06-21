@@ -13,14 +13,15 @@ class lightSensor : public QObject
     Q_OBJECT
 public:
     explicit lightSensor(QObject *parent = 0);
+    QLightSensor *mLightSensor;
+    QAmbientLightSensor *mAmbientSensor;
 
 signals:
 
 public slots:
 
 private:
-    QLightSensor *mLightSensor;
-    QAmbientLightSensor *mAmbientSensor;
+
 
 private slots:
     void ReadLightSensor();
