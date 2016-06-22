@@ -34,7 +34,7 @@ void _WDslaveNode::Write()
 		{
 			tx += CommandString[buttonLeds[i].GetName()];
 			tx += ",";
-			tx += String(buttonLeds[i].GetValue());
+			tx += String(ValueString[buttonLeds[i].GetValue()]);
 			tx += ",";
 		}
 	}

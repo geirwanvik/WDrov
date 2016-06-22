@@ -124,7 +124,7 @@ void _WDmasterNode::ProcessCommand(const String &cmd, const String &val)
 
 byte _WDmasterNode::NodeAlive()
 {
-	if (millis() - slaveTime > 1100)
+	if (millis() - slaveTime > 2000)
 	{
 		return false;
 	}
