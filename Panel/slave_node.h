@@ -6,18 +6,9 @@ public:
 	void Init(HardwareSerial *_serial);
 	void Read();
 	void Write();
-	void SetPinState(byte pin, byte value);
 	byte MasterAlive();
 
 private:
-	struct PinState
-	{
-		byte name;
-		byte value;
-		byte oldValue;
-		byte pin;
-	};
-	PinState pinState[8];
 	void NewMessage(const String &s);
 	byte CalculateCRC(const char *buffer);
 	byte CheckCRC(const char *buffer);
@@ -33,4 +24,4 @@ private:
 	uint32_t masterTime;
 	byte aliveCounter;
 };
-extern _WDslaveNode WDslaveNode;;
+extern _WDslaveNode WDslaveNode;

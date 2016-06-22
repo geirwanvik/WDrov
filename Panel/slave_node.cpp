@@ -1,4 +1,5 @@
 #include "slave_node.h"
+#include "button_led.h"
 #include "pins.h"
 
 _WDslaveNode WDslaveNode;
@@ -16,26 +17,6 @@ void _WDslaveNode::Init(HardwareSerial *_serial)
 	val = "";
 	savePending = false;
 
-	for (byte i = 0; i < 8; i++)
-	{
-		pinState[i].value = 0;
-		pinState[i].oldValue = 0;
-		pinState[i].name = UNUSED;
-		pinState[i].pin = 0;
-	}
-
-	pinState[0].name = BUTTON_BILGE_PP;
-	pinState[0].pin = LED_BILGE_PIN;
-
-	pinState[1].name = BUTTON_LANTERN;
-	pinState[1].pin = LED_LANTERN_PIN;
-
-	pinState[2].name = BUTTON_WIPER;
-	pinState[2].pin = LED_WIPER_PIN;
-
-	pinState[3].name = BUTTON_INSTRUMENT;
-	pinState[3].pin = LED_INSTRUMENT_PIN;
-
 	slaveTime = 0;
 	masterTime = 0;
 	aliveCounter = 0;
@@ -49,12 +30,11 @@ void _WDslaveNode::Write()
 
 	for (byte i = 0; i < 8; i++)
 	{
-		if ((pinState[i].value != pinState[i].oldValue) && (pinState[i].name != UNUSED))
+		if ((buttonLeds[i].GetName() != UNUSED) && (buttonLeds[i].ButtonChanged()))
 		{
-			pinState[i].oldValue = pinState[i].value;
-			tx += CommandString[pinState[i].name];
+			tx += CommandString[buttonLeds[i].GetName()];
 			tx += ",";
-			tx += String(pinState[i].value);
+			tx += String(buttonLeds[i].GetValue());
 			tx += ",";
 		}
 	}
@@ -84,6 +64,7 @@ void _WDslaveNode::Write()
 	tx += String(crc, HEX);
 
 	serial->println(tx);
+
 }
 
 void _WDslaveNode::Read()
@@ -153,6 +134,7 @@ void _WDslaveNode::ProcessCommand(const String &cmd, const String &val)
 {
 	int i;
 	CommandEnum cmdEnum;
+	byte value;
 	for (i = 0; i < sizeof(CommandString) / sizeof(CommandString[0]); i++)
 	{
 		if (cmd == CommandString[NODE_ALIVE])
@@ -162,22 +144,17 @@ void _WDslaveNode::ProcessCommand(const String &cmd, const String &val)
 		else if (cmd == CommandString[i])
 		{
 			cmdEnum = static_cast<CommandEnum>(i);
+			if (val == ValueString[ON])
+			{
+				value = 1;
+			}
+			else
+			{
+				value = 0;
+			}
 			for (byte j = 0; j < 8; j++)
 			{
-				if (pinState[j].name == cmdEnum)
-				{
-					if (val == ValueString[ON])
-					{
-						pinState[j].value = 1;
-					}
-					else
-					{
-						pinState[j].value = 0;
-					}
-					pinState[j].oldValue = pinState[j].value;
-					digitalWrite(pinState[j].pin, pinState[j].value); // Update led
-					return;
-				}
+				buttonLeds[j].SetLed(cmdEnum, value);
 			}
 			break;
 		}
@@ -213,17 +190,6 @@ byte _WDslaveNode::CheckCRC(const char *buffer)
 	return false;
 }
 
-void _WDslaveNode::SetPinState(byte pin, byte value)
-{
-	for (byte i = 0; i < 8; i++)
-	{
-		if (pinState[i].name == pin)
-		{
-			pinState[i].value = value;
-			return;
-		}
-	}
-}
 byte _WDslaveNode::MasterAlive()
 {
 	if ((millis() - masterTime) > 1100)

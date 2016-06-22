@@ -1,47 +1,36 @@
 #include "slave_node.h"
+#include "button_led.h"
 #include "pins.h"
+
 void setup()
 {
-	digitalWrite(LED_BILGE_PIN, LOW);
-	pinMode(LED_BILGE_PIN, OUTPUT);
-	pinMode(LED_LANTERN_PIN, OUTPUT);
-	digitalWrite(LED_LANTERN_PIN, LOW);
-	pinMode(LED_WIPER_PIN, OUTPUT);
-	digitalWrite(LED_WIPER_PIN, LOW);
-	pinMode(LED_INSTRUMENT_PIN, OUTPUT);
-	digitalWrite(LED_INSTRUMENT_PIN, LOW);
-	pinMode(LED_5_PIN, OUTPUT);
-	digitalWrite(LED_5_PIN, LOW);
-	pinMode(LED_6_PIN, OUTPUT);
-	digitalWrite(LED_6_PIN, LOW);
-	pinMode(LED_7_PIN, OUTPUT);
-	digitalWrite(LED_7_PIN, LOW);
-	pinMode(LED_8_PIN, OUTPUT);
-	digitalWrite(LED_8_PIN, LOW);
-
-	pinMode(BUTTON_BILGE_PIN, INPUT);
-	pinMode(BUTTON_LANTERN_PIN, INPUT);
-	pinMode(BUTTON_WIPER_PIN, INPUT);
-	pinMode(BUTTON_INSTRUMENT_PIN, INPUT);
-	pinMode(BUTTON_5_PIN, INPUT);
-	pinMode(BUTTON_6_PIN, INPUT);
-	pinMode(BUTTON_7_PIN, INPUT);
-	pinMode(BUTTON_8_PIN, INPUT);
-
 	WDslaveNode.Init(&Serial);
+	buttonLeds[0].Init(BUTTON_BILGE_PP, BUTTON_BILGE_PIN, LED_BILGE_PIN);
+	buttonLeds[1].Init(BUTTON_LANTERN, BUTTON_LANTERN_PIN, LED_LANTERN_PIN);
+	buttonLeds[2].Init(BUTTON_WIPER, BUTTON_WIPER_PIN, LED_WIPER_PIN);
+	buttonLeds[3].Init(BUTTON_INSTRUMENT, BUTTON_INSTRUMENT_PIN, LED_INSTRUMENT_PIN);
+
+	buttonLeds[4].Init(UNUSED, BUTTON_5_PIN, LED_5_PIN);
+	buttonLeds[5].Init(UNUSED, BUTTON_6_PIN, LED_6_PIN);
+	buttonLeds[6].Init(UNUSED, BUTTON_7_PIN, LED_7_PIN);
+	buttonLeds[7].Init(UNUSED, BUTTON_8_PIN, LED_8_PIN);
 }
 
 void loop()
 {
-	// TODO - ADD ANTI BOUNCE ON BUTTON
-	// ADD PUSH FOR ON, PUSH AGAIN FOR OFF
-	// ADD ALL LED BLINK IF NO COMM
 	WDslaveNode.Read();
-	for (byte i = BUTTON_BILGE_PIN; i < LED_BILGE_PIN; i++)
+
+	for (byte i = 0; i < 8; i++)
 	{
-		WDslaveNode.SetPinState(i, digitalRead(i));
+		if (WDslaveNode.MasterAlive())
+		{
+			buttonLeds[i].ReadButton();
+		}
+		else
+		{
+			buttonLeds[i].Blink();
+		}
 	}
 
 	WDslaveNode.Write();
-
 }
