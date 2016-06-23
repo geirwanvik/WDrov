@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
    this->grabGesture(Qt::SwipeGesture);
    this->setAttribute(Qt::WA_TouchPadAcceptSingleTouchEvents);
 
+   ui->actionAll_Sensor->setVisible(false);
 
 
 }
@@ -204,7 +205,7 @@ void MainWindow::click_RawSensorData()
     connect(mWdParser, SIGNAL(ImuData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
     connect(mWdParser, SIGNAL(PowerData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
     connect(mWdParser, SIGNAL(LedFeedback(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
-
+    connect(mAllSensorOverview, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(Send(QString)));
     mAllSensorOverview->setModal(true);
     mAllSensorOverview->show();
 

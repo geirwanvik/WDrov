@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QScroller>
 #include "../../WDboat/CommandList.h"
+#include <QMessageBox>
 
 namespace Ui {
 class AllSensorsDialog;
@@ -24,10 +25,16 @@ public slots:
 
 private slots:
     void on_pushButtonClose_clicked();
+    void on_pushButtonAccCalibration_clicked();
+    void on_pushButtonMagCalibration_clicked();
 
 private:
     Ui::AllSensorsDialog *ui;
     QScroller *scroller;
+
+signals:
+    void writeToSocket(QString String);
+
 };
 
 #endif // ALLSENSORSDIALOG_H

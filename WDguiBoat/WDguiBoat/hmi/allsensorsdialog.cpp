@@ -98,3 +98,58 @@ void AllSensorsDialog::on_pushButtonClose_clicked()
     this->hide();
     this->deleteLater();
 }
+
+void AllSensorsDialog::on_pushButtonAccCalibration_clicked()
+{
+    QMessageBox::StandardButton resBtn = QMessageBox::question( qobject_cast<QWidget *>(parent()), "Accelerometer Calibration",
+                                                                tr("Please level the boat and sit still\nThen press yes to start calibration!"
+                                                                   ""),
+                                                                QMessageBox::No | QMessageBox::Yes, QMessageBox::Yes);
+
+    if(resBtn == QMessageBox::Yes)
+    {
+        emit writeToSocket(tr(",%1,%2").arg(CommandString[ACC_ZERO]).arg(ValueString[ON]));
+    }
+    else
+    {
+        return;
+    }
+
+}
+
+void AllSensorsDialog::on_pushButtonMagCalibration_clicked()
+{
+    QMessageBox::StandardButton resBtn = QMessageBox::question( qobject_cast<QWidget *>(parent()), "Magnetometer Calibration",
+                                                                tr("Press Yes and magnetometer calibration will start!\n"
+                                                                   "Please drive the boat in figure 8 for a couple of min!"
+                                                                   ""),
+                                                                QMessageBox::No | QMessageBox::Yes, QMessageBox::Yes);
+
+    if(resBtn == QMessageBox::Yes)
+    {
+        emit writeToSocket(tr(",%1,%2").arg(CommandString[MAG_CALIBRATE]).arg(ValueString[ON]));
+
+        QMessageBox::StandardButton resBt = QMessageBox::question( qobject_cast<QWidget *>(parent()), "Magnetometer Calibration",
+                                                                    tr("Press Yes When you feel you are happy with your figure 8's\n"
+                                                                       ""));
+
+
+
+        if(resBt == QMessageBox::Yes || resBt == QMessageBox::No)
+        {
+             emit writeToSocket(tr(",%1,%2").arg(CommandString[MAG_CALIBRATE]).arg(ValueString[OFF]));
+        }
+        else
+        {
+           return;
+        }
+
+
+
+    }
+    else
+    {
+        return;
+    }
+
+}

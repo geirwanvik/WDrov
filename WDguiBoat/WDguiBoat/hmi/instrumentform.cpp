@@ -86,13 +86,13 @@ void InstrumentForm::on_pushButtonLatern_released()
 {
     if(ui->pushButtonLatern->isChecked())
     {
-        writeToSocket("ARDU,RELAY_LANTERN,ON");
+        writeToSocket(",RELAY_LANTERN,ON");
         ui->pushButtonLatern->setText("Lantern\nON");
         ui->pushButtonLatern->setStyleSheet("QPushButton { background-color: rgb(0, 255, 0);border-radius: 11px; border: 2px solid #555;}");
     }
     else
     {
-        writeToSocket("ARDU,RELAY_LANTERN,OFF");
+        writeToSocket(",RELAY_LANTERN,OFF");
         ui->pushButtonLatern->setText("Lantern\nOFF");
         ui->pushButtonLatern->setStyleSheet("QPushButton {}");
     }
