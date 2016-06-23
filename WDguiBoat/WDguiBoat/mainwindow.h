@@ -19,6 +19,8 @@
 #include "hmi/allsensorsdialog.h"
 #include "hmi/debug/wdlinkdebugdialog.h"
 
+#include "hmi/gaugedialog.h"
+
 #include "Android_Sensors/androidsensordialog.h"
 
 #if  defined(Q_OS_ANDROID)

@@ -40,7 +40,10 @@ SOURCES += main.cpp\
     hmi/ConfigClasses/colordialog.cpp \
     mainwindowmenuactions.cpp \
     Android_Sensors/lightsensor.cpp \
-    Android_Sensors/androidsensordialog.cpp
+    Android_Sensors/androidsensordialog.cpp \
+    hmi/gaugedialog.cpp \
+    QRoundProgressBar.cpp \
+    gaugeWidgets/qcgaugewidget.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -64,7 +67,10 @@ HEADERS  += mainwindow.h \
     Android_Sensors/androidcompass.h \
     hmi/ConfigClasses/colordialog.h \
     Android_Sensors/lightsensor.h \
-    Android_Sensors/androidsensordialog.h
+    Android_Sensors/androidsensordialog.h \
+    hmi/gaugedialog.h \
+    QRoundProgressBar.h \
+    gaugeWidgets/qcgaugewidget.h
 
 
 FORMS    += mainwindow.ui \
@@ -76,7 +82,8 @@ FORMS    += mainwindow.ui \
     hmi/debug/wdlinkdebugdialog.ui \
     hmi/seamapform.ui \
     hmi/ConfigClasses/colordialog.ui \
-    Android_Sensors/androidsensordialog.ui
+    Android_Sensors/androidsensordialog.ui \
+    hmi/gaugedialog.ui
 
 CONFIG += mobility
 MOBILITY = 

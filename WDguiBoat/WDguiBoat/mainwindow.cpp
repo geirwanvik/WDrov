@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -49,11 +50,12 @@ void MainWindow::setupApperance()
     fontNormalSize.setBold(true);
     fontNormalSize.setPointSize(12 + mScreen->ratioFont());
     QApplication::setFont(fontNormalSize);
+
 }
 
 bool MainWindow::event(QEvent *event)
 {
-
+   // qDebug() << "Event big time!";
     if (event->type() == QEvent::Gesture)
            return gestureEvent(static_cast<QGestureEvent*>(event));
        return QWidget::event(event);
@@ -78,6 +80,12 @@ void MainWindow::swipeTriggered(QSwipeGesture *swipe)
            if (swipe->horizontalDirection() == QSwipeGesture::Left
                || swipe->verticalDirection() == QSwipeGesture::Up) {
                qDebug() << "swipeTriggered(): swipe to previous";
+               gaugeDialog *mGaugeDialog = new gaugeDialog(this);
+               connect(mWdParser, SIGNAL(GpsData(QString,QString)), mGaugeDialog, SLOT(gpsData(QString,QString)));
+               connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mGaugeDialog, SLOT(dht22Data(QString,QString)));
+               connect(mWdParser, SIGNAL(ImuData(QString,QString)), mGaugeDialog, SLOT(imuData(QString,QString)));
+               mGaugeDialog->setModal(true);
+               mGaugeDialog->show();
 
            } else {
                qDebug() << "swipeTriggered(): swipe to next";
@@ -108,12 +116,12 @@ void MainWindow::createToolbar()
 
     mBoatStatus = new QAction(QIcon(":/icons/pictures/Boat icon/boat_propeller.png"), "Motor", this);
     mBoatStatus->setCheckable(true);
-    ui->toolBar->addAction(mBoatStatus);
+    //ui->toolBar->addAction(mBoatStatus);
     connect(mBoatStatus, SIGNAL(triggered(bool)), this, SLOT(click_BoatStatus()));
 
     mBoatNavigation = new QAction(QIcon(":/icons/pictures/Boat icon/Map-512.png"), "Navigation", this);
     mBoatNavigation->setCheckable(true);
-    ui->toolBar->addAction(mBoatNavigation);
+   // ui->toolBar->addAction(mBoatNavigation);
     connect(mBoatNavigation, SIGNAL(triggered(bool)), this, SLOT(click_Navigation()));
 
     mBoatMusic = new QAction(QIcon(":/icons/pictures/Boat icon/MusicNote.png"), "Music", this);
@@ -127,7 +135,7 @@ void MainWindow::createToolbar()
     connect(mRawSensorData, SIGNAL(triggered(bool)), this, SLOT(click_RawSensorData()));
 
     mSettings = new QAction(QIcon(":/icon/pictures/Icons/settingSVG.png"), "Settings", this);
-    ui->toolBar->addAction(mSettings);
+    //ui->toolBar->addAction(mSettings);
     connect(mSettings, SIGNAL(triggered(bool)), this, SLOT(click_Settings()));
 
 }

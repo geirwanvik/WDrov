@@ -49,31 +49,31 @@ void InstrumentForm::setupApperance()
     ui->pushButtonBilgePump->setCheckable(true);
 
     ui->pushButtonLatern->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/lantern.png"));
-    ui->pushButtonLatern->setIconSize(QSize(100,100));
+    ui->pushButtonLatern->setIconSize(QSize(80,80));
     ui->pushButtonLatern->setCheckable(true);
 
     ui->pushButtonInteriorLights->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/led light.png"));
-    ui->pushButtonInteriorLights->setIconSize(QSize(100,100));
+    ui->pushButtonInteriorLights->setIconSize(QSize(80,80));
     ui->pushButtonInteriorLights->setCheckable(true);
 
     ui->pushButtonWindowWiper->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/windshield wiper.png"));
-    ui->pushButtonWindowWiper->setIconSize(QSize(100,100));
+    ui->pushButtonWindowWiper->setIconSize(QSize(80,80));
     ui->pushButtonWindowWiper->setCheckable(true);
 
     ui->pushButtonHeater->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/heaterFan.png"));
-    ui->pushButtonHeater->setIconSize(QSize(100,100));
+    ui->pushButtonHeater->setIconSize(QSize(80,80));
     ui->pushButtonHeater->setCheckable(true);
 
     ui->pushButtonHorn->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/Horn.png"));
-    ui->pushButtonHorn->setIconSize(QSize(100,100));
+    ui->pushButtonHorn->setIconSize(QSize(80,80));
 
     ui->pushButtonInstruments->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/instrument.png"));
-    ui->pushButtonInstruments->setIconSize(QSize(100,100));
+    ui->pushButtonInstruments->setIconSize(QSize(80,80));
     ui->pushButtonInstruments->setCheckable(true);
 
     ui->pushButtonFloodlight->setCheckable(true);
     ui->pushButtonFloodlight->setIcon(QIcon(":/instrumentIcons/pictures/Instrument/searchlight.png"));
-    ui->pushButtonFloodlight->setIconSize(QSize(100,100));
+    ui->pushButtonFloodlight->setIconSize(QSize(80,80));
 }
 
 void InstrumentForm::dataFromWdCore(QString command, QString value)
