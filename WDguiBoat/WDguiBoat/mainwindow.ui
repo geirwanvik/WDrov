@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>991</width>
-    <height>494</height>
+    <width>739</width>
+    <height>412</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -42,8 +42,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>945</width>
-             <height>415</height>
+             <width>74</width>
+             <height>16</height>
             </rect>
            </property>
           </widget>
@@ -63,8 +63,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>945</width>
-             <height>415</height>
+             <width>59</width>
+             <height>16</height>
             </rect>
            </property>
           </widget>
@@ -97,8 +97,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>945</width>
-             <height>415</height>
+             <width>224</width>
+             <height>169</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -173,7 +173,39 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="pageNotConnected"/>
+      <widget class="QWidget" name="pageNotConnected">
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pushButtonCommunication">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton { background-color: rgb(255, 0, 0);border-radius: 11px; border: 2px solid #555;}</string>
+          </property>
+          <property name="text">
+           <string>Communication</string>
+          </property>
+          <property name="icon">
+           <iconset resource="pictureresources.qrc">
+            <normaloff>:/icon/pictures/Icons/BluetoothNotConnected.png</normaloff>:/icon/pictures/Icons/BluetoothNotConnected.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>200</width>
+            <height>200</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -232,8 +264,8 @@ QToolBar::handle {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>991</width>
-     <height>21</height>
+     <width>739</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuConfigure">

@@ -25,5 +25,6 @@
     </qresource>
     <qresource prefix="/icon">
         <file>pictures/Icons/settingSVG.png</file>
+        <file>pictures/Icons/BluetoothNotConnected.png</file>
     </qresource>
 </RCC>

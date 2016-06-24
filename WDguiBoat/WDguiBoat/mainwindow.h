@@ -74,6 +74,8 @@ private slots:
     void on_actionCommunication_Debug_triggered();
     void on_actionInterior_Light_Color_triggered();
 
+    void on_pushButtonCommunication_clicked();
+
 signals:
 
 

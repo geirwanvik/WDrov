@@ -56,8 +56,8 @@ void gaugeDialog::apperanceSetup()
        mCompassGauge->addBackground(0);
        QcBackgroundItem *bkg1 = mCompassGauge->addBackground(90);
        bkg1->clearrColors();
-       bkg1->addColor(0.1,Qt::darkGray);
-       bkg1->addColor(1.0,Qt::white);
+       bkg1->addColor(0.1,Qt::blue);
+       bkg1->addColor(1.0,Qt::darkBlue);
 
        QcBackgroundItem *bkg2 = mCompassGauge->addBackground(50);
        bkg2->clearrColors();
@@ -121,14 +121,12 @@ void gaugeDialog::gpsData(QString command, QString value)
        ui->progressKnots->setFormat(knots);
        ui->progressKnots->setValue(value.toDouble());
 
-       qDebug() << "Gauge Data:" << command << value;
     }
     else if(command == CommandString[GPS_GROUND_COURSE])
     {
         QString heading = QString("%1 Deg").arg(value.toDouble());
         ui->processGroundCourse->setFormat(heading);
-        ui->processGroundCourse->setValue(value.toDouble());
-        qDebug() << "Gauge Data:" << command << value;
+        ui->processGroundCourse->setValue(value.toDouble());      
     }
     else
     {
@@ -143,14 +141,13 @@ void gaugeDialog::dht22Data(QString command, QString value)
         QString Volts = QString("%1 V").arg(value.toDouble());
         ui->progressVolt->setFormat(Volts);
         ui->progressVolt->setValue(value.toDouble());
-        qDebug() << "Gauge Data:" << command << value;
+
     }
     else if(command == CommandString[CURRENT])
     {
         QString current = QString("%1 A").arg(value.toDouble());
         ui->ProgressCurrent->setFormat(current);
-        ui->ProgressCurrent->setValue(value.toDouble());
-        qDebug() << "Gauge Data:" << command << value;
+        ui->ProgressCurrent->setValue(value.toDouble());     
     }
     else
     {
@@ -164,7 +161,7 @@ void gaugeDialog::imuData(QString command, QString value)
     {
         double heading = value.toDouble() + 180;
         mCompassNeedle->setCurrentValue(heading);
-        qDebug() << "Gauge Data:" << command << value;
+
     }
     else
     {
@@ -174,7 +171,6 @@ void gaugeDialog::imuData(QString command, QString value)
 
 void gaugeDialog::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    qDebug() << "Double tap!!" << event;
     this->hide();
 }
 

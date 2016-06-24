@@ -36,8 +36,10 @@ void MainWindow::on_actionCommunication_Debug_triggered()
     connect(mWdParser, SIGNAL(ImuData(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
     connect(mWdParser, SIGNAL(instrumentData(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
     connect(mWdParser, SIGNAL(LedFeedback(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
+    connect(mWdParser, SIGNAL(buttonPanelFeedback(QString,QString)), mWdlinkDebug, SLOT(wdLinkData(QString,QString)));
     connect(mWdlinkDebug, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(Send(QString)));
     connect(mWdLink, SIGNAL(freshData(QString)), mWdlinkDebug, SLOT(wdlinkRaw(QString)));
+
 
     mWdlinkDebug->setModal(true);
     mWdlinkDebug->show();

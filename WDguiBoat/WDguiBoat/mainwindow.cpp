@@ -61,7 +61,7 @@ bool MainWindow::event(QEvent *event)
     //QTimer::singleShot(15000,this,SLOT(timerTimeOutScreenSaver()));
     if(event->type() == QEvent::MouseMove || QEvent::MouseButtonPress)
     {
-         qDebug() << "Event big time!";
+       //  qDebug() << "Event big time!";
     }
 
     if (event->type() == QEvent::Gesture)
@@ -71,7 +71,7 @@ bool MainWindow::event(QEvent *event)
 
 void MainWindow::timerTimeOutScreenSaver()
 {
-    qDebug() << "Timer overflow!" << mGaugeDialog->isVisible();
+   // qDebug() << "Timer overflow!" << mGaugeDialog->isVisible();
 
     if(mGaugeDialog->isVisible() == false)
     {
@@ -237,6 +237,8 @@ void MainWindow::bluetoothStartConnection()
     ui->statusBar->showMessage("Connecting....");
     ui->statusBar->setStyleSheet("QStatusBar{background:rgba(255, 255, 127)}");
     mInstrumentForm->connectedToWdCore(true);
+    mInstrumentForm->connectedToWdCore(false);
+    ui->toolBar->setEnabled(false);
 
 }
 
@@ -246,6 +248,9 @@ void MainWindow::bluetoothDoneConnection()
     mProgressInd->hide();
     ui->statusBar->showMessage("Bluetooth Connected!");
     ui->statusBar->setStyleSheet("QStatusBar{background:rgba(0, 255, 0, 255)}");
+    mInstrumentForm->connectedToWdCore(true);
+    ui->toolBar->setEnabled(true);
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 void MainWindow::bluetoothFailedConnection()
@@ -255,8 +260,8 @@ void MainWindow::bluetoothFailedConnection()
     ui->statusBar->showMessage("Disconncted!");
     ui->statusBar->setStyleSheet("QStatusBar{background:rgba(255, 0, 0, 255)}");
     mInstrumentForm->connectedToWdCore(false);
-   // ui->toolBar->setEnabled(false);
-   // ui->stackedWidget->setCurrentIndex(4);
+    ui->toolBar->setEnabled(false);
+    ui->stackedWidget->setCurrentIndex(4);
 }
 
 
@@ -302,7 +307,7 @@ void MainWindow::initObjectAndConnection()
 
    mGaugeDialog = new gaugeDialog(this);
    connect(mWdParser, SIGNAL(GpsData(QString,QString)), mGaugeDialog, SLOT(gpsData(QString,QString)));
-   connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mGaugeDialog, SLOT(dht22Data(QString,QString)));
+   connect(mWdParser, SIGNAL(PowerData(QString,QString)), mGaugeDialog, SLOT(dht22Data(QString,QString)));
    connect(mWdParser, SIGNAL(ImuData(QString,QString)), mGaugeDialog, SLOT(imuData(QString,QString)));
 
 
@@ -415,3 +420,8 @@ void MainWindow::ShowSetupSerial()
 
 
 
+
+void MainWindow::on_pushButtonCommunication_clicked()
+{
+    mSocket->showSetupWindow();
+}
