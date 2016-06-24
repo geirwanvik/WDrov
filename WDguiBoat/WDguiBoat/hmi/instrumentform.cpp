@@ -26,14 +26,14 @@ void InstrumentForm::showColorDialog()
 
 void InstrumentForm::connectedToWdCore(bool status)
 {
-    if(status == true)
-    {
-        ui->pushButtonLatern->setEnabled(true);
-    }
-    else
-    {
-        ui->pushButtonLatern->setEnabled(false);
-    }
+    ui->pushButtonLatern->setEnabled(status);
+    ui->pushButtonBilgePump->setEnabled(status);
+    ui->pushButtonHeater->setEnabled(status);
+    ui->pushButtonInstruments->setEnabled(status);
+    ui->pushButtonInteriorLights->setEnabled(status);
+    ui->pushButtonWindowWiper->setEnabled(status);
+    ui->pushButtonFloodlight->setEnabled(status);
+    ui->pushButtonHorn->setEnabled(status);
 }
 
 

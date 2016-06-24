@@ -7,6 +7,7 @@
 #include <QSettings>
 #include <QMessageBox>
 #include <QSwipeGesture>
+#include <QTimer>
 
 #include "Screen/screendata.h"
 #include "Palette/styleone.h"
@@ -60,6 +61,7 @@ private slots:
     void bluetoothFailedConnection();
     void on_actionSensor_View_triggered();
     void on_actionSerial_Port_triggered();
+    void timerTimeOutScreenSaver();
 
 #if  defined(Q_OS_ANDROID)
 
@@ -100,10 +102,6 @@ private:
 
     AllSensorsDialog *mAllSensorOverview;
 
-
-
-
-
     //Screen data, set font and sizes
     void setupApperance();
     ScreenData *mScreen;
@@ -115,6 +113,11 @@ private:
     bool event(QEvent *event);
     bool gestureEvent(QGestureEvent *event);
     void swipeTriggered(QSwipeGesture *swipe);
+
+
+    gaugeDialog *mGaugeDialog;
+
+
 
 #if  defined(Q_OS_ANDROID)
     bluetooththread *mSocket;

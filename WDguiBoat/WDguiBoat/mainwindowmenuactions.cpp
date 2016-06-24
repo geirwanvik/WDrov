@@ -16,6 +16,7 @@ void MainWindow::on_actionSerial_Port_triggered()
 #endif
 }
 
+
 void MainWindow::on_actionAll_Sensor_triggered()
 {
 

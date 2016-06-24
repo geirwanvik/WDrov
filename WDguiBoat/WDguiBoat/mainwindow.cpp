@@ -56,10 +56,32 @@ void MainWindow::setupApperance()
 
 bool MainWindow::event(QEvent *event)
 {
-   // qDebug() << "Event big time!";
+
+
+    //QTimer::singleShot(15000,this,SLOT(timerTimeOutScreenSaver()));
+    if(event->type() == QEvent::MouseMove || QEvent::MouseButtonPress)
+    {
+         qDebug() << "Event big time!";
+    }
+
     if (event->type() == QEvent::Gesture)
            return gestureEvent(static_cast<QGestureEvent*>(event));
        return QWidget::event(event);
+}
+
+void MainWindow::timerTimeOutScreenSaver()
+{
+    qDebug() << "Timer overflow!" << mGaugeDialog->isVisible();
+
+    if(mGaugeDialog->isVisible() == false)
+    {
+        mGaugeDialog->setModal(true);
+        mGaugeDialog->show();
+    }
+    else
+    {
+        return;
+    }
 }
 
 bool MainWindow::gestureEvent(QGestureEvent *event)
@@ -81,10 +103,7 @@ void MainWindow::swipeTriggered(QSwipeGesture *swipe)
            if (swipe->horizontalDirection() == QSwipeGesture::Left
                || swipe->verticalDirection() == QSwipeGesture::Up) {
                qDebug() << "swipeTriggered(): swipe to previous";
-               gaugeDialog *mGaugeDialog = new gaugeDialog(this);
-               connect(mWdParser, SIGNAL(GpsData(QString,QString)), mGaugeDialog, SLOT(gpsData(QString,QString)));
-               connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mGaugeDialog, SLOT(dht22Data(QString,QString)));
-               connect(mWdParser, SIGNAL(ImuData(QString,QString)), mGaugeDialog, SLOT(imuData(QString,QString)));
+               mGaugeDialog->rightPageAnimation();
                mGaugeDialog->setModal(true);
                mGaugeDialog->show();
 
@@ -281,6 +300,12 @@ void MainWindow::initObjectAndConnection()
    this->resize(1300, 800);
 #endif
 
+   mGaugeDialog = new gaugeDialog(this);
+   connect(mWdParser, SIGNAL(GpsData(QString,QString)), mGaugeDialog, SLOT(gpsData(QString,QString)));
+   connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mGaugeDialog, SLOT(dht22Data(QString,QString)));
+   connect(mWdParser, SIGNAL(ImuData(QString,QString)), mGaugeDialog, SLOT(imuData(QString,QString)));
+
+
     connect(mWdParser, SIGNAL(ImuData(QString,QString)), mSensorOverviewForm, SLOT(imuData(QString,QString)));
     connect(mWdParser, SIGNAL(PowerData(QString,QString)), mSensorOverviewForm, SLOT(powerData(QString,QString)));
     connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mSensorOverviewForm, SLOT(dht22Data(QString,QString)));
@@ -386,8 +411,6 @@ void MainWindow::ShowSetupSerial()
 }
 
 #endif
-
-
 
 
 
