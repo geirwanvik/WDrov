@@ -21,15 +21,6 @@
     <ClInclude Include="__vm\.WDboat.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="i2cHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imuHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dht11.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -42,9 +33,6 @@
     <ClInclude Include="VoltCurrent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mpu6050.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RGBdriver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -54,26 +42,11 @@
     <ClInclude Include="CommandList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TinyGPS++.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="master_node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Panel\slave_node.h">
+    <ClInclude Include="button_led.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="imu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="i2cHelper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="imuHelper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="dht11.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -83,19 +56,10 @@
     <ClCompile Include="VoltCurrent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mpu6050.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RGBdriver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TinyGPS++.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="master_node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Panel\slave_node.cpp">
+    <ClCompile Include="button_led.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

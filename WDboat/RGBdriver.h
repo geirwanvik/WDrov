@@ -15,7 +15,8 @@ extern RGB_STATE RGB;
 class RGBdriver
 {
   public:
-    RGBdriver(uint8_t, uint8_t);
+    //RGBdriver(uint8_t, uint8_t);
+	void Init(uint8_t, uint8_t);
     void begin(void);
     void end(void);
     void ClkRise(void);
@@ -27,4 +28,5 @@ class RGBdriver
     uint8_t Clkpin;
     uint8_t Datapin;
 };
+extern RGBdriver Driver;
 #endif

@@ -1,36 +1,29 @@
 #include "Arduino.h"
 #include <EEPROM.h>
-#include "imu.h"
 #include "dht11.h"
 #include "link.h"
-#include "master_node.h"
 #include "pins.h"
 #include "VoltCurrent.h"
 #include "RGBdriver.h"
-#include "TinyGPS++.h"
-
-RGBdriver Driver(LED_CLK, LED_DATA);
-RGB_STATE RGB;
+#include "button_led.h"
+#include "CommandList.h"
 
 void setup()
 {
-	Serial1.begin(115200);
-	WDlink.Init(&Serial);
-	WDmasterNode.Init(&Serial2);
-	IMU.Init();
+	WDlink.Init(&Serial3);
 	DHT.Init(DHT_DATA_PIN);
 	VoltCurrent.Init();
+	Driver.Init(LED_CLK, LED_DATA);
 
-	digitalWrite(BILGE_PP_PIN, LOW);
-	pinMode(BILGE_PP_PIN, OUTPUT);
+	buttonLeds[0].Init(RELAY_BILGE_PP, BUTTON_BILGE_PIN, LED_BILGE_PIN, RELAY_BILGE_PP_PIN);
+	buttonLeds[1].Init(RELAY_LANTERN, BUTTON_LANTERN_PIN, LED_LANTERN_PIN, RELAY_LANTERN_PIN);
+	buttonLeds[2].Init(RELAY_WIPER, BUTTON_WIPER_PIN, LED_WIPER_PIN, RELAY_WIPER_PIN);
+	buttonLeds[3].Init(RELAY_INSTRUMENT, BUTTON_INSTRUMENT_PIN, LED_INSTRUMENT_PIN, RELAY_INSTRUMENT_PIN);
 
-
-	digitalWrite(LANTERN_PIN, LOW);
-	pinMode(LANTERN_PIN, OUTPUT);
-
-
-	digitalWrite(WIPER_PIN, LOW);
-	pinMode(WIPER_PIN, OUTPUT);
+	buttonLeds[4].Init(RELAY_SPARE5, BUTTON_5_PIN, LED_5_PIN, RELAY_5);
+	buttonLeds[5].Init(RELAY_SPARE6, BUTTON_6_PIN, LED_6_PIN, RELAY_6);
+	buttonLeds[6].Init(RELAY_SPARE7, BUTTON_7_PIN, LED_7_PIN, RELAY_7);
+	buttonLeds[7].Init(RELAY_SPARE8, BUTTON_8_PIN, LED_8_PIN, RELAY_8);
 
 	RGB_STATE load;
 	byte *ptr;
@@ -45,18 +38,14 @@ void setup()
 
 uint32_t updateSlowLoop = 0;
 uint32_t updateFastLoop = 0;
-uint32_t delayImuLoop = 0;
 
 void loop()
 {
-	delayImuLoop = millis();
-	IMU.Update();
 	WDlink.Read();
-	WDmasterNode.Read();
 
-	while (Serial1.available())
+	for (byte i = 0; i < 8; i++)
 	{
-		Gps.encode(Serial1.read());
+		buttonLeds[i].ReadButton();
 	}
 
 	//int red = 128 + 127 * cos(2 * PI / RGB.fade * (millis()));
@@ -75,11 +64,5 @@ void loop()
 		updateFastLoop = millis();
 		VoltCurrent.Update();
 		WDlink.Write();
-		WDmasterNode.Write();
-	}
-	
-	if ((millis() - delayImuLoop) < 3)
-	{
-		delay(millis() - delayImuLoop);
 	}
 }

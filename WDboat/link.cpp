@@ -22,7 +22,7 @@ void _WDlink::Init(HardwareSerial *_serial)
 	savePending = false;
 }
 
-enum { SEND_GPS, SEND_IMU, SEND_MISC, SEND_BUTTONS, SEND_LED };
+enum { SEND_GPS, SEND_IMU, SEND_MISC, SEND_RELAY, SEND_LED };
 
 void _WDlink::Write()
 {
@@ -100,31 +100,21 @@ void _WDlink::Write()
 		tx += ",";
 		tx += String(VoltCurrent.Current, 3);
 		break;
-	case SEND_BUTTONS:
-		//tx += CommandString[NODE_ALIVE];
-		//tx += ",";
-		//tx += ValueString[WDmasterNode.NodeAlive()];
-		//tx += ",";
-
-		//tx += CommandString[BUTTON_BILGE_PP];
-		//tx += ",";
-		//tx += ValueString[WDmasterNode.GetPinState(BUTTON_BILGE_PP)];
-		//tx += ",";
-
-		//tx += CommandString[BUTTON_LANTERN];
-		//tx += ",";
-		//tx += ValueString[WDmasterNode.GetPinState(BUTTON_LANTERN)];
-		//tx += ",";
-
-		//tx += CommandString[BUTTON_WIPER];
-		//tx += ",";
-		//tx += ValueString[WDmasterNode.GetPinState(BUTTON_WIPER)];
-		//tx += ",";
-
-		//tx += CommandString[BUTTON_INSTRUMENT];
-		//tx += ",";
-		//tx += ValueString[WDmasterNode.GetPinState(BUTTON_INSTRUMENT)];
+	case SEND_RELAY:
+	{
+		for (byte i = 0; i < 8; i++)
+		{
+			byte name = buttonLeds[i].GetName();
+			tx += CommandString[name];
+			tx += ",";
+			tx += ValueString[buttonLeds[i].GetValue()];
+			if (i < 7)
+			{
+				tx += ",";
+			}
+		}
 		break;
+	}
 	case SEND_LED:
 		tx += CommandString[LED_RED];
 		tx += ",";
@@ -250,21 +240,18 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 	case RELAY_LANTERN:
 	case RELAY_WIPER:
 	case RELAY_INSTRUMENT:
-	{
-		byte value;
+	case RELAY_5:
+	case RELAY_6:
+	case RELAY_7:
+	case RELAY_8:
 		if (val == ValueString[ON])
 		{
-			value = 1;
+			buttonLeds[RELAY_BILGE_PP - i].SetOutputs(i, ON);
 		}
 		else
 		{
-			value = 0;
+			buttonLeds[RELAY_BILGE_PP - i].SetOutputs(i, OFF);
 		}
-		for (byte j = 0; j < 8; j++)
-		{
-			buttonLeds[j].SetOutputs(i, value);
-		}
-	}
 		break;
 	case LED_RED:
 		RGB.r = val.toInt();

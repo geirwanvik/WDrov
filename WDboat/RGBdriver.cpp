@@ -14,7 +14,9 @@
 //  Modified Record:
 /***************************************************************************/  
 #include "RGBdriver.h"
-RGBdriver::RGBdriver(uint8_t Clk, uint8_t Data)
+RGBdriver Driver;
+RGB_STATE RGB;
+void RGBdriver::Init(uint8_t Clk, uint8_t Data)
 {
   Clkpin = Clk;
   Datapin = Data;

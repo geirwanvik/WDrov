@@ -21,8 +21,6 @@ _String CommandString[] =
 	"IMU_ROLL",
 	"IMU_PITCH",
 	"IMU_HEADING",
-	"ACC_ZERO",
-	"MAG_CALIBRATE",
 
 	"DHT22_TEMP",
 	"DHT22_HUM",
@@ -31,11 +29,10 @@ _String CommandString[] =
 	"RELAY_LANTERN",
 	"RELAY_WIPER",
 	"RELAY_INSTRUMENT",
-
-	"BUTTON_BILGE_PP",
-	"BUTTON_LANTERN",
-	"BUTTON_WIPER",
-	"BUTTON_INSTRUMENT",
+	"RELAY_SPARE5",
+	"RELAY_SPARE6",
+	"RELAY_SPARE7",
+	"RELAY_SPARE8",
 
     "VOLTAGE",
     "CURRENT",
@@ -43,7 +40,6 @@ _String CommandString[] =
     "LED_RED",
     "LED_GREEN",
     "LED_BLUE",
-	"NODE_ALIVE"
 };
 
 enum CommandEnum
@@ -59,8 +55,6 @@ enum CommandEnum
     IMU_ROLL,
     IMU_PITCH,
     IMU_HEADING,
-    ACC_ZERO,
-    MAG_CALIBRATE,
 
     DHT22_TEMP,
     DHT22_HUM,
@@ -69,11 +63,10 @@ enum CommandEnum
     RELAY_LANTERN,
     RELAY_WIPER,
 	RELAY_INSTRUMENT,
-
-	BUTTON_BILGE_PP,
-	BUTTON_LANTERN,
-	BUTTON_WIPER,
-	BUTTON_INSTRUMENT,
+	RELAY_SPARE5,
+	RELAY_SPARE6,
+	RELAY_SPARE7,
+	RELAY_SPARE8,
 
     VOLTAGE,
     CURRENT,
@@ -81,7 +74,6 @@ enum CommandEnum
     LED_RED,
     LED_GREEN,
     LED_BLUE,
-	NODE_ALIVE,
 
 	UNUSED = 0xff
 };

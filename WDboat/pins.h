@@ -2,12 +2,29 @@
 
 enum Arduino_Pins
 {
+	BUTTON_BILGE_PIN = A0,
+	BUTTON_LANTERN_PIN = A1,
+	BUTTON_WIPER_PIN = A2,
+	BUTTON_INSTRUMENT_PIN = A3,
+	BUTTON_5_PIN = A4,
+	BUTTON_6_PIN = A5,
+	BUTTON_7_PIN = A6,
+	BUTTON_8_PIN = A7,
+	LED_BILGE_PIN = 12, // Out 1
+	LED_LANTERN_PIN = 11, // Out 2
+	LED_WIPER_PIN = 8, // Out 3
+	LED_INSTRUMENT_PIN = 7, // Out 4
+	LED_5_PIN = 6, // Out 5
+	LED_6_PIN = 3, // Out 6
+	LED_7_PIN = 2, // Out 7
+	LED_8_PIN = 5, // Out 8
+
 	DHT_DATA_PIN		= 41,
 
-	BILGE_PP_PIN		= 42, // Relay 1
-	LANTERN_PIN			= 44, // Relay 2
-	WIPER_PIN			= 46, // Relay 3
-	INSTRUMENT_PIN		= 48, // Relay 4
+	RELAY_BILGE_PP_PIN		= 42, // Relay 1
+	RELAY_LANTERN_PIN = 44, // Relay 2
+	RELAY_WIPER_PIN = 46, // Relay 3
+	RELAY_INSTRUMENT_PIN = 48, // Relay 4
 	RELAY_5				= 43,
 	RELAY_6				= 45,
 	RELAY_7				= 47,
