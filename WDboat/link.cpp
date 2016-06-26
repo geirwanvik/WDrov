@@ -6,6 +6,7 @@
 #include "EEPROM.h"
 #include "VoltCurrent.h"
 #include "button_led.h"
+#include "MavlinkParser.h"
 _WDlink WDlink;
 
 void _WDlink::Init(HardwareSerial *_serial)
@@ -31,54 +32,66 @@ void _WDlink::Write()
 	switch (select)
 	{
 	case SEND_GPS:
-		//tx += CommandString[GPS_LAT];
-		//tx += ",";
-		//tx += String(Gps.location.lat(), 6);
-		//tx += ",";
+		tx += CommandString[GPS_LAT];
+		tx += ",";
+		tx += String(MavlinkData.lat, 6);
+		tx += ",";
 
-		//tx += CommandString[GPS_LON];
-		//tx += ",";
-		//tx += String(Gps.location.lng(), 6);
-		//tx += ",";
+		tx += CommandString[GPS_LON];
+		tx += ",";
+		tx += String(MavlinkData.lon, 6);
+		tx += ",";
 
-		//tx += CommandString[GPS_GROUND_SPEED_KNOTS];
-		//tx += ",";
-		//tx += String(Gps.speed.knots(), 2);
-		//tx += ",";
+		tx += CommandString[GPS_GROUND_SPEED_KNOTS];
+		tx += ",";
+		tx += String(MavlinkData.groundspeed * 1.9438444924574, 2);
+		tx += ",";
 
-		//tx += CommandString[GPS_GROUND_SPEED_KMH];
-		//tx += ",";
-		//tx += String(Gps.speed.kmph(), 2);
-		//tx += ",";
+		tx += CommandString[GPS_GROUND_SPEED_KMH];
+		tx += ",";
+		tx += String(MavlinkData.groundspeed * 3.6, 2);
+		tx += ",";
 
-		//tx += CommandString[GPS_GROUND_COURSE];
-		//tx += ",";
-		//tx += String(Gps.course.deg(), 2);
-		//tx += ",";
+		tx += CommandString[GPS_GROUND_COURSE];
+		tx += ",";
+		tx += String(MavlinkData.gps_heading, 2);
+		tx += ",";
 
-		//tx += CommandString[GPS_NUM_SATS];
-		//tx += ",";
-		//tx += String(Gps.satellites.value());
-		//tx += ",";
+		tx += CommandString[GPS_X_SPEED];
+		tx += ",";
+		tx += String(MavlinkData.groundXspeed, 2);
+		tx += ",";
 
-		//tx += CommandString[GPS_HDOP];
-		//tx += ",";
-		//tx += String(Gps.hdop.value());
+		tx += CommandString[GPS_Y_SPEED];
+		tx += ",";
+		tx += String(MavlinkData.groundYspeed, 2);
+		tx += ",";
+
+		tx += CommandString[GPS_NUM_SATS];
+		tx += ",";
+		tx += "NEI";
+    
 		break;
 	case SEND_IMU:
-		//tx += CommandString[IMU_ROLL];
-		//tx += ",";
-		//tx += String(IMU.Roll, 1);
-		//tx += ",";
+		tx += CommandString[IMU_ROLL];
+		tx += ",";
+		tx += String(MavlinkData.roll, 1);
+		tx += ",";
 
-		//tx += CommandString[IMU_PITCH];
-		//tx += ",";
-		//tx += String(IMU.Pitch, 1);
-		//tx += ",";
+		tx += CommandString[IMU_PITCH];
+		tx += ",";
+		tx += String(MavlinkData.pitch, 1);
+		tx += ",";
 
-		//tx += CommandString[IMU_HEADING];
-		//tx += ",";
-		//tx += String(IMU.Heading, 1);
+		tx += CommandString[IMU_HEADING];
+		tx += ",";
+		tx += String(MavlinkData.compassHeading, 0);
+    tx += ",";
+
+		tx += CommandString[IMU_RATE_OF_TURN];
+		tx += ",";
+		tx += String(MavlinkData.yawSpeed, 2);
+    
 		break;
 	case SEND_MISC:
 		tx += CommandString[DHT22_TEMP];
@@ -99,6 +112,7 @@ void _WDlink::Write()
 		tx += CommandString[CURRENT];
 		tx += ",";
 		tx += String(VoltCurrent.Current, 3);
+   
 		break;
 	case SEND_RELAY:
 	{

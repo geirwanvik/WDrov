@@ -7,10 +7,12 @@
 #include "RGBdriver.h"
 #include "button_led.h"
 #include "CommandList.h"
+#include "MavlinkParser.h"
 
 void setup()
 {
-	WDlink.Init(&Serial3);
+	WDlink.Init(&Serial);
+	MavlinkParser.Init(&Serial2);
 	DHT.Init(DHT_DATA_PIN);
 	VoltCurrent.Init();
 	Driver.Init(LED_CLK, LED_DATA);
@@ -42,6 +44,7 @@ uint32_t updateFastLoop = 0;
 void loop()
 {
 	WDlink.Read();
+	MavlinkParser.Read();
 
 	for (byte i = 0; i < 8; i++)
 	{

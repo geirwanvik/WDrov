@@ -17,10 +17,13 @@ _String CommandString[] =
 	"GPS_GROUND_COURSE",
 	"GPS_NUM_SATS",
 	"GPS_HDOP",
+	"GPS_X_SPEED", //Ground X Speed (Latitude, positive north) m/s
+	"GPS_Y_SPEED", //Ground Y Speed (Longitude, positive east) m/s
 
 	"IMU_ROLL",
 	"IMU_PITCH",
 	"IMU_HEADING",
+	"IMU_RATE_OF_TURN", // DEG/SEC
 
 	"DHT22_TEMP",
 	"DHT22_HUM",
@@ -34,12 +37,12 @@ _String CommandString[] =
 	"RELAY_SPARE7",
 	"RELAY_SPARE8",
 
-    "VOLTAGE",
-    "CURRENT",
+  "VOLTAGE",
+  "CURRENT",
 
-    "LED_RED",
-    "LED_GREEN",
-    "LED_BLUE",
+  "LED_RED",
+  "LED_GREEN",
+  "LED_BLUE"
 };
 
 enum CommandEnum
@@ -51,10 +54,13 @@ enum CommandEnum
     GPS_GROUND_COURSE,
     GPS_NUM_SATS,
 	GPS_HDOP,
+	GPS_X_SPEED,
+	GPS_Y_SPEED,
 
     IMU_ROLL,
     IMU_PITCH,
     IMU_HEADING,
+	IMU_RATE_OF_TURN,
 
     DHT22_TEMP,
     DHT22_HUM,
