@@ -1,15 +1,11 @@
 #include "link.h"
 #include "CommandList.h"
-#include "imu.h"
 #include "dht11.h"
 #include "pins.h"
 #include "RGBdriver.h"
 #include "EEPROM.h"
-#include "mpu6050.h"
 #include "VoltCurrent.h"
-#include "TinyGPS++.h"
-#include "master_node.h"
-
+#include "button_led.h"
 _WDlink WDlink;
 
 void _WDlink::Init(HardwareSerial *_serial)
@@ -35,54 +31,54 @@ void _WDlink::Write()
 	switch (select)
 	{
 	case SEND_GPS:
-		tx += CommandString[GPS_LAT];
-		tx += ",";
-		tx += String(Gps.location.lat(), 6);
-		tx += ",";
+		//tx += CommandString[GPS_LAT];
+		//tx += ",";
+		//tx += String(Gps.location.lat(), 6);
+		//tx += ",";
 
-		tx += CommandString[GPS_LON];
-		tx += ",";
-		tx += String(Gps.location.lng(), 6);
-		tx += ",";
+		//tx += CommandString[GPS_LON];
+		//tx += ",";
+		//tx += String(Gps.location.lng(), 6);
+		//tx += ",";
 
-		tx += CommandString[GPS_GROUND_SPEED_KNOTS];
-		tx += ",";
-		tx += String(Gps.speed.knots(), 2);
-		tx += ",";
+		//tx += CommandString[GPS_GROUND_SPEED_KNOTS];
+		//tx += ",";
+		//tx += String(Gps.speed.knots(), 2);
+		//tx += ",";
 
-		tx += CommandString[GPS_GROUND_SPEED_KMH];
-		tx += ",";
-		tx += String(Gps.speed.kmph(), 2);
-		tx += ",";
+		//tx += CommandString[GPS_GROUND_SPEED_KMH];
+		//tx += ",";
+		//tx += String(Gps.speed.kmph(), 2);
+		//tx += ",";
 
-		tx += CommandString[GPS_GROUND_COURSE];
-		tx += ",";
-		tx += String(Gps.course.deg(), 2);
-		tx += ",";
+		//tx += CommandString[GPS_GROUND_COURSE];
+		//tx += ",";
+		//tx += String(Gps.course.deg(), 2);
+		//tx += ",";
 
-		tx += CommandString[GPS_NUM_SATS];
-		tx += ",";
-		tx += String(Gps.satellites.value());
-		tx += ",";
+		//tx += CommandString[GPS_NUM_SATS];
+		//tx += ",";
+		//tx += String(Gps.satellites.value());
+		//tx += ",";
 
-		tx += CommandString[GPS_HDOP];
-		tx += ",";
-		tx += String(Gps.hdop.value());
+		//tx += CommandString[GPS_HDOP];
+		//tx += ",";
+		//tx += String(Gps.hdop.value());
 		break;
 	case SEND_IMU:
-		tx += CommandString[IMU_ROLL];
-		tx += ",";
-		tx += String(IMU.Roll, 1);
-		tx += ",";
+		//tx += CommandString[IMU_ROLL];
+		//tx += ",";
+		//tx += String(IMU.Roll, 1);
+		//tx += ",";
 
-		tx += CommandString[IMU_PITCH];
-		tx += ",";
-		tx += String(IMU.Pitch, 1);
-		tx += ",";
+		//tx += CommandString[IMU_PITCH];
+		//tx += ",";
+		//tx += String(IMU.Pitch, 1);
+		//tx += ",";
 
-		tx += CommandString[IMU_HEADING];
-		tx += ",";
-		tx += String(IMU.Heading, 1);
+		//tx += CommandString[IMU_HEADING];
+		//tx += ",";
+		//tx += String(IMU.Heading, 1);
 		break;
 	case SEND_MISC:
 		tx += CommandString[DHT22_TEMP];
@@ -105,29 +101,29 @@ void _WDlink::Write()
 		tx += String(VoltCurrent.Current, 3);
 		break;
 	case SEND_BUTTONS:
-		tx += CommandString[NODE_ALIVE];
-		tx += ",";
-		tx += ValueString[WDmasterNode.NodeAlive()];
-		tx += ",";
+		//tx += CommandString[NODE_ALIVE];
+		//tx += ",";
+		//tx += ValueString[WDmasterNode.NodeAlive()];
+		//tx += ",";
 
-		tx += CommandString[BUTTON_BILGE_PP];
-		tx += ",";
-		tx += ValueString[WDmasterNode.GetPinState(BUTTON_BILGE_PP)];
-		tx += ",";
+		//tx += CommandString[BUTTON_BILGE_PP];
+		//tx += ",";
+		//tx += ValueString[WDmasterNode.GetPinState(BUTTON_BILGE_PP)];
+		//tx += ",";
 
-		tx += CommandString[BUTTON_LANTERN];
-		tx += ",";
-		tx += ValueString[WDmasterNode.GetPinState(BUTTON_LANTERN)];
-		tx += ",";
+		//tx += CommandString[BUTTON_LANTERN];
+		//tx += ",";
+		//tx += ValueString[WDmasterNode.GetPinState(BUTTON_LANTERN)];
+		//tx += ",";
 
-		tx += CommandString[BUTTON_WIPER];
-		tx += ",";
-		tx += ValueString[WDmasterNode.GetPinState(BUTTON_WIPER)];
-		tx += ",";
+		//tx += CommandString[BUTTON_WIPER];
+		//tx += ",";
+		//tx += ValueString[WDmasterNode.GetPinState(BUTTON_WIPER)];
+		//tx += ",";
 
-		tx += CommandString[BUTTON_INSTRUMENT];
-		tx += ",";
-		tx += ValueString[WDmasterNode.GetPinState(BUTTON_INSTRUMENT)];
+		//tx += CommandString[BUTTON_INSTRUMENT];
+		//tx += ",";
+		//tx += ValueString[WDmasterNode.GetPinState(BUTTON_INSTRUMENT)];
 		break;
 	case SEND_LED:
 		tx += CommandString[LED_RED];
@@ -250,70 +246,25 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 
 	switch (i)
 	{
-	case ACC_ZERO:
-		MPU.calibrateAcc();
-		break;
-	case MAG_CALIBRATE:
-		if (val == ValueString[ON])
-		{
-			MPU.beginCalibration();
-		}
-		else
-		{
-			MPU.endCalibration();
-		}
-		break;
 	case RELAY_BILGE_PP:
-		if (val == ValueString[ON])
-		{
-			digitalWrite(BILGE_PP_PIN, HIGH);
-			WDmasterNode.UpdatePin(BUTTON_BILGE_PP, 1);
-		}
-		else
-		{
-			digitalWrite(BILGE_PP_PIN, LOW);
-			WDmasterNode.UpdatePin(BUTTON_BILGE_PP, 0);
-		}
-		
-		break;
 	case RELAY_LANTERN:
-		if (val == ValueString[ON])
-		{
-			digitalWrite(LANTERN_PIN, HIGH);
-			WDmasterNode.UpdatePin(BUTTON_LANTERN, 1);
-		}
-		else
-		{
-			digitalWrite(LANTERN_PIN, LOW);
-			WDmasterNode.UpdatePin(BUTTON_LANTERN, 0);
-		}
-		
-		break;
 	case RELAY_WIPER:
-		if (val == ValueString[ON])
-		{
-			digitalWrite(WIPER_PIN, HIGH);
-			WDmasterNode.UpdatePin(BUTTON_WIPER, 1);
-		}
-		else
-		{
-			digitalWrite(WIPER_PIN, LOW);
-			WDmasterNode.UpdatePin(BUTTON_WIPER, 0);
-		}
-		
-		break;
 	case RELAY_INSTRUMENT:
+	{
+		byte value;
 		if (val == ValueString[ON])
 		{
-			digitalWrite(INSTRUMENT_PIN, HIGH);
-			WDmasterNode.UpdatePin(BUTTON_INSTRUMENT, 1);
+			value = 1;
 		}
 		else
 		{
-			digitalWrite(INSTRUMENT_PIN, LOW);
-			WDmasterNode.UpdatePin(BUTTON_INSTRUMENT, 0);
+			value = 0;
 		}
-
+		for (byte j = 0; j < 8; j++)
+		{
+			buttonLeds[j].SetOutputs(i, value);
+		}
+	}
 		break;
 	case LED_RED:
 		RGB.r = val.toInt();
