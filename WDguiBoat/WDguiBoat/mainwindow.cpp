@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
    this->setAttribute(Qt::WA_AcceptTouchEvents);
    this->grabGesture(Qt::SwipeGesture);
    this->setAttribute(Qt::WA_TouchPadAcceptSingleTouchEvents);
-
+   qApp->setAttribute(Qt::AA_SynthesizeMouseForUnhandledTouchEvents);
    ui->actionAll_Sensor->setVisible(false);
 
 
@@ -264,13 +264,11 @@ void MainWindow::bluetoothFailedConnection()
     ui->stackedWidget->setCurrentIndex(4);
 }
 
-
-
-
 void MainWindow::initObjectAndConnection()
 {
     mInstrumentForm = new InstrumentForm(this);
     ui->scrollAreaIntrumentForm->setWidget(mInstrumentForm);
+   // QScroller::grabGesture(ui->scrollArea->viewport(), QScroller::LeftMouseButtonGesture);
 
     mSensorOverviewForm = new SensorOverviewForm(this);
     ui->scrollAreaSensorOverview->setWidget(mSensorOverviewForm);

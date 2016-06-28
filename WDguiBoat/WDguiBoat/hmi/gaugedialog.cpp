@@ -54,10 +54,10 @@ void gaugeDialog::apperanceSetup()
     mCompassGauge = new QcGaugeWidget(this);
 
        mCompassGauge->addBackground(0);
-       QcBackgroundItem *bkg1 = mCompassGauge->addBackground(90);
+       QcBackgroundItem *bkg1 = mCompassGauge->addBackground(120);
        bkg1->clearrColors();
-       bkg1->addColor(0.1,Qt::blue);
-       bkg1->addColor(1.0,Qt::darkBlue);
+       bkg1->addColor(0.1,QColor(0, 170, 255, 250));
+       bkg1->addColor(1.0, QColor(0, 170, 255, 240));
 
        QcBackgroundItem *bkg2 = mCompassGauge->addBackground(50);
        bkg2->clearrColors();

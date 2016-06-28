@@ -64,13 +64,6 @@ void wdParser::findCommand(QString command, QString value)
     case RELAY_WIPER:
     emit instrumentData(command, value);
         break;
-    case BUTTON_BILGE_PP:
-    case BUTTON_INSTRUMENT:
-    case BUTTON_LANTERN:
-    case BUTTON_WIPER:
-    case NODE_ALIVE:
-    emit buttonPanelFeedback(command,value);
-        break;
     case VOLTAGE:
     case CURRENT:
     emit PowerData(command, value);

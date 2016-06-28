@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QSwipeGesture>
 #include <QTimer>
+#include <QScroller>
 
 #include "Screen/screendata.h"
 #include "Palette/styleone.h"
