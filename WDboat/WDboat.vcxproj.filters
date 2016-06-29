@@ -633,6 +633,18 @@
     <ClInclude Include="MavlinkParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WDboat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="master_node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="slave_node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="relay_output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dht11.cpp">
@@ -651,6 +663,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MavlinkParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WDboat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="master_node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="slave_node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="relay_output.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

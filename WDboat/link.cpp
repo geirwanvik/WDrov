@@ -7,6 +7,7 @@
 #include "VoltCurrent.h"
 #include "button_led.h"
 #include "MavlinkParser.h"
+#include "master_node.h"
 _WDlink WDlink;
 
 void _WDlink::Init(HardwareSerial *_serial)
@@ -86,7 +87,7 @@ void _WDlink::Write()
 		tx += CommandString[IMU_HEADING];
 		tx += ",";
 		tx += String(MavlinkData.compassHeading, 0);
-    tx += ",";
+		tx += ",";
 
 		tx += CommandString[IMU_RATE_OF_TURN];
 		tx += ",";
@@ -112,6 +113,11 @@ void _WDlink::Write()
 		tx += CommandString[CURRENT];
 		tx += ",";
 		tx += String(VoltCurrent.Current, 3);
+		tx += ",";
+
+		tx += CommandString[NODE_ALIVE];
+		tx += ",";
+		tx += ValueString[WDmasterNode.NodeAlive()];
    
 		break;
 	case SEND_RELAY:

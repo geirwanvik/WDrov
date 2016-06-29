@@ -2,17 +2,14 @@
 
 ButtonLed buttonLeds[8];
 
-void ButtonLed::Init(byte _name, byte _buttonPin, byte _ledPin, byte _relayPin)
+void ButtonLed::Init(byte _name, byte _buttonPin, byte _ledPin)
 {
 	name = _name;
 	ledPin = _ledPin;
 	buttonPin = _buttonPin;
-	relayPin = _relayPin;
 	digitalWrite(ledPin, LOW);
 	pinMode(ledPin, OUTPUT);
 	pinMode(buttonPin, INPUT_PULLUP);
-	digitalWrite(relayPin, LOW);
-	pinMode(relayPin, OUTPUT);
 	debounceDelay = 100;
 	debounceTime = 0;
 	lastValue = 0;
@@ -37,7 +34,6 @@ void ButtonLed::ReadButton()
 			if (buttonState == LOW)
 			{
 				value = !value;
-				digitalWrite(relayPin, value);
 				if (value)
 				{
 					analogWrite(ledPin, 255);
@@ -57,7 +53,6 @@ void ButtonLed::SetOutputs(byte _name, byte _value)
 	if (name == _name)
 	{
 		value = lastValue = _value;
-		digitalWrite(relayPin, value);
 		if (value)
 		{
 			analogWrite(ledPin, 255);

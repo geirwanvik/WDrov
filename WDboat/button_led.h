@@ -3,7 +3,7 @@
 class ButtonLed
 {
 public:
-	void Init(byte _name, byte _buttonPin, byte _ledPin, byte _relayPin);
+	void Init(byte _name, byte _buttonPin, byte _ledPin);
 	void ReadButton();
 	void SetOutputs(byte _name, byte _value);
 	byte GetValue();
@@ -15,7 +15,6 @@ private:
 	byte name;
 	byte buttonPin;
 	byte ledPin;
-	byte relayPin;
 	byte value;
 	byte lastValue;
 	byte blink;

@@ -5,15 +5,15 @@
 class _WDlink
 {
 public:
-	void Init(HardwareSerial *_serial);
+	virtual void Init(HardwareSerial *_serial);
 	void Read();
-	void Write();
+	virtual void Write();
 
-private:
+protected:
 	void NewMessage(const String &s);
 	byte CalculateCRC(const char *buffer);
 	byte CheckCRC(const char *buffer);
-	void ProcessCommand(const String &cmd, const String &val);
+	virtual void ProcessCommand(const String &cmd, const String &val);
 
 	String rx;
 	String cmd;
