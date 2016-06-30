@@ -17,6 +17,7 @@ void ButtonLed::Init(byte _name, byte _buttonPin, byte _ledPin)
 	blink = 0;
 	lastInput = 0;
 	buttonState = 0;
+	blinkSet = false;
 }
 
 void ButtonLed::ReadButton()
@@ -46,6 +47,18 @@ void ButtonLed::ReadButton()
 		}
 	}
 	lastInput = input;
+	if (blinkSet)
+	{
+		blinkSet = false;
+		if (value)
+		{
+			analogWrite(ledPin, 255);
+		}
+		else
+		{
+			analogWrite(ledPin, 0);
+		}
+	}
 }
 
 void ButtonLed::SetOutputs(byte _name, byte _value)
@@ -82,6 +95,7 @@ byte ButtonLed::ButtonChanged()
 
 void ButtonLed::Blink()
 {
+	blinkSet = true;
 	if ((millis() - blinkTime) > 500)
 	{
 		if (blink)

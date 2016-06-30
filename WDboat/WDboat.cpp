@@ -26,9 +26,9 @@ void setup()
 {
 	if (isBridge())
 	{
-		WDlink.Init(&Serial);
-		MavlinkParser.Init(&Serial1);
-		WDmasterNode.Init(&Serial2);
+		WDlink.Init(&Serial);			// UART 0
+		MavlinkParser.Init(&Serial1);	// UART 1
+		WDmasterNode.Init(&Serial2);	// UART 2
 
 		buttonLeds[0].Init(RELAY_BILGE_PP, BUTTON_BILGE_PIN, LED_BILGE_PIN);
 		buttonLeds[1].Init(RELAY_LANTERN, BUTTON_LANTERN_PIN, LED_LANTERN_PIN);
@@ -52,7 +52,7 @@ void setup()
 		RelayOutput[6].Init(RELAY_SPARE7, RELAY_7);
 		RelayOutput[7].Init(RELAY_SPARE8, RELAY_8);
 
-		WDslaveNode.Init(&Serial2);
+		WDslaveNode.Init(&Serial1);
 		DHT.Init(DHT_DATA_PIN);
 		VoltCurrent.Init();
 		Driver.Init(LED_CLK, LED_DATA);
@@ -74,27 +74,42 @@ uint32_t updateFastLoop = 0;
 
 inline void BridgeLoop()
 {
+	byte sendButtonsNow = false;
 	WDlink.Read();
 	MavlinkParser.Read();
 	WDmasterNode.Read();
 	for (byte i = 0; i < 8; i++)
 	{
-		buttonLeds[i].ReadButton();
+		if (WDmasterNode.NodeAlive())
+		{
+			buttonLeds[i].ReadButton();
+			if (buttonLeds[i].ButtonChanged())
+				sendButtonsNow = true;
+		}
+		else
+		{
+			buttonLeds[i].Blink();
+		}
+
 	}
 	if ((millis() - updateFastLoop) >= 100)
 	{
 		updateFastLoop = millis();
 		WDlink.Write();
+	}
+	if (sendButtonsNow || ((millis() - updateSlowLoop) >= 1000))
+	{
 		WDmasterNode.Write();
+		updateSlowLoop = millis();
 	}
 }
 
 inline void AftLoop()
 {
 	WDslaveNode.Read();
-	Driver.begin(); // begin
-	Driver.SetColor(RGB.r, RGB.g, RGB.b); //Red. first node data
-	Driver.end();
+//	Driver.begin(); // begin
+//	Driver.SetColor(RGB.r, RGB.g, RGB.b); //Red. first node data
+//	Driver.end();
 	if ((millis() - updateSlowLoop) >= 1000)
 	{
 		updateSlowLoop = millis();

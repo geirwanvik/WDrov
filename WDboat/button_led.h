@@ -23,6 +23,7 @@ private:
 	unsigned long blinkTime;
 	byte lastInput;
 	byte buttonState;
+	byte blinkSet;
 };
 
 extern ButtonLed buttonLeds[8];
