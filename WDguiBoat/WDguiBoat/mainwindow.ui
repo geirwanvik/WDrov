@@ -22,7 +22,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="pageInstruments">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -42,8 +42,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>74</width>
-             <height>16</height>
+             <width>693</width>
+             <height>333</height>
             </rect>
            </property>
           </widget>
@@ -63,8 +63,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>59</width>
-             <height>16</height>
+             <width>693</width>
+             <height>333</height>
             </rect>
            </property>
           </widget>
@@ -72,7 +72,33 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="pageBoat"/>
+      <widget class="QWidget" name="pageGaugePanel">
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="0" column="0">
+         <widget class="QScrollArea" name="scrollAreaGaugePanel">
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_4">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>693</width>
+             <height>333</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="pageCommunicationSetup">
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
@@ -97,8 +123,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>224</width>
-             <height>169</height>
+             <width>693</width>
+             <height>333</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -265,7 +291,7 @@ QToolBar::handle {
      <x>0</x>
      <y>0</y>
      <width>739</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuConfigure">

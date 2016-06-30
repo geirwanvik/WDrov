@@ -1,7 +1,7 @@
 #include "styleone.h"
 
 styleOne::styleOne():
-    QProxyStyle(QStyleFactory::create("windows"))
+    QProxyStyle(QStyleFactory::create("fusion"))
 {
 }
 
@@ -16,12 +16,11 @@ void styleOne::polish(QPalette &palette)
 
 
     RGB = QColor(0,0,255,100);
-    QColor blue(0, 0, 255);
-  //  QColor beige(225, 225, 225); //Not beige
+    QColor blue(0, 255, 255);
     QColor slightlyOpaqueBlack(0, 0, 0, 67);
 
-    QPixmap backgroundImage(":/background/pictures/lighterBackground.jpg");
-    QPixmap buttonImage(":/palette/Resources/Palette/black brick.jpg");
+    QPixmap backgroundImage("");
+    QPixmap buttonImage("");
 
     QPixmap midImage = buttonImage;
 
@@ -32,18 +31,19 @@ void styleOne::polish(QPalette &palette)
     painter.end();
 
     palette = QPalette(blue);
-    palette.setBrush(QPalette::Button, RGB);
-    palette.setBrush(QPalette::ButtonText, Qt::white);
-    palette.setBrush(QPalette::BrightText, Qt::white);
+    palette.setBrush(QPalette::Button, Qt::green);
+    palette.setBrush(QPalette::ButtonText, Qt::green);
+    palette.setBrush(QPalette::BrightText, Qt::green);
     palette.setBrush(QPalette::HighlightedText, Qt::white);
     palette.setBrush(QPalette::Base, blue);
     palette.setBrush(QPalette::Highlight, Qt::darkBlue);
-    setTexture(palette, QPalette::Button, buttonImage);
+    setTexture(palette, QPalette::Button, buttonImage
+               );
     setTexture(palette, QPalette::Mid, midImage);
     setTexture(palette, QPalette::Window, backgroundImage);
 
     QBrush brush = palette.background();
-    brush.setColor(brush.color().dark());
+    brush.setColor(brush.color().lighter());
 
     palette.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
     palette.setBrush(QPalette::Disabled, QPalette::Text, brush);
@@ -240,7 +240,7 @@ void styleOne::setTexture(QPalette &palette, QPalette::ColorRole role, const QPi
 
 QPainterPath styleOne::roundRectPath(const QRect &rect)
 {
-    int radius = qMin(rect.width(), rect.height()) / 3; // Setter radius på knappene
+    int radius = qMin(rect.width(), rect.height()) / 2; // Setter radius på knappene
     int diam = 2 * radius;
 
     int x1, y1, x2, y2;

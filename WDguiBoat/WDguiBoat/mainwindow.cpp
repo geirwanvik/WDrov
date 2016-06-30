@@ -31,6 +31,8 @@ MainWindow::MainWindow(QWidget *parent) :
    qApp->setAttribute(Qt::AA_SynthesizeMouseForUnhandledTouchEvents);
    ui->actionAll_Sensor->setVisible(false);
 
+   ui->toolBar->setVisible(false);
+
 
 }
 
@@ -49,7 +51,7 @@ void MainWindow::setupApperance()
     //trying to sett correct font for screen specs
     fontNormalSize.setFamily(fontNormalSize.defaultFamily());
     fontNormalSize.setBold(true);
-    fontNormalSize.setPointSize(12 + mScreen->ratioFont());
+    fontNormalSize.setPointSize(16 + mScreen->ratioFont());
     QApplication::setFont(fontNormalSize);
 
 }
@@ -103,15 +105,10 @@ void MainWindow::swipeTriggered(QSwipeGesture *swipe)
            if (swipe->horizontalDirection() == QSwipeGesture::Left
                || swipe->verticalDirection() == QSwipeGesture::Up) {
                qDebug() << "swipeTriggered(): swipe to previous";
-               mGaugeDialog->rightPageAnimation();
-               mGaugeDialog->setModal(true);
-               mGaugeDialog->show();
-
+              ui->stackedWidget->setCurrentIndex(2);
            } else {
                qDebug() << "swipeTriggered(): swipe to next";
-                AndroidSensorDialog *mAndroidSensors = new AndroidSensorDialog(this);
-                mAndroidSensors->setModal(true);
-                mAndroidSensors->show();
+              ui->stackedWidget->setCurrentIndex(0);
            }
            update();
        }
@@ -304,6 +301,7 @@ void MainWindow::initObjectAndConnection()
 #endif
 
    mGaugeDialog = new gaugeDialog(this);
+   ui->scrollAreaGaugePanel->setWidget(mGaugeDialog);
    connect(mWdParser, SIGNAL(GpsData(QString,QString)), mGaugeDialog, SLOT(gpsData(QString,QString)));
    connect(mWdParser, SIGNAL(PowerData(QString,QString)), mGaugeDialog, SLOT(dht22Data(QString,QString)));
    connect(mWdParser, SIGNAL(ImuData(QString,QString)), mGaugeDialog, SLOT(imuData(QString,QString)));

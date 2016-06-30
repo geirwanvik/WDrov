@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QTimer>
 #include <QDebug>
+#include "Palette/styleone.h"
 
 #include "hmi/ConfigClasses/colordialog.h"
 
