@@ -2,8 +2,6 @@
 #include "CommandList.h"
 #include "dht11.h"
 #include "pins.h"
-#include "RGBdriver.h"
-#include "EEPROM.h"
 #include "VoltCurrent.h"
 #include "button_led.h"
 #include "MavlinkParser.h"
@@ -21,7 +19,6 @@ void _WDlink::Init(HardwareSerial *_serial)
 	cmd = "";
 	val.reserve(20);
 	val = "";
-	savePending = false;
 }
 
 enum { SEND_GPS, SEND_IMU, SEND_MISC, SEND_RELAY, SEND_LED };
@@ -121,7 +118,6 @@ void _WDlink::Write()
    
 		break;
 	case SEND_RELAY:
-	{
 		for (byte i = 0; i < 8; i++)
 		{
 			byte name = buttonLeds[i].GetName();
@@ -133,22 +129,6 @@ void _WDlink::Write()
 				tx += ",";
 			}
 		}
-		break;
-	}
-	case SEND_LED:
-		tx += CommandString[LED_RED];
-		tx += ",";
-		tx += String((int)RGB.r);
-		tx += ",";
-
-		tx += CommandString[LED_GREEN];
-		tx += ",";
-		tx += String((int)RGB.g);
-		tx += ",";
-
-		tx += CommandString[LED_BLUE];
-		tx += ",";
-		tx += String((int)RGB.b);
 		break;
 	}
 
@@ -166,17 +146,6 @@ void _WDlink::Write()
 	if (select > SEND_LED)
 	{
 		select = SEND_GPS;
-	}
-
-	if (savePending)
-	{
-		savePending = false;
-		byte *ptr;
-		ptr = (byte*)&RGB;
-		for (byte i = 0; i < 6; i++)
-		{
-			EEPROM.write(0x30 + i, ptr[i]);
-		}
 	}
 }
 
@@ -274,16 +243,9 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 		}
 		break;
 	case LED_RED:
-		RGB.r = val.toInt();
-		savePending = true;
-		break;
 	case LED_GREEN:
-		RGB.g = val.toInt();
-		savePending = true;
-		break;
 	case LED_BLUE:
-		RGB.b = val.toInt();
-		savePending = true;
+		WDmasterNode.AddToQueue(cmd, val);
 		break;
 	}
 }

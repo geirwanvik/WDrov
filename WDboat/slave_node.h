@@ -10,5 +10,6 @@ public:
 private:
 	virtual void ProcessCommand(const String &cmd, const String &val);
 	uint8_t aliveCounter;
+	bool savePending;
 };
 extern _WDslaveNode WDslaveNode;

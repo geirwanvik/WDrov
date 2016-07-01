@@ -8,7 +8,6 @@ struct RGB_STATE
 	byte r;
 	byte g;
 	byte b;
-	int fade;
 };
 
 extern RGB_STATE RGB;

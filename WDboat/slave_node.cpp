@@ -1,11 +1,13 @@
 #include "slave_node.h"
 #include "relay_output.h"
 #include "pins.h"
-
+#include "RGBdriver.h"
+#include "EEPROM.h"
 _WDslaveNode WDslaveNode;
 
 void _WDslaveNode::Init(HardwareSerial *_serial)
 {
+	savePending = false;
 	_WDlink::Init(_serial);
 }
 
@@ -28,6 +30,16 @@ void _WDslaveNode::Write()
 
 	serial->println(tx);
 
+	if (savePending)
+	{
+		savePending = false;
+		byte *ptr;
+		ptr = (byte*)&RGB;
+		for (byte i = 0; i < 6; i++)
+		{
+			EEPROM.write(0x30 + i, ptr[i]);
+		}
+	}
 }
 
 void _WDslaveNode::ProcessCommand(const String &cmd, const String &val)
@@ -59,6 +71,18 @@ void _WDslaveNode::ProcessCommand(const String &cmd, const String &val)
 		{
 			RelayOutput[RELAY_BILGE_PP - i].SetOutput(i, OFF);
 		}
+		break;
+	case LED_RED:
+		RGB.r = val.toInt();
+		savePending = true;
+		break;
+	case LED_GREEN:
+		RGB.g = val.toInt();
+		savePending = true;
+		break;
+	case LED_BLUE:
+		RGB.b = val.toInt();
+		savePending = true;
 		break;
 	}
 }

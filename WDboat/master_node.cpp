@@ -6,6 +6,7 @@ _WDmasterNode WDmasterNode;
 void _WDmasterNode::Init(HardwareSerial *_serial)
 {
 	slaveTime = 0;
+	numberOfElements = 0;
 	_WDlink::Init(_serial);
 }
 
@@ -58,4 +59,52 @@ byte _WDmasterNode::NodeAlive()
 		return false;
 	}
 	return true;
+}
+
+void _WDmasterNode::AddToQueue(const String &cmd, const String &val)
+{
+	numberOfElements++;
+	if (numberOfElements < 4)
+	{
+		queueCmds[numberOfElements] = cmd;
+		queueValues[numberOfElements] = val;
+
+	}
+	else
+	{
+		numberOfElements--;
+	}
+}
+
+void _WDmasterNode::WriteQueue()
+{
+	if (numberOfElements == 0)
+	{
+		return;
+	}
+
+	tx = "$m,";
+
+	for (byte i = 0; i < numberOfElements; i++)
+	{
+		tx += queueCmds[i];
+		tx += ",";
+		tx += queueValues[i];
+		if (i < (numberOfElements -1))
+		{
+			tx += ",";
+		}
+	}
+
+	tx += "*";
+
+	byte crc = CalculateCRC(tx.c_str());
+	if (crc < 0x10)
+	{
+		tx += "0";
+	}
+	tx += String(crc, HEX);
+
+	serial->println(tx);
+	numberOfElements = 0;
 }

@@ -96,6 +96,7 @@ inline void BridgeLoop()
 	{
 		updateFastLoop = millis();
 		WDlink.Write();
+		WDmasterNode.WriteQueue();
 	}
 	if (sendButtonsNow || ((millis() - updateSlowLoop) >= 1000))
 	{
@@ -103,13 +104,19 @@ inline void BridgeLoop()
 		updateSlowLoop = millis();
 	}
 }
-
+RGB_STATE prevRGB = { 0, 0, 0 };
 inline void AftLoop()
 {
 	WDslaveNode.Read();
-//	Driver.begin(); // begin
-//	Driver.SetColor(RGB.r, RGB.g, RGB.b); //Red. first node data
-//	Driver.end();
+
+	if ((RGB.r != prevRGB.r) || (RGB.g != prevRGB.g) || (RGB.b != prevRGB.b))
+	{
+		Driver.begin(); // begin
+		Driver.SetColor(RGB.r, RGB.g, RGB.b); //Red. first node data
+		Driver.end();
+		prevRGB = RGB;
+	}
+
 	if ((millis() - updateSlowLoop) >= 1000)
 	{
 		updateSlowLoop = millis();

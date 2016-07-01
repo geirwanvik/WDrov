@@ -18,7 +18,6 @@ protected:
 	String rx;
 	String cmd;
 	String val;
-	bool savePending;
 	String tx;
 	HardwareSerial *serial;
 
