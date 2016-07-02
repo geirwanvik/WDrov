@@ -15,8 +15,8 @@
 #define BRIDGE	1
 #define AFT 2
 
-//#define CONTROLLER BRIDGE
-#define CONTROLLER AFT
+#define CONTROLLER BRIDGE
+//#define CONTROLLER AFT
 
 
 inline bool isBridge() { if (CONTROLLER == BRIDGE) { return true; } return false; };

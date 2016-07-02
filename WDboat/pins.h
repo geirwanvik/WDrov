@@ -19,7 +19,7 @@ enum Arduino_Pins
 	LED_7_PIN = 2, // Out 7
 	LED_8_PIN = 5, // Out 8
 
-	DHT_DATA_PIN		= 41,
+	DHT_DATA_PIN		= A8,
 
 	RELAY_BILGE_PP_PIN		= 42, // Relay 1
 	RELAY_LANTERN_PIN = 44, // Relay 2
