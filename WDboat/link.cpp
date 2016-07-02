@@ -21,7 +21,7 @@ void _WDlink::Init(HardwareSerial *_serial)
 	val = "";
 }
 
-enum { SEND_GPS, SEND_IMU, SEND_MISC, SEND_RELAY, SEND_LED };
+enum { SEND_GPS, SEND_IMU, SEND_MISC, SEND_RELAY };
 
 void _WDlink::Write()
 {
@@ -143,7 +143,7 @@ void _WDlink::Write()
 	serial->println(tx);
 
 	select++;
-	if (select > SEND_LED)
+	if (select > SEND_RELAY)
 	{
 		select = SEND_GPS;
 	}
@@ -154,18 +154,32 @@ void _WDlink::Read()
 	while (serial->available())
 	{
 		char data = serial->read();
-		if ((data != '\n') && (data != '\r'))
+
+		if ((data == '\n') || (data == '\r') || (data == '$'))
 		{
-			rx.concat(data);
-		}
-		else
-		{
+			if (rx.length() < 3)
+			{
+				rx = "";
+				if (data == '$')
+				{
+					rx.concat(data);
+				}
+				return;
+			}
 			byte crcOK = CheckCRC(rx.c_str());
 			if (crcOK)
 			{
 				NewMessage(rx);
 			}
 			rx = "";
+			if (data == '$')
+			{
+				rx.concat(data);
+			}
+		}
+		else
+		{
+			rx.concat(data);
 		}
 	}
 }
