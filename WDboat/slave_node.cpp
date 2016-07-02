@@ -3,6 +3,7 @@
 #include "pins.h"
 #include "RGBdriver.h"
 #include "EEPROM.h"
+#include "voltcurrent.h"
 _WDslaveNode WDslaveNode;
 
 void _WDslaveNode::Init(HardwareSerial *_serial)
@@ -18,6 +19,16 @@ void _WDslaveNode::Write()
 	tx += CommandString[NODE_ALIVE];
 	tx += ",";
 	tx += String(aliveCounter++, 10);
+	tx += ",";
+
+	tx += CommandString[CURRENT];
+	tx += ",";
+	tx += String(VoltCurrent.Current, 3);
+	tx += ",";
+
+	tx += CommandString[VOLTAGE];
+	tx += ",";
+	tx += String(VoltCurrent.Voltage, 3);
 
 	tx += "*";
 
@@ -59,17 +70,17 @@ void _WDslaveNode::ProcessCommand(const String &cmd, const String &val)
 	case RELAY_LANTERN:
 	case RELAY_WIPER:
 	case RELAY_INSTRUMENT:
-	case RELAY_5:
-	case RELAY_6:
-	case RELAY_7:
-	case RELAY_8:
+	case RELAY_SPARE5:
+	case RELAY_SPARE6:
+	case RELAY_SPARE7:
+	case RELAY_SPARE8:
 		if (val == ValueString[ON])
 		{
-			RelayOutput[RELAY_BILGE_PP - i].SetOutput(i, ON);
+			RelayOutput[i - RELAY_BILGE_PP].SetOutput(i, ON);
 		}
 		else
 		{
-			RelayOutput[RELAY_BILGE_PP - i].SetOutput(i, OFF);
+			RelayOutput[i - RELAY_BILGE_PP].SetOutput(i, OFF);
 		}
 		break;
 	case LED_RED:

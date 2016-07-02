@@ -15,8 +15,8 @@
 #define BRIDGE	1
 #define AFT 2
 
-#define CONTROLLER BRIDGE
-//#define CONTROLLER AFT
+//#define CONTROLLER BRIDGE
+#define CONTROLLER AFT
 
 
 inline bool isBridge() { if (CONTROLLER == BRIDGE) { return true; } return false; };
@@ -39,6 +39,8 @@ void setup()
 		buttonLeds[5].Init(RELAY_SPARE6, BUTTON_6_PIN, LED_6_PIN);
 		buttonLeds[6].Init(RELAY_SPARE7, BUTTON_7_PIN, LED_7_PIN);
 		buttonLeds[7].Init(RELAY_SPARE8, BUTTON_8_PIN, LED_8_PIN);
+
+		DHT.Init(DHT_DATA_PIN);
 	}
 	else
 	{
@@ -53,7 +55,6 @@ void setup()
 		RelayOutput[7].Init(RELAY_SPARE8, RELAY_8);
 
 		WDslaveNode.Init(&Serial1);
-		DHT.Init(DHT_DATA_PIN);
 		VoltCurrent.Init();
 		Driver.Init(LED_CLK, LED_DATA);
 
@@ -100,6 +101,7 @@ inline void BridgeLoop()
 	}
 	if (sendButtonsNow || ((millis() - updateSlowLoop) >= 1000))
 	{
+		DHT.Update();
 		WDmasterNode.Write();
 		updateSlowLoop = millis();
 	}
@@ -120,13 +122,12 @@ inline void AftLoop()
 	if ((millis() - updateSlowLoop) >= 1000)
 	{
 		updateSlowLoop = millis();
-		DHT.Update();
 		WDslaveNode.Write();
 	}
 	else if ((millis() - updateFastLoop) >= 100)
 	{
-		updateFastLoop = millis();
 		VoltCurrent.Update();
+		updateFastLoop = millis();
 	}
 }
 

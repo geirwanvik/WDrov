@@ -10,6 +10,8 @@ public:
 	byte NodeAlive();
 	void AddToQueue(const String &cmd, const String &val);
 	void WriteQueue();
+	String Current;
+	String Voltage;
 
 private:
 	virtual void ProcessCommand(const String &cmd, const String &val);
@@ -17,5 +19,6 @@ private:
 	byte numberOfElements;
 	String queueValues[4];
 	String queueCmds[4];
+
 };
 extern _WDmasterNode WDmasterNode;

@@ -1,5 +1,4 @@
 #include "MavlinkParser.h"
-#include "mavlink\ardupilotmega\ardupilotmega.h"
 
 _MavlinkParser MavlinkParser;
 MavlinkDataContainer MavlinkData;
@@ -51,8 +50,6 @@ void _MavlinkParser::Parse(mavlink_message_t *msg)
     case MAVLINK_MSG_ID_VFR_HUD:
       MavlinkData.groundspeed = mavlink_msg_vfr_hud_get_groundspeed(msg);
       MavlinkData.compassHeading = mavlink_msg_vfr_hud_get_heading(msg);
-      break;
-    case MAVLINK_MSG_ID_HWSTATUS:
       break;
     }
 }

@@ -21,7 +21,7 @@ void _WDlink::Init(HardwareSerial *_serial)
 	val = "";
 }
 
-enum { SEND_GPS, SEND_IMU, SEND_MISC, SEND_RELAY };
+enum { SEND_GPS_1, SEND_GPS_2, SEND_IMU, SEND_MISC, SEND_RELAY_1, SEND_RELAY_2 };
 
 void _WDlink::Write()
 {
@@ -29,7 +29,7 @@ void _WDlink::Write()
 	tx = "$ardu,";
 	switch (select)
 	{
-	case SEND_GPS:
+	case SEND_GPS_1:
 		tx += CommandString[GPS_LAT];
 		tx += ",";
 		tx += String(MavlinkData.lat, 6);
@@ -40,20 +40,12 @@ void _WDlink::Write()
 		tx += String(MavlinkData.lon, 6);
 		tx += ",";
 
-		tx += CommandString[GPS_GROUND_SPEED_KNOTS];
-		tx += ",";
-		tx += String(MavlinkData.groundspeed * 1.9438444924574, 2);
-		tx += ",";
-
-		tx += CommandString[GPS_GROUND_SPEED_KMH];
-		tx += ",";
-		tx += String(MavlinkData.groundspeed * 3.6, 2);
-		tx += ",";
-
 		tx += CommandString[GPS_GROUND_COURSE];
 		tx += ",";
 		tx += String(MavlinkData.gps_heading, 2);
-		tx += ",";
+
+		break;
+	case SEND_GPS_2:
 
 		tx += CommandString[GPS_X_SPEED];
 		tx += ",";
@@ -65,11 +57,16 @@ void _WDlink::Write()
 		tx += String(MavlinkData.groundYspeed, 2);
 		tx += ",";
 
-		tx += CommandString[GPS_NUM_SATS];
+		tx += CommandString[GPS_GROUND_SPEED_KNOTS];
 		tx += ",";
-		tx += "NEI";
-    
+		tx += String(MavlinkData.groundspeed * 1.9438444924574, 2);
+		tx += ",";
+
+		tx += CommandString[GPS_GROUND_SPEED_KMH];
+		tx += ",";
+		tx += String(MavlinkData.groundspeed * 3.6, 2);
 		break;
+
 	case SEND_IMU:
 		tx += CommandString[IMU_ROLL];
 		tx += ",";
@@ -104,12 +101,12 @@ void _WDlink::Write()
 
 		tx += CommandString[VOLTAGE];
 		tx += ",";
-		tx += String(VoltCurrent.Voltage, 3);
+		tx += WDmasterNode.Voltage;
 		tx += ",";
 
 		tx += CommandString[CURRENT];
 		tx += ",";
-		tx += String(VoltCurrent.Current, 3);
+		tx += WDmasterNode.Current;
 		tx += ",";
 
 		tx += CommandString[NODE_ALIVE];
@@ -117,8 +114,21 @@ void _WDlink::Write()
 		tx += ValueString[WDmasterNode.NodeAlive()];
    
 		break;
-	case SEND_RELAY:
-		for (byte i = 0; i < 8; i++)
+	case SEND_RELAY_1:
+		for (byte i = 0; i < 4; i++)
+		{
+			byte name = buttonLeds[i].GetName();
+			tx += CommandString[name];
+			tx += ",";
+			tx += ValueString[buttonLeds[i].GetValue()];
+			if (i < 3)
+			{
+				tx += ",";
+			}
+		}
+		break;
+	case SEND_RELAY_2:
+		for (byte i = 4; i < 8; i++)
 		{
 			byte name = buttonLeds[i].GetName();
 			tx += CommandString[name];
@@ -143,9 +153,9 @@ void _WDlink::Write()
 	serial->println(tx);
 
 	select++;
-	if (select > SEND_RELAY)
+	if (select > SEND_RELAY_2)
 	{
-		select = SEND_GPS;
+		select = SEND_GPS_1;
 	}
 }
 

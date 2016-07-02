@@ -7,23 +7,46 @@ void _WDmasterNode::Init(HardwareSerial *_serial)
 {
 	slaveTime = 0;
 	numberOfElements = 0;
+	Voltage = "0";
+	Current = "0";
 	_WDlink::Init(_serial);
 }
 
+enum { SEND_RELAY_1, SEND_RELAY_2 };
+
 void _WDmasterNode::Write()
 {
+	static byte select = 0;
 	tx = "$m,";
 
-	for (byte i = 0; i < 8; i++)
+	switch (select)
 	{
-		byte name = buttonLeds[i].GetName();
-		tx += CommandString[name];
-		tx += ",";
-		tx += ValueString[buttonLeds[i].GetValue()];
-		if (i < 7)
+	case SEND_RELAY_1:
+		for (byte i = 0; i < 4; i++)
 		{
+			byte name = buttonLeds[i].GetName();
+			tx += CommandString[name];
 			tx += ",";
+			tx += ValueString[buttonLeds[i].GetValue()];
+			if (i < 3)
+			{
+				tx += ",";
+			}
 		}
+		break;
+	case SEND_RELAY_2:
+		for (byte i = 4; i < 8; i++)
+		{
+			byte name = buttonLeds[i].GetName();
+			tx += CommandString[name];
+			tx += ",";
+			tx += ValueString[buttonLeds[i].GetValue()];
+			if (i < 7)
+			{
+				tx += ",";
+			}
+		}
+		break;
 	}
 
 	tx += "*";
@@ -36,19 +59,39 @@ void _WDmasterNode::Write()
 	tx += String(crc, HEX);
 
 	serial->println(tx);
+
+	select++;
+	if (select > SEND_RELAY_2)
+	{
+		select = SEND_RELAY_1;
+	}
 }
 
 
 void _WDmasterNode::ProcessCommand(const String &cmd, const String &val)
 {
 	int i;
-	CommandEnum cmdEnum;
 	for (i = 0; i < sizeof(CommandString) / sizeof(CommandString[0]); i++)
 	{
-		if (cmd == CommandString[NODE_ALIVE])
+		if (cmd == CommandString[i])
 		{
-			slaveTime = millis();
+			break;
 		}
+	}
+
+	switch (i)
+	{
+	case NODE_ALIVE:
+		slaveTime = millis();
+		break;
+	case CURRENT:
+		if (Current != val)
+			Current = val;
+		break;
+	case VOLTAGE:
+		if (Voltage != val)
+			Voltage = val;
+		break;
 	}
 }
 
