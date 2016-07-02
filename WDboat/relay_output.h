@@ -10,5 +10,6 @@ public:
 private:
 	byte name;
 	byte pin;
+  byte lastValue;
 };
 extern _RelayOutput RelayOutput[8];
