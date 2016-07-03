@@ -44,7 +44,8 @@ _String CommandString[] =
 	"LED_GREEN",
 	"LED_BLUE",
 	"NODE_ALIVE",
-	"BUTTON_LED"
+	"LED_STATUS",
+	"MAVLINK_ALIVE"
 };
 
 enum CommandEnum
@@ -83,7 +84,8 @@ enum CommandEnum
 	LED_GREEN,
 	LED_BLUE,
 	NODE_ALIVE,
-	BUTTON_LED
+	LED_STATUS,
+	MAVLINK_ALIVE
 };
 
 _String ValueString[] =
