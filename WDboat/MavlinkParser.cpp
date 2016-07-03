@@ -8,6 +8,7 @@ void _MavlinkParser::Init(HardwareSerial *_serial)
 	serial = _serial;
 	serial->begin(57600);
 	channel = 0;
+	slaveTime = 0;
 	memset(&MavlinkData, 0, sizeof(MavlinkDataContainer));
 }
 
@@ -18,8 +19,18 @@ void _MavlinkParser::Read()
 		if (mavlink_parse_char(channel, (char)serial->read(), &msg, &sts))
 		{
 			Parse(&msg);
+			slaveTime = millis();
 		}
 	}
+}
+
+byte _MavlinkParser::NodeAlive()
+{
+	if (millis() - slaveTime > 1500)
+	{
+		return false;
+	}
+	return true;
 }
 
 void _MavlinkParser::Parse(mavlink_message_t *msg)

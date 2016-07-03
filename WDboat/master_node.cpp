@@ -5,10 +5,8 @@ _WDmasterNode WDmasterNode;
 
 void _WDmasterNode::Init(HardwareSerial *_serial)
 {
+	talker = "$m";
 	slaveTime = 0;
-	numberOfElements = 0;
-	Voltage = "0";
-	Current = "0";
 	_WDlink::Init(_serial);
 }
 
@@ -17,7 +15,7 @@ enum { SEND_RELAY_1, SEND_RELAY_2 };
 void _WDmasterNode::Write()
 {
 	static byte select = 0;
-	tx = "$m,";
+	tx = talker + ",";
 
 	switch (select)
 	{
@@ -85,12 +83,8 @@ void _WDmasterNode::ProcessCommand(const String &cmd, const String &val)
 		slaveTime = millis();
 		break;
 	case CURRENT:
-		if (Current != val)
-			Current = val;
-		break;
 	case VOLTAGE:
-		if (Voltage != val)
-			Voltage = val;
+		WDlink.AddToQueue(cmd, val);
 		break;
 	}
 }
@@ -102,48 +96,4 @@ byte _WDmasterNode::NodeAlive()
 		return false;
 	}
 	return true;
-}
-
-void _WDmasterNode::AddToQueue(const String &cmd, const String &val)
-{
-	if (numberOfElements < 4)
-	{
-		queueCmds[numberOfElements] = cmd;
-		queueValues[numberOfElements] = val;
-
-	}
-	numberOfElements++;
-}
-
-void _WDmasterNode::WriteQueue()
-{
-	if (numberOfElements == 0)
-	{
-		return;
-	}
-
-	tx = "$m,";
-
-	for (byte i = 0; i < numberOfElements; i++)
-	{
-		tx += queueCmds[i];
-		tx += ",";
-		tx += queueValues[i];
-		if (i < (numberOfElements -1))
-		{
-			tx += ",";
-		}
-	}
-
-	tx += "*";
-
-	byte crc = CalculateCRC(tx.c_str());
-	if (crc < 0x10)
-	{
-		tx += "0";
-	}
-	tx += String(crc, HEX);
-
-	serial->println(tx);
-	numberOfElements = 0;
 }

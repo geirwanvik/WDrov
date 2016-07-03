@@ -19,6 +19,9 @@ void _WDlink::Init(HardwareSerial *_serial)
 	cmd = "";
 	val.reserve(20);
 	val = "";
+	qTx = "";
+	qTx.reserve(100);
+	talker = "$ardu";
 }
 
 enum { SEND_GPS_1, SEND_GPS_2, SEND_IMU, SEND_MISC, SEND_RELAY_1, SEND_RELAY_2 };
@@ -26,7 +29,8 @@ enum { SEND_GPS_1, SEND_GPS_2, SEND_IMU, SEND_MISC, SEND_RELAY_1, SEND_RELAY_2 }
 void _WDlink::Write()
 {
 	static byte select = 0;
-	tx = "$ardu,";
+	tx = talker + ",";
+
 	switch (select)
 	{
 	case SEND_GPS_1:
@@ -59,11 +63,6 @@ void _WDlink::Write()
 		tx += CommandString[GPS_GROUND_SPEED_KNOTS];
 		tx += ",";
 		tx += String(MavlinkData.groundspeed * 1.9438444924574, 2);
-		tx += ",";
-
-		tx += CommandString[GPS_GROUND_SPEED_KMH];
-		tx += ",";
-		tx += String(MavlinkData.groundspeed * 3.6, 2);
 		break;
 
 	case SEND_IMU:
@@ -84,7 +83,7 @@ void _WDlink::Write()
 
 		tx += CommandString[IMU_RATE_OF_TURN];
 		tx += ",";
-		tx += String(MavlinkData.yawSpeed, 2);
+		tx += String(MavlinkData.yawSpeed, 1);
 		break;
 	case SEND_MISC:
 		tx += CommandString[DHT22_TEMP];
@@ -97,14 +96,9 @@ void _WDlink::Write()
 		tx += String(DHT.Humidity, 1);
 		tx += ",";
 
-		tx += CommandString[VOLTAGE];
+		tx += CommandString[MAVLINK_ALIVE];
 		tx += ",";
-		tx += WDmasterNode.Voltage;
-		tx += ",";
-
-		tx += CommandString[CURRENT];
-		tx += ",";
-		tx += WDmasterNode.Current;
+		tx += ValueString[MavlinkParser.NodeAlive()];
 		tx += ",";
 
 		tx += CommandString[NODE_ALIVE];
@@ -264,7 +258,7 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 	case RELAY_6:
 	case RELAY_7:
 	case RELAY_8:
-	case BUTTON_LED:
+	case LED_STATUS:
 		for (byte j = 0; j < 8; j++)
 		{
 			if (buttonLeds[j].CommandReceived(i, value))
@@ -280,6 +274,37 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 		WDmasterNode.AddToQueue(cmd, val);
 		break;
 	}
+}
+
+void _WDlink::AddToQueue(const String &cmd, const String &val)
+{
+	if (qTx.length() == 0)
+	{
+		qTx = talker;
+	}
+	qTx += ",";
+	qTx += cmd;
+	qTx += ",";
+	qTx += val;
+}
+bool _WDlink::WriteQueue()
+{
+	if (qTx.length() == 0)
+	{
+		return false;
+	}
+
+	qTx += "*";
+	byte crc = CalculateCRC(qTx.c_str());
+	if (crc < 0x10)
+	{
+		qTx += "0";
+	}
+	qTx += String(crc, HEX);
+
+	serial->println(qTx);
+	qTx = "";
+	return true;
 }
 
 byte _WDlink::CalculateCRC(const char *buffer)

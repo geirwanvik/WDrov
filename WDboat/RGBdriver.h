@@ -8,6 +8,7 @@ struct RGB_STATE
 	byte r;
 	byte g;
 	byte b;
+	byte state;
 };
 
 extern RGB_STATE RGB;

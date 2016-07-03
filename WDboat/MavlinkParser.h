@@ -23,6 +23,7 @@ class _MavlinkParser
 public:
 	void Init(HardwareSerial *_serial);
 	void Read();
+	byte NodeAlive();
 
 private:
   void Parse(mavlink_message_t *msg);
@@ -32,6 +33,7 @@ private:
 	// Mavlink data structs
 	mavlink_message_t msg;
 	mavlink_status_t sts;
+	uint32_t slaveTime;
 };
 extern _MavlinkParser MavlinkParser;
 

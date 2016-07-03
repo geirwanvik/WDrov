@@ -38,7 +38,7 @@ void setup()
 		buttonLeds[4].Init(RELAY_SPARE5, BUTTON_5_PIN, LED_5_PIN);
 		buttonLeds[5].Init(RELAY_SPARE6, BUTTON_6_PIN, LED_6_PIN);
 		buttonLeds[6].Init(RELAY_SPARE7, BUTTON_7_PIN, LED_7_PIN);
-		buttonLeds[7].Init(BUTTON_LED, BUTTON_8_PIN, LED_8_PIN);
+		buttonLeds[7].Init(LED_STATUS, BUTTON_8_PIN, LED_8_PIN);
 
 		DHT.Init(DHT_DATA_PIN);
 	}
@@ -96,7 +96,10 @@ inline void BridgeLoop()
 	if ((millis() - updateFastLoop) >= 100)
 	{
 		updateFastLoop = millis();
-		WDlink.Write();
+		if (!WDlink.WriteQueue())
+		{
+			WDlink.Write();
+		}
 		WDmasterNode.WriteQueue();
 	}
 	if (sendButtonsNow || ((millis() - updateSlowLoop) >= 1000))
@@ -106,15 +109,22 @@ inline void BridgeLoop()
 		updateSlowLoop = millis();
 	}
 }
-RGB_STATE prevRGB = { 0, 0, 0 };
+RGB_STATE prevRGB = { 0, 0, 0, 0};
 inline void AftLoop()
 {
 	WDslaveNode.Read();
 
-	if ((RGB.r != prevRGB.r) || (RGB.g != prevRGB.g) || (RGB.b != prevRGB.b))
+	if ((RGB.r != prevRGB.r) || (RGB.g != prevRGB.g) || (RGB.b != prevRGB.b) || (RGB.state != prevRGB.state))
 	{
 		Driver.begin(); // begin
-		Driver.SetColor(RGB.r, RGB.g, RGB.b); //Red. first node data
+		if (RGB.state)
+		{
+			Driver.SetColor(RGB.r, RGB.g, RGB.b); //Red. first node data
+		}
+		else
+		{
+			Driver.SetColor(0, 0, 0); //Red. first node data
+		}
 		Driver.end();
 		prevRGB = RGB;
 	}

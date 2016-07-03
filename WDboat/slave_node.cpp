@@ -8,13 +8,14 @@ _WDslaveNode WDslaveNode;
 
 void _WDslaveNode::Init(HardwareSerial *_serial)
 {
+	talker = "$s";
 	savePending = false;
 	_WDlink::Init(_serial);
 }
 
 void _WDslaveNode::Write()
 {
-	tx = "$s,";
+	tx = talker + ",";
 
 	tx += CommandString[NODE_ALIVE];
 	tx += ",";
@@ -23,12 +24,12 @@ void _WDslaveNode::Write()
 
 	tx += CommandString[CURRENT];
 	tx += ",";
-	tx += String(VoltCurrent.Current, 3);
+	tx += String(VoltCurrent.Current, 1);
 	tx += ",";
 
 	tx += CommandString[VOLTAGE];
 	tx += ",";
-	tx += String(VoltCurrent.Voltage, 3);
+	tx += String(VoltCurrent.Voltage, 1);
 
 	tx += "*";
 
@@ -95,18 +96,14 @@ void _WDslaveNode::ProcessCommand(const String &cmd, const String &val)
 		RGB.b = val.toInt();
 		savePending = true;
 		break;
-	case BUTTON_LED:
+	case LED_STATUS:
 		if (val == ValueString[ON])
 		{
-			RGB.r = 255;
-			RGB.g = 0;
-			RGB.b = 0;
+			RGB.state = true;
 		}
 		else
 		{
-			RGB.r = 0;
-			RGB.g = 0;
-			RGB.b = 0;
+			RGB.state = false;
 		}
 	}
 }
