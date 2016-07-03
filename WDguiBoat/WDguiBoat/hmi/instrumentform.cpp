@@ -9,17 +9,7 @@ InstrumentForm::InstrumentForm(QWidget *parent) :
 
     setupApperance();
     mColorDialog = new ColorDialog(this);
-/*
-    ui->pushButtonBilgePump->setStyle(new styleOne);
-    ui->pushButtonFloodlight->setStyle(new styleOne);
-    ui->pushButtonHeater->setStyle(new styleOne);
-    ui->pushButtonHorn->setStyle(new styleOne);
-    ui->pushButtonInstruments->setStyle(new styleOne);
-    ui->pushButtonInteriorLights->setStyle(new styleOne);
-    ui->pushButtonLatern->setStyle(new styleOne);
-    ui->pushButtonWindowWiper->setStyle(new styleOne);
 
-*/
     ui->pushButtonLatern->setStyleSheet("QPushButton {border-radius: 100px; border: 10px solid #555; border-color: rgb(0, 170, 255);}");
     ui->pushButtonBilgePump->setStyleSheet("QPushButton {border-radius: 100px; border: 10px solid #555; border-color: rgb(0, 170, 255);}");
     ui->pushButtonFloodlight->setStyleSheet("QPushButton {border-radius: 100px; border: 10px solid #555; border-color: rgb(0, 170, 255);}");
@@ -28,6 +18,18 @@ InstrumentForm::InstrumentForm(QWidget *parent) :
     ui->pushButtonWindowWiper->setStyleSheet("QPushButton {border-radius: 100px; border: 10px solid #555; border-color: rgb(0, 170, 255);}");
     ui->pushButtonHorn->setStyleSheet("QPushButton {border-radius: 100px; border: 10px solid #555; border-color: rgb(0, 170, 255);}");
     ui->pushButtonInstruments->setStyleSheet("QPushButton {border-radius: 100px; border: 10px solid #555; border-color: rgb(0, 170, 255);}");
+/*
+    ButtonGroup = new QButtonGroup(this);
+    ButtonGroup->addButton(ui->pushButtonBilgePump);
+    ButtonGroup->addButton(ui->pushButtonFloodlight);
+    ButtonGroup->addButton(ui->pushButtonHeater);
+    ButtonGroup->addButton(ui->pushButtonHorn);
+    ButtonGroup->addButton(ui->pushButtonInstruments);
+    ButtonGroup->addButton(ui->pushButtonInteriorLights);
+    ButtonGroup->addButton(ui->pushButtonLatern);
+    ButtonGroup->addButton(ui->pushButtonWindowWiper);
+
+    */
 
 }
 
@@ -94,7 +96,77 @@ void InstrumentForm::setupApperance()
 
 void InstrumentForm::dataFromWdCore(QString command, QString value)
 {
-    qDebug() << "Instrument: " << command << " " << value;
+   // qDebug() << "Instrument: " << command << " " << value;
+
+
+
+    if(value == ValueString[ON])
+    {
+        qDebug() << "Instrument: " << command << " " << value;
+        if(command == CommandString[RELAY_LANTERN])
+        {
+            ui->pushButtonLatern->setChecked(true);
+            on_pushButtonLatern_released();
+        }
+        else if(command == CommandString[RELAY_INSTRUMENT])
+        {
+            ui->pushButtonInstruments->setChecked(true);
+            on_pushButtonInstruments_clicked();
+        }
+        else if(command == CommandString[RELAY_BILGE_PP])
+        {
+            ui->pushButtonBilgePump->setChecked(true);
+            on_pushButtonBilgePump_released();
+        }
+        else if(command == CommandString[RELAY_WIPER])
+        {
+            ui->pushButtonWindowWiper->setChecked(true);
+            on_pushButtonWindowWiper_released();
+        }
+        else if(command == CommandString[LED_STATUS])
+        {
+            ui->pushButtonInteriorLights->setChecked(true);
+            on_pushButtonInteriorLights_released();
+        }
+        else
+        {
+            return;
+        }
+    }
+    else if(value == ValueString[OFF])
+    {
+        //qDebug() << command << value << ButtonGroup->checkedButton();
+        if(command == CommandString[RELAY_LANTERN])
+        {
+            ui->pushButtonLatern->setChecked(false);
+            on_pushButtonLatern_released();
+        }
+        else if(command == CommandString[RELAY_INSTRUMENT])
+        {
+            ui->pushButtonInstruments->setChecked(false);
+            on_pushButtonInstruments_clicked();
+        }
+        else if(command == CommandString[RELAY_BILGE_PP])
+        {
+            ui->pushButtonBilgePump->setChecked(false);
+            on_pushButtonBilgePump_released();
+        }
+        else if(command == CommandString[RELAY_WIPER])
+        {
+            ui->pushButtonWindowWiper->setChecked(false);
+            on_pushButtonWindowWiper_released();
+        }
+        else if(command == CommandString[LED_STATUS])
+        {
+            ui->pushButtonInteriorLights->setChecked(false);
+            on_pushButtonInteriorLights_released();
+        }
+        else
+        {
+            return;
+        }
+    }
+
 }
 
 
@@ -133,13 +205,14 @@ void InstrumentForm::on_pushButtonInteriorLights_released()
 {
     if(ui->pushButtonInteriorLights->isChecked())
     {
-        writeToSocket(tr(",LED_RED,%1,LED_GREEN,%2,LED_BLUE,%3").arg(mColorDialog->getRed()).arg(mColorDialog->getGreen()).arg(mColorDialog->getBlue()));
+       // writeToSocket(tr(",LED_RED,%1,LED_GREEN,%2,LED_BLUE,%3").arg(mColorDialog->getRed()).arg(mColorDialog->getGreen()).arg(mColorDialog->getBlue()));
+        writeToSocket(",LED_STATUS,ON");
         ui->pushButtonInteriorLights->setStyleSheet("QPushButton { background-color: rgb(0, 170, 255); border-radius: 100px; border: 10px solid #555; border-color: rgb(0, 170, 255);}");
     }
     else
     {
 
-        writeToSocket(",LED_RED,0,LED_GREEN,0,LED_BLUE,0");
+        writeToSocket(",LED_STATUS,OFF");
         ui->pushButtonInteriorLights->setStyleSheet("QPushButton {border-radius: 100px; border: 10px solid #555; border-color: rgb(0, 170, 255);}");
     }
 }
@@ -175,13 +248,11 @@ void InstrumentForm::on_pushButtonHeater_released()
 
 void InstrumentForm::on_pushButtonHorn_pressed()
 {
-    ui->pushButtonHorn->setText("TUUUUT!!");
     ui->pushButtonHorn->setStyleSheet("QPushButton { background-color: rgb(0, 170, 255); border-radius: 100px; border: 10px solid #555; border-color: rgb(0, 170, 255);}");
 }
 
 void InstrumentForm::on_pushButtonHorn_released()
 {
-    ui->pushButtonHorn->setText("");
     ui->pushButtonHorn->setStyleSheet("QPushButton {border-radius: 100px; border: 10px solid #555; border-color: rgb(0, 170, 255);}");
 }
 

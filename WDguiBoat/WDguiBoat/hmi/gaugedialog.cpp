@@ -28,12 +28,12 @@ gaugeDialog::~gaugeDialog()
 void gaugeDialog::apperanceSetup()
 {
 
-    ui->progressKnots->setRange(0, 50);
+    ui->progressKnots->setRange(0, 30);
     ui->progressKnots->setNullPosition(QRoundProgressBar::PositionBottom);
     QString knots = QString( "%1 Kn" ).arg(15.5);
     ui->progressKnots->setFormat(knots);
 
-    ui->progressVolt->setRange(0, 20);
+    ui->progressVolt->setRange(0, 16);
     ui->progressVolt->setNullPosition(QRoundProgressBar::PositionBottom);
     QString Volts = QString("%1 V").arg(12.4);
     ui->progressVolt->setFormat(Volts);
@@ -117,9 +117,9 @@ void gaugeDialog::gpsData(QString command, QString value)
 
     if(command == CommandString[GPS_GROUND_SPEED_KNOTS])
     {
-       QString knots = QString( "%1 Kn" ).arg(value.toDouble());
+       QString knots = QString( "%1 Kn" ).arg(qRound(value.toDouble()));
        ui->progressKnots->setFormat(knots);
-       ui->progressKnots->setValue(value.toDouble());
+       ui->progressKnots->setValue(qRound(value.toFloat()));
 
     }
     else if(command == CommandString[GPS_GROUND_COURSE])
@@ -138,9 +138,9 @@ void gaugeDialog::dht22Data(QString command, QString value)
 {
     if(command == CommandString[VOLTAGE])
     {
-        QString Volts = QString("%1 V").arg(value.toDouble());
+        QString Volts = QString("%1 V").arg(value.toFloat());
         ui->progressVolt->setFormat(Volts);
-        ui->progressVolt->setValue(value.toDouble());
+        ui->progressVolt->setValue(value.toFloat());
 
     }
     else if(command == CommandString[CURRENT])

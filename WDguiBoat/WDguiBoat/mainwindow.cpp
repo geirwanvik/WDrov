@@ -247,7 +247,7 @@ void MainWindow::bluetoothDoneConnection()
     ui->statusBar->setStyleSheet("QStatusBar{background:rgba(0, 255, 0, 255)}");
     mInstrumentForm->connectedToWdCore(true);
     ui->toolBar->setEnabled(true);
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(2);
 }
 
 void MainWindow::bluetoothFailedConnection()
@@ -312,8 +312,10 @@ void MainWindow::initObjectAndConnection()
     connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mSensorOverviewForm, SLOT(dht22Data(QString,QString)));
     connect(mWdParser, SIGNAL(GpsData(QString,QString)), mSensorOverviewForm, SLOT(gpsData(QString,QString)));
 
-    connect(mWdParser, SIGNAL(instrumentData(QString,QString)), mInstrumentForm, SLOT(dataFromWdCore(QString,QString)));
+    connect(mWdParser, SIGNAL(buttonPanelFeedback(QString,QString)), mInstrumentForm, SLOT(dataFromWdCore(QString,QString)));
     connect(mInstrumentForm->mColorDialog, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(Send(QString)));
+
+    connect(mWdParser, SIGNAL(LedFeedback(QString,QString)), mInstrumentForm, SLOT(dataFromWdCore(QString,QString)));
 
 
 

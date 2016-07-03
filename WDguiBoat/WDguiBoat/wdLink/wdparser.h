@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QDebug>
 
+#include "../../WDboat/CommandList.h"
+
 #include <QTimer>
 
 class wdParser : public QObject
@@ -16,7 +18,6 @@ signals:
     void GpsData(QString command,QString value);
     void ImuData(QString command,QString value);
     void Dht22Data(QString command,QString value);
-    void instrumentData(QString command,QString value);
     void PowerData(QString command,QString value);
     void LedFeedback(QString command,QString value);
     void buttonPanelFeedback(QString command,QString value);

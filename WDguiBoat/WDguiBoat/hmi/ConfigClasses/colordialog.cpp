@@ -29,6 +29,7 @@ ColorDialog::~ColorDialog()
 void ColorDialog::updateResultColor()
 {
     ui->label->setStyleSheet(tr("QLabel { background-color: rgb(%1, %2, %3);border-radius: 11px; border: 2px solid #555; color : white;}").arg(Red).arg(Green).arg(Blue));
+    emit writeToSocket(tr(",LED_RED,%1,LED_GREEN,%2,LED_BLUE,%3").arg(Red).arg(Green).arg(Blue));
 }
 
 void ColorDialog::updateSliders()
@@ -120,7 +121,7 @@ void ColorDialog::setRed(const quint8 &value)
 void ColorDialog::on_pushButtonUpdate_clicked()
 {
     emit writeToSocket(tr(",LED_RED,%1,LED_GREEN,%2,LED_BLUE,%3").arg(Red).arg(Green).arg(Blue));
-    qDebug() << "From Color Dialog" << Red << Green << Blue;
+
 }
 
 void ColorDialog::on_pushButtonRed_clicked()

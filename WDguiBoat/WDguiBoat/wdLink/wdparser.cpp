@@ -1,5 +1,5 @@
 #include "wdparser.h"
-#include "../../WDboat/CommandList.h"
+
 
 wdParser::wdParser(QObject *parent) : QObject(parent)
 {
@@ -48,21 +48,19 @@ void wdParser::findCommand(QString command, QString value)
     case GPS_GROUND_COURSE:
     case GPS_NUM_SATS:
     case GPS_HDOP:
+    case GPS_X_SPEED:
+    case GPS_Y_SPEED:
     emit GpsData(command, value);
         break;
     case IMU_ROLL:
     case IMU_PITCH:
     case IMU_HEADING:
+    case IMU_RATE_OF_TURN:
     emit ImuData(command, value);
         break;
     case DHT22_TEMP:
     case DHT22_HUM:
     emit Dht22Data(command, value);
-        break;
-    case RELAY_BILGE_PP:
-    case RELAY_LANTERN:
-    case RELAY_WIPER:
-    emit instrumentData(command, value);
         break;
     case VOLTAGE:
     case CURRENT:
@@ -71,7 +69,19 @@ void wdParser::findCommand(QString command, QString value)
     case LED_RED:
     case LED_GREEN:
     case LED_BLUE:
+    case LED_STATUS:
     emit LedFeedback(command, value);
+        break;
+    case RELAY_BILGE_PP:
+    case RELAY_INSTRUMENT:
+    case RELAY_LANTERN:
+    case RELAY_WIPER:
+    case RELAY_SPARE5:
+    case RELAY_SPARE6:
+    case RELAY_SPARE7:
+    case RELAY_SPARE8:
+    case NODE_ALIVE:
+    emit buttonPanelFeedback(command, value);
         break;
     default:
         qDebug() << "Ooops i fucked up" << command << value;

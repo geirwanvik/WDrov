@@ -108,7 +108,11 @@ void AllSensorsDialog::on_pushButtonAccCalibration_clicked()
 
     if(resBtn == QMessageBox::Yes)
     {
+
         //emit writeToSocket(tr(",%1,%2").arg(CommandString[ACC_ZERO]).arg(ValueString[ON]));
+
+       // emit writeToSocket(tr(",%1,%2").arg(CommandString[ACC_ZERO]).arg(ValueString[ON]));
+
     }
     else
     {
@@ -137,7 +141,11 @@ void AllSensorsDialog::on_pushButtonMagCalibration_clicked()
 
         if(resBt == QMessageBox::Yes || resBt == QMessageBox::No)
         {
+
              //emit writeToSocket(tr(",%1,%2").arg(CommandString[MAG_CALIBRATE]).arg(ValueString[OFF]));
+
+             //4emit writeToSocket(tr(",%1,%2").arg(CommandString[MAG_CALIBRATE]).arg(ValueString[OFF]));
+
         }
         else
         {

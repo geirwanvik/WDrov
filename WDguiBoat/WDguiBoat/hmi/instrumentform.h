@@ -4,8 +4,9 @@
 #include <QWidget>
 #include <QTimer>
 #include <QDebug>
-#include "Palette/styleone.h"
+#include <QButtonGroup>
 
+#include "../../WDboat/CommandList.h"
 #include "hmi/ConfigClasses/colordialog.h"
 
 
@@ -40,6 +41,7 @@ private slots:
 private:
     Ui::InstrumentForm *ui;
     void setupApperance();
+    QButtonGroup *ButtonGroup;
 
 
 signals:
