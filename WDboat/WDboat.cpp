@@ -38,7 +38,7 @@ void setup()
 		buttonLeds[4].Init(RELAY_SPARE5, BUTTON_5_PIN, LED_5_PIN);
 		buttonLeds[5].Init(RELAY_SPARE6, BUTTON_6_PIN, LED_6_PIN);
 		buttonLeds[6].Init(RELAY_SPARE7, BUTTON_7_PIN, LED_7_PIN);
-		buttonLeds[7].Init(RELAY_SPARE8, BUTTON_8_PIN, LED_8_PIN);
+		buttonLeds[7].Init(BUTTON_LED, BUTTON_8_PIN, LED_8_PIN);
 
 		DHT.Init(DHT_DATA_PIN);
 	}

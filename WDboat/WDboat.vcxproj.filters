@@ -54,178 +54,31 @@
     <ClInclude Include="mavlink\protocol.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\ardupilotmega.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="mavlink\ardupilotmega\testsuite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="mavlink\ardupilotmega\version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink.h">
-      <Filter>Header Files\mavlink</Filter>
+    <ClInclude Include="MavlinkParser.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mavlink\mavlink_conversions.h">
-      <Filter>Header Files\mavlink</Filter>
+    <ClInclude Include="WDboat.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mavlink\mavlink_helpers.h">
-      <Filter>Header Files\mavlink</Filter>
+    <ClInclude Include="master_node.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_ahrs.h">
-      <Filter>Header Files\mavlink</Filter>
+    <ClInclude Include="slave_node.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_ahrs2.h">
-      <Filter>Header Files\mavlink</Filter>
+    <ClInclude Include="relay_output.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_ahrs3.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_airspeed_autocal.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_ap_adc.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_autopilot_version_request.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_battery2.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_camera_feedback.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_camera_status.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_compassmot_status.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_data16.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_data32.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_data64.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_data96.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_digicam_configure.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_digicam_control.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_ekf_status_report.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_fence_fetch_point.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_fence_point.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_fence_status.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_gimbal_control.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_gimbal_report.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_gimbal_torque_cmd_report.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_gopro_get_request.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_gopro_get_response.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_gopro_heartbeat.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_gopro_set_request.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_gopro_set_response.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_hwstatus.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_led_control.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_limits_status.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_mag_cal_progress.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_mag_cal_report.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_meminfo.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_mount_configure.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_mount_control.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_mount_status.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_pid_tuning.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_radio.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_rally_fetch_point.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_rally_point.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_rangefinder.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_remote_log_block_status.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_remote_log_data_block.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_rpm.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_sensor_offsets.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_set_mag_offsets.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_simstate.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\ardupilotmega\mavlink_msg_wind.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\mavlink_types.h">
+    <ClInclude Include="mavlink\common\mavlink.h">
       <Filter>Header Files\mavlink</Filter>
     </ClInclude>
     <ClInclude Include="mavlink\common\common.h">
-      <Filter>Header Files\mavlink</Filter>
-    </ClInclude>
-    <ClInclude Include="mavlink\common\mavlink.h">
       <Filter>Header Files\mavlink</Filter>
     </ClInclude>
     <ClInclude Include="mavlink\common\mavlink_msg_actuator_control_target.h">
@@ -630,20 +483,14 @@
     <ClInclude Include="mavlink\common\version.h">
       <Filter>Header Files\mavlink</Filter>
     </ClInclude>
-    <ClInclude Include="MavlinkParser.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="mavlink\mavlink_conversions.h">
+      <Filter>Header Files\mavlink</Filter>
     </ClInclude>
-    <ClInclude Include="WDboat.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="mavlink\mavlink_helpers.h">
+      <Filter>Header Files\mavlink</Filter>
     </ClInclude>
-    <ClInclude Include="master_node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="slave_node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="relay_output.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="mavlink\mavlink_types.h">
+      <Filter>Header Files\mavlink</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -76,6 +76,23 @@ void ButtonLed::SetOutputs(byte _name, byte _value)
 		}
 	}
 }
+bool ButtonLed::CommandReceived(byte _name, byte _value)
+{
+	if (name == _name)
+	{
+		value = _value;
+		if (value)
+		{
+			analogWrite(ledPin, 128);
+		}
+		else
+		{
+			analogWrite(ledPin, 0);
+		}
+		return true;
+	}
+	return false;
+}
 
 byte ButtonLed::GetValue()
 {

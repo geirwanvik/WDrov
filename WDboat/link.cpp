@@ -43,7 +43,6 @@ void _WDlink::Write()
 		tx += CommandString[GPS_GROUND_COURSE];
 		tx += ",";
 		tx += String(MavlinkData.gps_heading, 2);
-
 		break;
 	case SEND_GPS_2:
 
@@ -80,13 +79,12 @@ void _WDlink::Write()
 
 		tx += CommandString[IMU_HEADING];
 		tx += ",";
-		tx += String(MavlinkData.compassHeading, 0);
+		tx += String(MavlinkData.compassHeading);
 		tx += ",";
 
 		tx += CommandString[IMU_RATE_OF_TURN];
 		tx += ",";
 		tx += String(MavlinkData.yawSpeed, 2);
-    
 		break;
 	case SEND_MISC:
 		tx += CommandString[DHT22_TEMP];
@@ -112,7 +110,6 @@ void _WDlink::Write()
 		tx += CommandString[NODE_ALIVE];
 		tx += ",";
 		tx += ValueString[WDmasterNode.NodeAlive()];
-   
 		break;
 	case SEND_RELAY_1:
 		for (byte i = 0; i < 4; i++)
@@ -239,12 +236,22 @@ void _WDlink::NewMessage(const String &s)
 void _WDlink::ProcessCommand(const String &cmd, const String &val)
 {
 	int i;
+	byte value;
 	for (i = 0; i < sizeof(CommandString) / sizeof(CommandString[0]); i++)
 	{
 		if (cmd == CommandString[i])
 		{
 			break;
 		}
+	}
+
+	if (val == ValueString[ON])
+	{
+		value = ON;
+	}
+	else
+	{
+		value = OFF;
 	}
 
 	switch (i)
@@ -257,14 +264,15 @@ void _WDlink::ProcessCommand(const String &cmd, const String &val)
 	case RELAY_6:
 	case RELAY_7:
 	case RELAY_8:
-		if (val == ValueString[ON])
+	case BUTTON_LED:
+		for (byte j = 0; j < 8; j++)
 		{
-			buttonLeds[RELAY_BILGE_PP - i].SetOutputs(i, ON);
+			if (buttonLeds[j].CommandReceived(i, value))
+			{
+				break;
+			}
 		}
-		else
-		{
-			buttonLeds[RELAY_BILGE_PP - i].SetOutputs(i, OFF);
-		}
+		WDmasterNode.AddToQueue(cmd, val);
 		break;
 	case LED_RED:
 	case LED_GREEN:

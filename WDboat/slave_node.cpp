@@ -95,5 +95,18 @@ void _WDslaveNode::ProcessCommand(const String &cmd, const String &val)
 		RGB.b = val.toInt();
 		savePending = true;
 		break;
+	case BUTTON_LED:
+		if (val == ValueString[ON])
+		{
+			RGB.r = 255;
+			RGB.g = 0;
+			RGB.b = 0;
+		}
+		else
+		{
+			RGB.r = 0;
+			RGB.g = 0;
+			RGB.b = 0;
+		}
 	}
 }

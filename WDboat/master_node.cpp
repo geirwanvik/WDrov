@@ -106,17 +106,13 @@ byte _WDmasterNode::NodeAlive()
 
 void _WDmasterNode::AddToQueue(const String &cmd, const String &val)
 {
-	numberOfElements++;
 	if (numberOfElements < 4)
 	{
 		queueCmds[numberOfElements] = cmd;
 		queueValues[numberOfElements] = val;
 
 	}
-	else
-	{
-		numberOfElements--;
-	}
+	numberOfElements++;
 }
 
 void _WDmasterNode::WriteQueue()

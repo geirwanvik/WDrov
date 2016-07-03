@@ -6,6 +6,7 @@ public:
 	void Init(byte _name, byte _buttonPin, byte _ledPin);
 	void ReadButton();
 	void SetOutputs(byte _name, byte _value);
+	bool CommandReceived(byte _name, byte _value);
 	byte GetValue();
 	byte GetName();
 	byte ButtonChanged();

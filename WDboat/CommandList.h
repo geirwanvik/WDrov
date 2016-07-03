@@ -43,7 +43,8 @@ _String CommandString[] =
 	"LED_RED",
 	"LED_GREEN",
 	"LED_BLUE",
-	"NODE_ALIVE"
+	"NODE_ALIVE",
+	"BUTTON_LED"
 };
 
 enum CommandEnum
@@ -82,8 +83,7 @@ enum CommandEnum
 	LED_GREEN,
 	LED_BLUE,
 	NODE_ALIVE,
-
-	UNUSED = 0xff
+	BUTTON_LED
 };
 
 _String ValueString[] =

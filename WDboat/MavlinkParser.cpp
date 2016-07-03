@@ -36,10 +36,10 @@ void _MavlinkParser::Parse(mavlink_message_t *msg)
       break;
     case MAVLINK_MSG_ID_GLOBAL_POSITION_INT:
       MavlinkData.gps_heading = (float)mavlink_msg_global_position_int_get_hdg(msg) / 100.0;
-	  MavlinkData.groundXspeed = (float)mavlink_msg_global_position_int_get_vx(msg) / 100.0;
-	  MavlinkData.groundYspeed = (float)mavlink_msg_global_position_int_get_vy(msg) / 100.0;
-	  MavlinkData.lat = (float)mavlink_msg_global_position_int_get_lat(msg) / 10000000.0;
-	  MavlinkData.lon = (float)mavlink_msg_global_position_int_get_lon(msg) / 10000000.0;
+	    MavlinkData.groundXspeed = (float)mavlink_msg_global_position_int_get_vx(msg) / 100.0;
+	    MavlinkData.groundYspeed = (float)mavlink_msg_global_position_int_get_vy(msg) / 100.0;
+	    MavlinkData.lat = (float)mavlink_msg_global_position_int_get_lat(msg) / 10000000.0;
+	    MavlinkData.lon = (float)mavlink_msg_global_position_int_get_lon(msg) / 10000000.0;
       break;
     case MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT:
       break;
