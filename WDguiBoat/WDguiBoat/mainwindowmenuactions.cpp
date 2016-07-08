@@ -19,7 +19,15 @@ void MainWindow::on_actionSerial_Port_triggered()
 
 void MainWindow::on_actionAll_Sensor_triggered()
 {
-
+    mAllSensorOverview = new AllSensorsDialog(this);
+    connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mWdParser, SIGNAL(GpsData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mWdParser, SIGNAL(ImuData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mWdParser, SIGNAL(PowerData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mWdParser, SIGNAL(LedFeedback(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
+    connect(mAllSensorOverview, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(Send(QString)));
+    mAllSensorOverview->setModal(true);
+    mAllSensorOverview->show();
 }
 
 void MainWindow::on_actionCommunication_triggered()

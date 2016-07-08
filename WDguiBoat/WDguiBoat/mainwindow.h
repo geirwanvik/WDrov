@@ -9,6 +9,7 @@
 #include <QSwipeGesture>
 #include <QTimer>
 #include <QScroller>
+#include <QScrollEvent>
 
 #include "Screen/screendata.h"
 #include "Palette/styleone.h"
@@ -50,19 +51,16 @@ private slots:
     void on_actionCommunication_triggered();
     void on_pushButtonSetupCommunication_clicked();
     void on_pushButtonSaveAndReturn_clicked();
-    void click_BoatInstrument();
-    void click_BoatSensors();
-    void click_BoatStatus();
-    void click_Navigation();
-    void click_BoatMusic();
-    void click_Settings();
-    void click_RawSensorData();
     void bluetoothStartConnection();
     void bluetoothDoneConnection();
     void bluetoothFailedConnection();
     void on_actionSensor_View_triggered();
     void on_actionSerial_Port_triggered();
     void timerTimeOutScreenSaver();
+    void on_actionAll_Sensor_triggered();
+    void on_actionCommunication_Debug_triggered();
+    void on_actionInterior_Light_Color_triggered();
+    void on_pushButtonCommunication_clicked();
 
 #if  defined(Q_OS_ANDROID)
 
@@ -71,30 +69,17 @@ private slots:
 
 #endif
 
-    void on_actionAll_Sensor_triggered();
-    void on_actionCommunication_Debug_triggered();
-    void on_actionInterior_Light_Color_triggered();
-
-    void on_pushButtonCommunication_clicked();
 
 signals:
 
 
 private:
     Ui::MainWindow *ui;
-    void createToolbar();
     void initObjectAndConnection();
     void readSetting();
     void writeSetting();
+    void scrollerSetup();
 
-    //Toolbar button and actions
-    QAction *mBoatPanel;
-    QAction *mBoatSensors;
-    QAction *mBoatStatus;
-    QAction *mBoatMusic;
-    QAction *mBoatNavigation;
-    QAction *mRawSensorData;
-    QAction *mSettings;
 
     WDLink *mWdLink;
     wdParser *mWdParser;
@@ -117,10 +102,7 @@ private:
     bool gestureEvent(QGestureEvent *event);
     void swipeTriggered(QSwipeGesture *swipe);
 
-
     gaugeDialog *mGaugeDialog;
-
-
 
 #if  defined(Q_OS_ANDROID)
     bluetooththread *mSocket;

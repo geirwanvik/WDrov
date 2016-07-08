@@ -12,27 +12,22 @@ MainWindow::MainWindow(QWidget *parent) :
    ui->radioButtonBluetooth->setChecked(true);
    //Read settings
    readSetting();
-   //Navigation Toolbar
-   createToolbar();
    //The apperacen of the app
    setupApperance();
    //Generel objects
    initObjectAndConnection();
 
+   scrollerSetup();
 
-   ui->stackedWidget->setCurrentIndex(0);
-   mBoatPanel->setChecked(true);
-
-   ui->statusBar->showMessage("WD Boat!");
+   ui->statusBar->showMessage("WD Boat!", 5000);
 
    this->setAttribute(Qt::WA_AcceptTouchEvents);
    this->grabGesture(Qt::SwipeGesture);
    this->setAttribute(Qt::WA_TouchPadAcceptSingleTouchEvents);
    qApp->setAttribute(Qt::AA_SynthesizeMouseForUnhandledTouchEvents);
-   ui->actionAll_Sensor->setVisible(false);
 
    ui->toolBar->setVisible(false);
-
+   ui->stackedWidget->setCurrentIndex(2);
 
 }
 
@@ -59,8 +54,6 @@ void MainWindow::setupApperance()
 bool MainWindow::event(QEvent *event)
 {
 
-
-    //QTimer::singleShot(15000,this,SLOT(timerTimeOutScreenSaver()));
     if(event->type() == QEvent::MouseMove || QEvent::MouseButtonPress)
     {
        //  qDebug() << "Event big time!";
@@ -73,8 +66,6 @@ bool MainWindow::event(QEvent *event)
 
 void MainWindow::timerTimeOutScreenSaver()
 {
-   // qDebug() << "Timer overflow!" << mGaugeDialog->isVisible();
-
     if(mGaugeDialog->isVisible() == false)
     {
         mGaugeDialog->setModal(true);
@@ -101,7 +92,7 @@ bool MainWindow::gestureEvent(QGestureEvent *event)
 
 void MainWindow::swipeTriggered(QSwipeGesture *swipe)
 {
-    if (swipe->state() == Qt::GestureFinished) {
+    if (swipe->state() == Qt::GestureStarted || swipe->state() == Qt::GestureFinished ) {
            if (swipe->horizontalDirection() == QSwipeGesture::Left
                || swipe->verticalDirection() == QSwipeGesture::Up) {
                qDebug() << "swipeTriggered(): swipe to previous";
@@ -111,121 +102,11 @@ void MainWindow::swipeTriggered(QSwipeGesture *swipe)
               ui->stackedWidget->setCurrentIndex(0);
            }
            update();
-       }
+    }
 }
 
 
 
-
-
-void MainWindow::createToolbar()
-{
-    mBoatPanel = new QAction(QIcon(":/icons/pictures/Boat icon/motor-boat-512.png"), "Instrument", this);
-    mBoatPanel->setCheckable(true);
-    ui->toolBar->addAction(mBoatPanel);
-    connect(mBoatPanel, SIGNAL(triggered(bool)), this, SLOT(click_BoatInstrument()));
-
-
-    mBoatSensors = new QAction(QIcon(":/icons/pictures/Boat icon/compass.png"), "Sensors", this);
-    mBoatSensors->setCheckable(true);
-    ui->toolBar->addAction(mBoatSensors);
-    connect(mBoatSensors, SIGNAL(triggered(bool)), this, SLOT(click_BoatSensors()));
-
-    mBoatStatus = new QAction(QIcon(":/icons/pictures/Boat icon/boat_propeller.png"), "Motor", this);
-    mBoatStatus->setCheckable(true);
-    //ui->toolBar->addAction(mBoatStatus);
-    connect(mBoatStatus, SIGNAL(triggered(bool)), this, SLOT(click_BoatStatus()));
-
-    mBoatNavigation = new QAction(QIcon(":/icons/pictures/Boat icon/Map-512.png"), "Navigation", this);
-    mBoatNavigation->setCheckable(true);
-   // ui->toolBar->addAction(mBoatNavigation);
-    connect(mBoatNavigation, SIGNAL(triggered(bool)), this, SLOT(click_Navigation()));
-
-    mBoatMusic = new QAction(QIcon(":/icons/pictures/Boat icon/MusicNote.png"), "Music", this);
-    mBoatMusic->setCheckable(true);
-   // ui->toolBar->addAction(mBoatMusic);
-    connect(mBoatMusic, SIGNAL(triggered(bool)), this, SLOT(click_BoatMusic()));
-
-    mRawSensorData = new QAction(QIcon(":/icons/pictures/Instrument/RawSensor.png"), "Raw Sensors", this);
-    mBoatMusic->setCheckable(true);
-    ui->toolBar->addAction(mRawSensorData);
-    connect(mRawSensorData, SIGNAL(triggered(bool)), this, SLOT(click_RawSensorData()));
-
-    mSettings = new QAction(QIcon(":/icon/pictures/Icons/settingSVG.png"), "Settings", this);
-    //ui->toolBar->addAction(mSettings);
-    connect(mSettings, SIGNAL(triggered(bool)), this, SLOT(click_Settings()));
-
-}
-
-void MainWindow::click_BoatInstrument()
-{
-    //Instrument settings
-    ui->stackedWidget->setCurrentIndex(0);
-    mBoatPanel->setChecked(true);
-    mBoatSensors->setChecked(false);
-    mBoatStatus->setChecked(false);
-    mBoatNavigation->setChecked(false);
-    mBoatMusic->setChecked(false);
-}
-
-void MainWindow::click_BoatSensors()
-{
-    //Sensor overview
-    ui->stackedWidget->setCurrentIndex(1);
-    mBoatPanel->setChecked(false);
-    mBoatSensors->setChecked(true);
-    mBoatStatus->setChecked(false);
-    mBoatNavigation->setChecked(false);
-    mBoatMusic->setChecked(false);
-}
-
-void MainWindow::click_BoatStatus()
-{
-    //Boat sensors
-    mBoatPanel->setChecked(false);
-    mBoatSensors->setChecked(false);
-    mBoatStatus->setChecked(true);
-    mBoatNavigation->setChecked(false);
-    mBoatMusic->setChecked(false);
-}
-
-void MainWindow::click_Navigation()
-{
-    mBoatPanel->setChecked(false);
-    mBoatSensors->setChecked(false);
-    mBoatStatus->setChecked(false);
-    mBoatNavigation->setChecked(true);
-    mBoatMusic->setChecked(false);
-}
-
-void MainWindow::click_BoatMusic()
-{
-    mBoatPanel->setChecked(false);
-    mBoatSensors->setChecked(false);
-    mBoatStatus->setChecked(false);
-    mBoatNavigation->setChecked(false);
-    mBoatMusic->setChecked(true);
-}
-
-void MainWindow::click_Settings()
-{
-
-}
-
-void MainWindow::click_RawSensorData()
-{
-
-    mAllSensorOverview = new AllSensorsDialog(this);
-    connect(mWdParser, SIGNAL(Dht22Data(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
-    connect(mWdParser, SIGNAL(GpsData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
-    connect(mWdParser, SIGNAL(ImuData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
-    connect(mWdParser, SIGNAL(PowerData(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
-    connect(mWdParser, SIGNAL(LedFeedback(QString,QString)), mAllSensorOverview, SLOT(sensorData(QString,QString)));
-    connect(mAllSensorOverview, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(Send(QString)));
-    mAllSensorOverview->setModal(true);
-    mAllSensorOverview->show();
-
-}
 
 void MainWindow::bluetoothStartConnection()
 {
@@ -297,7 +178,7 @@ void MainWindow::initObjectAndConnection()
    connect(mInstrumentForm, SIGNAL(writeToSocket(QString)), mWdLink, SLOT(Send(QString)));
    connect(mSocket, SIGNAL(readyRead(QByteArray)), mWdLink, SLOT(Receive(QByteArray)));
    connect(mWdLink, SIGNAL(sendByteArrayToSocket(QByteArray)), mSocket, SLOT(writeBytes(QByteArray)));
-   this->resize(1300, 800);
+   this->resize(1100, 700);
 #endif
 
    mGaugeDialog = new gaugeDialog(this);
@@ -336,9 +217,8 @@ void MainWindow::readSetting()
     QSettings settings("WD Electronics", "WDBoat");
     settings.beginGroup("WDBoatMainwindow");
     ui->radioButtonBluetooth->setChecked(settings.value("BluetoothRadioButton", ui->radioButtonBluetooth->isChecked()).toBool());
-   ui->radioButtonTcp->setChecked(settings.value("TcpRadioButton", ui->radioButtonTcp->isChecked()).toBool());
+    ui->radioButtonTcp->setChecked(settings.value("TcpRadioButton", ui->radioButtonTcp->isChecked()).toBool());
     ui->checkBoxConnectAtStart->setChecked(settings.value("ConnectAtStart", ui->checkBoxConnectAtStart->isChecked()).toBool());
-   // firsTimeSetup = settings.value("FirstTimeSetup", firsTimeSetup).toBool();
     settings.endGroup();
 }
 
@@ -349,8 +229,12 @@ void MainWindow::writeSetting()
     settings.setValue("BluetoothRadioButton", ui->radioButtonBluetooth->isChecked());
     settings.setValue("TcpRadioButton", ui->radioButtonTcp->isChecked());
     settings.setValue("ConnectAtStart", ui->checkBoxConnectAtStart->isChecked());
-   // settings.setValue("FirstTimeSetup", firsTimeSetup);
     settings.endGroup();
+}
+
+void MainWindow::scrollerSetup()
+{
+    QScroller::grabGesture(ui->stackedWidget, QScroller::TouchGesture);
 }
 
 

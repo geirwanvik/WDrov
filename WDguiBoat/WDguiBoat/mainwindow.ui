@@ -22,7 +22,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="pageInstruments">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -42,8 +42,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>693</width>
-             <height>333</height>
+             <width>74</width>
+             <height>16</height>
             </rect>
            </property>
           </widget>
@@ -63,8 +63,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>693</width>
-             <height>333</height>
+             <width>59</width>
+             <height>16</height>
             </rect>
            </property>
           </widget>
@@ -90,8 +90,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>693</width>
-             <height>333</height>
+             <width>74</width>
+             <height>16</height>
             </rect>
            </property>
           </widget>
@@ -123,8 +123,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>693</width>
-             <height>333</height>
+             <width>224</width>
+             <height>169</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -232,6 +232,9 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="page">
+       <layout class="QGridLayout" name="gridLayout_9"/>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -291,7 +294,7 @@ QToolBar::handle {
      <x>0</x>
      <y>0</y>
      <width>739</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuConfigure">
