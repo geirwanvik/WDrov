@@ -84,3 +84,8 @@ void MainWindow::on_actionFont_Size_triggered()
 {
     mVideoStream->showFontDialog();
 }
+
+void MainWindow::on_actionTrack_Bar_setting_triggered()
+{
+    mVideoStream->mTrackerBarDialog->show();
+}

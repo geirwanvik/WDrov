@@ -5,17 +5,11 @@
 #include <QCoreApplication>
 #include <QFile>
 
-#define MY_ASSERT(c) if (c == false) ;
-#define MY_ASSERT_X(c, where, what) if (c == false) ;
-
-
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
+    Q_UNUSED(context)
    // QFile file(QDate::currentDate().toString("Logg_dd_MM_yyyy.log"));
     QFile file("Logg");
-
-    MY_ASSERT(file.open(QIODevice::Append | QIODevice::Text));
-
     QTextStream out(&file);
 
    /* switch (type)

@@ -17,6 +17,10 @@
 
 #include "Video/configureipportdialog.h"
 #include "Video/fontsizedialog.h"
+#include "trackbardialog.h"
+
+using namespace cv;
+using namespace std;
 
 namespace Ui {
 class VideoForm;
@@ -31,6 +35,7 @@ public:
     ~VideoForm();
     void showColorDialog();
     void showFontDialog();
+    trackBarDialog *mTrackerBarDialog;
 
 private slots:
     void processFrameAndUpdateGUI();
@@ -54,6 +59,7 @@ private:
     ConfigureIpPortDialog *mCmdIpandPort;
     QString GetTime();
 
+
     //sensor variabels
     float Roll;
     float Pitch;
@@ -68,6 +74,45 @@ private:
     float font_Bold;
     FontSizeDialog *mFontDialog;
 
+    const int MIN_OBJECT_AREA = 20*20;
+
+    const string windowName = "Original Image";
+    //Matrix to store each frame of the webcam feed
+    Mat cameraFeed;
+    //matrix storage for HSV image
+    Mat HSV;
+    //matrix storage for binary threshold image
+    Mat threshold;
+    //x and y values for the location of the object
+    int x=0, y=0;
+
+    int H_MIN = 0;
+    int H_MAX = 256;
+    int S_MIN = 0;
+    int S_MAX = 256;
+    int V_MIN = 0;
+    int V_MAX = 256;
+
+    void morphOps(Mat &thresh);
+    void trackFilteredObject(int &x, int &y, Mat threshold, Mat &cameraFeed);
+    void drawObject(int x, int y,Mat &frame);
+    string intToString(int number);
+    const int MAX_NUM_OBJECTS=50;
+    const int FRAME_WIDTH = 640;
+    const int FRAME_HEIGHT = 480;
+    const int MAX_OBJECT_AREA = FRAME_HEIGHT*FRAME_WIDTH/1.5;
+
+    bool calibrationMode;//used for showing debugging windows, trackbars etc.
+
+    bool mouseIsDragging;//used for showing a rectangle on screen as user clicks and drags mouse
+    bool mouseMove;
+    bool rectangleSelected;
+    cv::Point initialClickPoint, currentMousePoint; //keep track of initial point clicked and current position of mouse
+    cv::Rect rectangleROI; //this is the ROI that the user has selected
+    vector<int> H_ROI, S_ROI, V_ROI;// HSV values from the click/drag ROI region stored in separate vectors so that we can sort them easily
+
+   void clickAndDrag_Rectangle(int event, int x, int y, int flags, void* param);
+    void recordHSV_Values(cv::Mat frame, cv::Mat hsv_frame);
 };
 
 #endif // VIDEOFORM_H

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>903</width>
-    <height>546</height>
+    <width>1162</width>
+    <height>727</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,8 +32,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>865</width>
-             <height>455</height>
+             <width>1124</width>
+             <height>636</height>
             </rect>
            </property>
           </widget>
@@ -92,7 +92,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>903</width>
+     <width>1162</width>
      <height>21</height>
     </rect>
    </property>
@@ -130,6 +130,7 @@
     <addaction name="actionVideo_Stream"/>
     <addaction name="actionAttitude_Indicator"/>
     <addaction name="actionCompass"/>
+    <addaction name="actionTrack_Bar_setting"/>
    </widget>
    <addaction name="menuConfigure"/>
    <addaction name="menuVideo"/>
@@ -182,6 +183,11 @@
   <action name="actionFont_Size">
    <property name="text">
     <string>Font Size</string>
+   </property>
+  </action>
+  <action name="actionTrack_Bar_setting">
+   <property name="text">
+    <string>Track Bar setting</string>
    </property>
   </action>
  </widget>

@@ -4,14 +4,14 @@ tcpClient::tcpClient(QObject *parent) : QObject(parent)
 {
     mClientSetupDialog = new clientSetupDialog();
 
-    mSocket = new QTcpSocket(this);
-    connect(mSocket, SIGNAL(readyRead()), this, SLOT(readyRead()));
-    connect(mSocket, SIGNAL(readyRead()), this, SLOT(readyReadString()));
-    connect(mSocket, SIGNAL(connected()), this, SLOT(connectedToHost()));
-    connect(mSocket, SIGNAL(disconnected()),this, SLOT(connectedToHost()));
-    connect(mSocket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(error(QAbstractSocket::SocketError)));
+   // mSocket = new QTcpSocket(this);
+  //  connect(mSocket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+   // connect(mSocket, SIGNAL(readyRead()), this, SLOT(readyReadString()));
+   // connect(mSocket, SIGNAL(connected()), this, SLOT(connectedToHost()));
+  //  connect(mSocket, SIGNAL(disconnected()),this, SLOT(connectedToHost()));
+  //  connect(mSocket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(error(QAbstractSocket::SocketError)));
 
-    QTimer::singleShot(1000, this, SLOT(connectToHost())); // Give the rest of the object time to init!
+ //   QTimer::singleShot(1000, this, SLOT(connectToHost())); // Give the rest of the object time to init!
 
 }
 

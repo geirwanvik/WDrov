@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     RovWidgets/compassform.cpp \
     RovWidgets/source/qcgaugewidget.cpp \
     Video/fontsizedialog.cpp \
-    Video/overlaysettingsdialog.cpp
+    Video/overlaysettingsdialog.cpp \
+    Video/trackbardialog.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -38,7 +39,8 @@ HEADERS  += mainwindow.h \
     RovWidgets/compassform.h \
     RovWidgets/source/qcgaugewidget.h \
     Video/fontsizedialog.h \
-    Video/overlaysettingsdialog.h
+    Video/overlaysettingsdialog.h \
+    Video/trackbardialog.h
 
 
 FORMS    += mainwindow.ui \
@@ -49,7 +51,8 @@ FORMS    += mainwindow.ui \
     RovWidgets/atttudeindicatorform.ui \
     RovWidgets/compassform.ui \
     Video/fontsizedialog.ui \
-    Video/overlaysettingsdialog.ui
+    Video/overlaysettingsdialog.ui \
+    Video/trackbardialog.ui
 
 
 

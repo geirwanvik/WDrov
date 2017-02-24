@@ -43,6 +43,8 @@ private slots:
 
     void on_actionFont_Size_triggered();
 
+    void on_actionTrack_Bar_setting_triggered();
+
 private:
     Ui::MainWindow *ui;
 
