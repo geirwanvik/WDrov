@@ -6,12 +6,15 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QColorDialog>
+#include <QTime>
+#include <QDateTime>
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+
 
 #include <QTimer>
 
@@ -46,6 +49,9 @@ private slots:
     void on_pushButtonRecord_clicked();
     void fontSizeChanged(float fontSize, float fontBold);
 
+
+    void on_pushButtonTakePicture_clicked();
+
 public slots:
     void sensorData(QString cmd, QString value);
 
@@ -73,6 +79,7 @@ private:
     float font_Size;
     float font_Bold;
     FontSizeDialog *mFontDialog;
+
 
     const int MIN_OBJECT_AREA = 20*20;
 
@@ -113,6 +120,11 @@ private:
 
    void clickAndDrag_Rectangle(int event, int x, int y, int flags, void* param);
     void recordHSV_Values(cv::Mat frame, cv::Mat hsv_frame);
+=======
+protected:
+     void mouseDoubleClickEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+
+>>>>>>> origin/master
 };
 
 #endif // VIDEOFORM_H

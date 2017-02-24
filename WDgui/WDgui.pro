@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network
+QT       += core gui network printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,7 +25,13 @@ SOURCES += main.cpp\
     RovWidgets/source/qcgaugewidget.cpp \
     Video/fontsizedialog.cpp \
     Video/overlaysettingsdialog.cpp \
+<<<<<<< HEAD
     Video/trackbardialog.cpp
+=======
+    palette/styleone.cpp \
+    Plot/Lib/qcustomplot.cpp \
+    Plot/plotdialog.cpp
+>>>>>>> origin/master
 
 
 HEADERS  += mainwindow.h \
@@ -40,7 +46,13 @@ HEADERS  += mainwindow.h \
     RovWidgets/source/qcgaugewidget.h \
     Video/fontsizedialog.h \
     Video/overlaysettingsdialog.h \
+<<<<<<< HEAD
     Video/trackbardialog.h
+=======
+    palette/styleone.h \
+    Plot/Lib/qcustomplot.h \
+    Plot/plotdialog.h
+>>>>>>> origin/master
 
 
 FORMS    += mainwindow.ui \
@@ -52,10 +64,15 @@ FORMS    += mainwindow.ui \
     RovWidgets/compassform.ui \
     Video/fontsizedialog.ui \
     Video/overlaysettingsdialog.ui \
+<<<<<<< HEAD
     Video/trackbardialog.ui
 
+=======
+    Plot/plotdialog.ui
+>>>>>>> origin/master
 
 
+win32{
 
 INCLUDEPATH +=C:\\OpenCV-3.1.0\\opencv\\build\\include
 
@@ -77,3 +94,64 @@ LIBS +=-LC:\\OpenCV-3.1.0\\mybuild\\lib\\Debug \
     -lopencv_videoio310d \
     -lopencv_videostab310d \
     -lopencv_calib3d310d
+
+}
+
+android {
+
+    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android-sources
+
+    INCLUDEPATH += C:\\opencv\\OpenCV-android-sdk\\sdk\\native\\jni\\include
+
+    OPENCV3RDPARTYLIBS = C:\opencv\OpenCV-android-sdk\sdk\native\3rdparty\libs\armeabi-v7a
+
+    OPENCVNATIVELIBS = C:\opencv\OpenCV-android-sdk\sdk\native\libs\armeabi-v7a
+
+
+LIBS += $$OPENCV3RDPARTYLIBS/liblibtiff.a \
+    $$OPENCV3RDPARTYLIBS/liblibjpeg.a \
+    $$OPENCV3RDPARTYLIBS/liblibjasper.a \
+    $$OPENCV3RDPARTYLIBS/liblibpng.a \
+    $$OPENCV3RDPARTYLIBS/libtbb.a \
+    $$OPENCV3RDPARTYLIBS/libIlmImf.a
+
+LIBS += $$OPENCVNATIVELIBS/libopencv_core.a \
+   # $$OPENCVNATIVELIBS/libopencv_androidcamera.a \
+    $$OPENCVNATIVELIBS/libopencv_flann.a \
+    $$OPENCVNATIVELIBS/libopencv_imgproc.a \
+    $$OPENCVNATIVELIBS/libopencv_highgui.a \
+    $$OPENCVNATIVELIBS/libopencv_features2d.a \
+    $$OPENCVNATIVELIBS/libopencv_calib3d.a \
+    $$OPENCVNATIVELIBS/libopencv_ml.a \
+    $$OPENCVNATIVELIBS/libopencv_objdetect.a \
+    $$OPENCVNATIVELIBS/libopencv_photo.a \
+    $$OPENCVNATIVELIBS/libopencv_stitching.a \
+    $$OPENCVNATIVELIBS/libopencv_superres.a \
+    $$OPENCVNATIVELIBS/libopencv_ts.a \
+    $$OPENCVNATIVELIBS/libopencv_video.a \
+    $$OPENCVNATIVELIBS/libopencv_videostab.a \
+    $$OPENCVNATIVELIBS/libopencv_java3.so \
+    $$OPENCVNATIVELIBS/libopencv_imgcodecs.a \
+    $$OPENCVNATIVELIBS/libopencv_ml.a \
+    $$OPENCVNATIVELIBS/libopencv_shape.a \
+    $$OPENCVNATIVELIBS/libopencv_videoio.a
+
+   # $$OPENCVNATIVELIBS/libopencv_info.so
+
+
+
+
+}
+
+DISTFILES += \
+    android/AndroidManifest.xml \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradlew \
+    android/res/values/libs.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew.bat
+
+RESOURCES += \
+    pictureresources.qrc
+

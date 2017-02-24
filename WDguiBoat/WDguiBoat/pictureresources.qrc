@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/background">
+        <file>pictures/compassBackground.jpg</file>
+        <file>pictures/lighterBackground.jpg</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>pictures/Boat icon/small-boat.jpg</file>
+        <file>pictures/Boat icon/compass.png</file>
+        <file>pictures/Boat icon/motor-boat-512.png</file>
+        <file>pictures/Boat icon/compass2.jpg</file>
+        <file>pictures/Boat icon/boat_propeller.png</file>
+        <file>pictures/Boat icon/MusicNote.png</file>
+        <file>pictures/Boat icon/Map-512.png</file>
+        <file>pictures/Instrument/RawSensor.png</file>
+    </qresource>
+    <qresource prefix="/instrumentIcons">
+        <file>pictures/Instrument/bilge pump.png</file>
+        <file>pictures/Instrument/lantern.png</file>
+        <file>pictures/Instrument/led light.png</file>
+        <file>pictures/Instrument/windshield wiper.png</file>
+        <file>pictures/Instrument/heaterFan.png</file>
+        <file>pictures/Instrument/Horn.png</file>
+        <file>pictures/Instrument/instrument.png</file>
+        <file>pictures/Instrument/searchlight.png</file>
+    </qresource>
+    <qresource prefix="/icon">
+        <file>pictures/Icons/settingSVG.png</file>
+        <file>pictures/Icons/BluetoothNotConnected.png</file>
+    </qresource>
+</RCC>

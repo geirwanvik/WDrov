@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/palette">
+        <file>Resources/Palette/star.jpg</file>
+        <file>Resources/Palette/anaonumous.jpg</file>
+        <file>Resources/Palette/black brick.jpg</file>
+        <file>Resources/Palette/black.jpg</file>
+    </qresource>
+</RCC>

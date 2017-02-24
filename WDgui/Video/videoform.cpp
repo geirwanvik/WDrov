@@ -23,7 +23,11 @@ VideoForm::VideoForm(QWidget *parent) :
     font_Size = mFontDialog->getFontSize();
     font_Bold = mFontDialog->getFontBold();
 
+<<<<<<< HEAD
     calibrationMode = true;
+=======
+
+>>>>>>> origin/master
 
 }
 
@@ -285,10 +289,14 @@ void VideoForm::recordHSV_Values(Mat frame, Mat hsv_frame)
 
         }
 
+<<<<<<< HEAD
         if (mouseMove == true){
             //if the mouse is held down, we will draw the click and dragged rectangle to the screen
             rectangle(frame, initialClickPoint, cv::Point(currentMousePoint.x, currentMousePoint.y), cv::Scalar(0, 255, 0), 1, 8, 0);
         }
+=======
+
+>>>>>>> origin/master
 }
 
 //   putText(cameraFeed, "WD Gui", Point(10,40), cv::FONT_HERSHEY_SIMPLEX, font_Size, Scalar(blue,green,red), font_Bold);
@@ -323,7 +331,14 @@ QString VideoForm::GetTime()
     return timeString;
 }
 
+<<<<<<< HEAD
 
+=======
+void VideoForm::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    qDebug() << "Double Click!!";
+}
+>>>>>>> origin/master
 
 void VideoForm::on_pushButtonPlay_clicked()
 {
@@ -336,7 +351,8 @@ void VideoForm::on_pushButtonPlay_clicked()
     {
         CameraStreamUrl = mCmdIpandPort->getHttpAdress();
         capWebcam.open(CameraStreamUrl.toLocal8Bit().constData());
-        qtimer->start(25); //update rate for stream
+
+        qtimer->start(20); //update rate for stream
     }
     else if(streamType == "IP Stream")
     {
@@ -360,7 +376,7 @@ void VideoForm::on_pushButtonPlay_clicked()
     }
 
 
-  // qDebug() << "Stream setup: " << streamType << mCmdIpandPort->getHttpAdress() << mCmdIpandPort->getIpAdress() << mCmdIpandPort->getPort();
+   qDebug() << "Stream setup: " << streamType << mCmdIpandPort->getHttpAdress() << mCmdIpandPort->getIpAdress() << mCmdIpandPort->getPort();
 
 }
 
@@ -418,4 +434,26 @@ void VideoForm::fontSizeChanged(float fontSize, float fontBold)
 {
     font_Size = fontSize;
     font_Bold = fontBold;
+}
+
+
+
+void VideoForm::on_pushButtonTakePicture_clicked()
+{
+    cv::Mat imgOriginal;
+
+    bool blnFrameReadSuccessfully = capWebcam.read(imgOriginal);
+
+    if(blnFrameReadSuccessfully == true)
+    {
+        QImage qimgOriginal = convertOpenCVMatToQtQImage(imgOriginal);
+        bool success = qimgOriginal.save("C:\Users\EmirD\Pictures\ROV\Rov.png", "PNG", -1);
+
+        qDebug() << success;
+
+    }
+    else
+    {
+        qDebug() << "We fucked up!";
+    }
 }

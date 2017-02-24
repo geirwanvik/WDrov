@@ -53,8 +53,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>63</width>
-             <height>16</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
           </widget>
@@ -74,8 +74,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>63</width>
-             <height>16</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
           </widget>
@@ -127,14 +127,32 @@
     <property name="title">
      <string>View</string>
     </property>
+    <widget class="QMenu" name="menuMode">
+     <property name="title">
+      <string>Mode</string>
+     </property>
+     <addaction name="actionDay_Mode"/>
+     <addaction name="actionNight_Mode"/>
+    </widget>
     <addaction name="actionVideo_Stream"/>
     <addaction name="actionAttitude_Indicator"/>
     <addaction name="actionCompass"/>
+<<<<<<< HEAD
     <addaction name="actionTrack_Bar_setting"/>
+=======
+    <addaction name="menuMode"/>
+   </widget>
+   <widget class="QMenu" name="menuUtility">
+    <property name="title">
+     <string>Utility</string>
+    </property>
+    <addaction name="actionPlot"/>
+>>>>>>> origin/master
    </widget>
    <addaction name="menuConfigure"/>
    <addaction name="menuVideo"/>
    <addaction name="menuView"/>
+   <addaction name="menuUtility"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -185,9 +203,25 @@
     <string>Font Size</string>
    </property>
   </action>
+<<<<<<< HEAD
   <action name="actionTrack_Bar_setting">
    <property name="text">
     <string>Track Bar setting</string>
+=======
+  <action name="actionDay_Mode">
+   <property name="text">
+    <string>Day Mode</string>
+   </property>
+  </action>
+  <action name="actionNight_Mode">
+   <property name="text">
+    <string>Night Mode</string>
+   </property>
+  </action>
+  <action name="actionPlot">
+   <property name="text">
+    <string>Sensor Plot</string>
+>>>>>>> origin/master
    </property>
   </action>
  </widget>

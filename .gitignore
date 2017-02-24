@@ -32,3 +32,18 @@ Makefile*
 #QtCtreator Qml
 *.qmlproject.user
 *.qmlproject.user.*
+*.buildinfo
+WDboat/Debug/board.buildinfo
+*.elf
+WDboat/Debug/WDboat.ino.hex
+WDboat/Visual Micro/.WDboat.vsarduino.h
+WDboat/Visual Micro/Configuration.Debug.vmps.xml
+WDboat/Visual Micro/Upload.vmps.xml
+WDboat/WDboat.sdf
+WDboat/__vm/.WDboat.vsarduino.h
+WDboat/__vm/Configuration.Debug.vmps.xml
+WDboat/WDboat.opensdf
+WDboat/WDboat.v12.suo
+*.opensdf
+*.suo
+*.sdf

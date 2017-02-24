@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->scrollAreaCompass->setWidget(mCompassForm);
     connect(mWDlink, SIGNAL(GetMessageItem(QString,QString)), mCompassForm, SLOT(sensorData(QString,QString)));
 
-
+    QApplication::setStyle("Fusion");
 
 
 }
@@ -85,7 +85,25 @@ void MainWindow::on_actionFont_Size_triggered()
     mVideoStream->showFontDialog();
 }
 
+<<<<<<< HEAD
 void MainWindow::on_actionTrack_Bar_setting_triggered()
 {
     mVideoStream->mTrackerBarDialog->show();
+=======
+void MainWindow::on_actionDay_Mode_triggered()
+{
+    QApplication::setStyle("Fusion");
+}
+
+void MainWindow::on_actionNight_Mode_triggered()
+{
+    QApplication::setStyle(new styleOne);
+}
+
+void MainWindow::on_actionPlot_triggered()
+{
+    mPlot = new plotDialog();
+    mPlot->setModal(true);
+    mPlot->show();
+>>>>>>> origin/master
 }
